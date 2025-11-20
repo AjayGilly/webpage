@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essential 8 Audit & Implementation | Outcomex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        outcomex: {
+                            dark: '#0B1120', // Deep navy/black
+                            primary: '#0056D2', // Corporate Blue
+                            accent: '#00A3E0', // Cyan/Bright Blue
+                            purple: '#6D28D9', // Cyber purple nuance
+                            surface: '#1E293B',
+                            emerald: '#10B981' // Added for "Essential 8" (Green status)
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        .hero-pattern {
+            background-color: #0B1120;
+            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        .gradient-border {
+            position: relative;
+            background: #1E293B;
+            border-radius: 1rem;
+            z-index: 1;
+        }
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            z-index: -1;
+            border-radius: 1.1rem;
+            background: linear-gradient(45deg, #10B981, #0056D2, #6D28D9);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased scroll-smooth">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <!-- Placeholder Logo Icon -->
+                    <div class="w-8 h-8 bg-gradient-to-br from-outcomex-primary to-outcomex-emerald rounded-md"></div>
+                    <span class="font-bold text-2xl tracking-tight">Outcomex</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#what-is-it" class="text-slate-300 hover:text-white transition-colors">What is Essential 8?</a>
+                    <a href="#importance" class="text-slate-300 hover:text-white transition-colors">Why Comply?</a>
+                    <a href="#difference" class="text-slate-300 hover:text-white transition-colors">From Gap to Green</a>
+                    <a href="#pricing" class="bg-outcomex-primary hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">View Plans</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-slate-300 hover:text-white p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700">
+            <a href="#what-is-it" class="block px-4 py-3 text-slate-300 hover:bg-slate-700">What is Essential 8?</a>
+            <a href="#importance" class="block px-4 py-3 text-slate-300 hover:bg-slate-700">Why Comply?</a>
+            <a href="#difference" class="block px-4 py-3 text-slate-300 hover:bg-slate-700">From Gap to Green</a>
+            <a href="#pricing" class="block px-4 py-3 text-outcomex-accent font-semibold hover:bg-slate-700">View Plans</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 hero-pattern overflow-hidden">
+        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full bg-gradient-to-b from-outcomex-emerald/10 to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-outcomex-emerald text-sm font-semibold mb-6">
+                <span class="w-2 h-2 rounded-full bg-outcomex-emerald animate-pulse"></span>
+                ASD Aligned Strategy
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                Don't Just Measure the Gap.<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-outcomex-emerald to-outcomex-primary">Bridge It.</span>
+            </h1>
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+                We go beyond the "Audit" to deliver full <strong>Essential 8 Implementation</strong>. Achieve Maturity Level 2 or 3 with a partner that can configure your Microsoft 365, harden your endpoints, and manage your backups.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#pricing" class="bg-outcomex-primary hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-lg shadow-blue-900/20">
+                    Start Your Assessment
+                </a>
+                <a href="#difference" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-8 py-4 rounded-lg font-semibold transition-all">
+                    The Implementation Gap
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is E8 -->
+    <section id="what-is-it" class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-white">What is the Essential 8?</h2>
+                    <p class="text-slate-400 mb-6 text-lg leading-relaxed">
+                        Developed by the <strong>Australian Signals Directorate (ASD)</strong>, the Essential 8 is widely considered the most effective baseline for cyber defence. It consists of eight mitigation strategies designed to prevent malware delivery and limit the extent of cyber security incidents.
+                    </p>
+                    <p class="text-slate-400 mb-6 text-lg leading-relaxed">
+                        Strategies are ranked by <strong>Maturity Levels (0 to 3)</strong>. Moving from Level 0 (Unprepared) to Level 3 (Fully Aligned) drastically reduces your attack surface against sophisticated adversaries.
+                    </p>
+                    <div class="flex items-center gap-4 text-outcomex-accent font-semibold">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Defending Australia's Digital Borders</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-outcomex-emerald to-blue-600 blur-3xl opacity-20 rounded-full"></div>
+                    <div class="glass-card p-8 rounded-2xl relative">
+                        <h3 class="text-xl font-semibold mb-4 border-b border-slate-700 pb-4">The Three Pillars</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <div class="bg-slate-800 p-2 rounded text-red-400"><i class="fas fa-ban"></i></div>
+                                <div>
+                                    <strong class="block text-white">Prevent Attacks</strong>
+                                    <span class="text-sm text-slate-400">Application Control, Patch Applications, Configure Macros, User App Hardening</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="bg-slate-800 p-2 rounded text-yellow-400"><i class="fas fa-lock"></i></div>
+                                <div>
+                                    <strong class="block text-white">Limit Extent</strong>
+                                    <span class="text-sm text-slate-400">Restrict Admin Privileges, Patch OS, Multi-Factor Authentication</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="bg-slate-800 p-2 rounded text-green-400"><i class="fas fa-database"></i></div>
+                                <div>
+                                    <strong class="block text-white">Recover Data</strong>
+                                    <span class="text-sm text-slate-400">Regular Backups</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Importance Section -->
+    <section id="importance" class="py-20 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Why Alignment is Non-Negotiable</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">It is no longer just a "recommendation." The Essential 8 is becoming the standard of care for Australian business.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-900 p-8 rounded-xl border border-slate-700 hover:border-outcomex-emerald transition-colors">
+                    <div class="w-12 h-12 bg-emerald-900/30 rounded-lg flex items-center justify-center text-outcomex-emerald text-xl mb-6">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Stop Ransomware</h3>
+                    <p class="text-slate-400 text-sm">The Essential 8 was specifically designed to neutralize the most common techniques used by ransomware gangs. Implementing "Application Control" alone stops 90% of executable-based malware.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-900 p-8 rounded-xl border border-slate-700 hover:border-outcomex-primary transition-colors">
+                    <div class="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-400 text-xl mb-6">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Government Mandates</h3>
+                    <p class="text-slate-400 text-sm">Under the <strong>SOCI Act</strong> and strict government procurement policies, aligning with Maturity Level 2 is often a prerequisite for doing business with the Commonwealth.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-900 p-8 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors">
+                    <div class="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-400 text-xl mb-6">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Insurance & Liability</h3>
+                    <p class="text-slate-400 text-sm">Cyber insurance premiums are skyrocketing. Demonstrating E8 maturity lowers your premium and ensures your claim isn't denied due to "negligence."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcomex Differentiation -->
+    <section id="difference" class="py-20 bg-outcomex-dark relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-1/3 h-full bg-outcomex-surface opacity-50 skew-x-12 transform translate-x-20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">The "Implementation Gap"</h2>
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 border border-red-500/50">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-2">The Problem with Auditors</h3>
+                                <p class="text-slate-400">Most GRC firms will hand you a depressing 50-page report listing your failures (Maturity Level 0) and then walk away, leaving your IT team overwhelmed.</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center">
+                            <i class="fas fa-arrow-down text-slate-600 text-2xl"></i>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-outcomex-emerald flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-2">The Outcomex Solution</h3>
+                                <p class="text-slate-400">We are <strong>Systems Integrators</strong>. We don't just find the gap; we fix it. We configure Intune, we deploy Defender, we rewrite your Macros policies, and we harden your back-end.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-full flex items-center justify-center">
+                    <!-- Maturity Scorecard UI -->
+                    <div class="w-full max-w-md bg-slate-800 border border-slate-700 rounded-xl overflow-hidden shadow-2xl">
+                        <div class="bg-slate-900 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                            <span class="text-sm font-bold text-slate-300">Client Maturity Scorecard</span>
+                            <span class="text-xs bg-green-900 text-green-300 px-2 py-1 rounded">Post-Implementation</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <!-- Item 1 -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Application Control</span>
+                                    <span class="text-outcomex-emerald font-bold">Level 3</span>
+                                </div>
+                                <div class="w-full bg-slate-700 h-2 rounded-full">
+                                    <div class="bg-outcomex-emerald h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Patch Operating Systems</span>
+                                    <span class="text-outcomex-emerald font-bold">Level 3</span>
+                                </div>
+                                <div class="w-full bg-slate-700 h-2 rounded-full">
+                                    <div class="bg-outcomex-emerald h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">MFA Implementation</span>
+                                    <span class="text-outcomex-emerald font-bold">Level 2</span>
+                                </div>
+                                <div class="w-full bg-slate-700 h-2 rounded-full">
+                                    <div class="bg-outcomex-emerald h-2 rounded-full" style="width: 66%"></div>
+                                </div>
+                            </div>
+                            <!-- Item 4 -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-slate-400">Restrict Admin Privileges</span>
+                                    <span class="text-outcomex-emerald font-bold">Level 2</span>
+                                </div>
+                                <div class="w-full bg-slate-700 h-2 rounded-full">
+                                    <div class="bg-outcomex-emerald h-2 rounded-full" style="width: 66%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 pt-4 border-t border-slate-700 flex items-center gap-3">
+                                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                    <i class="fab fa-microsoft text-white"></i>
+                                </div>
+                                <div class="text-xs text-slate-400">
+                                    Configuration via <strong>Microsoft Intune & Defender</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Tiers -->
+    <section id="pricing" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Engagement Models</h2>
+                <p class="text-slate-400">From baseline assessment to full maturity management.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- ESSENTIAL TIER -->
+                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 flex flex-col relative group hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Essential</h3>
+                        <p class="text-slate-400 mt-2 text-sm">Assess & Audit (Know your gaps).</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>Current State E8 Assessment</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>Gap Analysis Report</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>Roadmap to Maturity Level 2</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>Executive Presentation</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg border border-slate-600 hover:border-outcomex-primary hover:bg-outcomex-primary/10 transition-colors font-semibold">Enquire</a>
+                </div>
+
+                <!-- ADVANTAGE TIER -->
+                <div class="bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl p-8 border-2 border-outcomex-emerald flex flex-col relative shadow-2xl shadow-emerald-900/20 transform md:-translate-y-4">
+                    <div class="absolute top-0 right-0 bg-outcomex-emerald text-slate-900 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MOST POPULAR</div>
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Advantage</h3>
+                        <p class="text-slate-400 mt-2 text-sm">Implement & Fix (Close the gaps).</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm font-semibold text-white">
+                            <i class="fas fa-check-double text-outcomex-emerald mt-1"></i>
+                            <span><strong>Everything in Essential</strong></span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>Engineering Remediation Hours</span>
+                        </li>
+                         <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>AppLocker / WDAC Configuration</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>Macro & Office Hardening</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-check text-outcomex-emerald mt-1"></i>
+                            <span>Admin Privilege Cleanup</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg bg-outcomex-emerald text-slate-900 hover:bg-emerald-400 transition-colors font-bold shadow-lg">Contact Sales</a>
+                </div>
+
+                <!-- ADD-ONS TIER -->
+                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 flex flex-col hover:border-purple-500 transition-colors">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white">Add-Ons</h3>
+                        <p class="text-slate-400 mt-2 text-sm">Assure & Maintain.</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8 flex-1">
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-plus text-purple-500 mt-1"></i>
+                            <span>Quarterly Drift Assessments</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-plus text-purple-500 mt-1"></i>
+                            <span>Backup Integrity Testing</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-plus text-purple-500 mt-1"></i>
+                            <span>User Awareness Training</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-sm text-slate-300">
+                            <i class="fas fa-plus text-purple-500 mt-1"></i>
+                            <span>IRAP Pre-Audit Support</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg border border-slate-600 hover:border-white hover:bg-white hover:text-slate-900 transition-colors font-semibold">Enquire Now</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-6 h-6 bg-outcomex-primary rounded"></div>
+                        <span class="text-xl font-bold">Outcomex</span>
+                    </div>
+                    <p class="text-slate-500 text-sm max-w-sm">
+                        Australian-owned systems integrator delivering outcome-based cyber security solutions.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-outcomex-accent">Essential 8 Uplift</a></li>
+                        <li><a href="#" class="hover:text-outcomex-accent">Cyber Fusion Centre</a></li>
+                        <li><a href="#" class="hover:text-outcomex-accent">VMaaS & Patching</a></li>
+                        <li><a href="#" class="hover:text-outcomex-accent">Incident Response</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><i class="fas fa-phone mr-2"></i> 1300 123 456</li>
+                        <li><i class="fas fa-envelope mr-2"></i> sales@outcomex.com.au</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Sydney, Melbourne, Brisbane</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-600 text-sm">&copy; 2025 Outcomex. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-slate-600 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-slate-600 hover:text-white"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll spy to highlight nav items
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav div.hidden a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-white');
+                link.classList.add('text-slate-300');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.remove('text-slate-300');
+                    link.classList.add('text-white');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
