@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Security Awareness | Outcomex</title>
+    <title>Security Awareness & Human Risk Management | Outcomex</title>
+    <meta name="description" content="Australian security awareness training. Reduce human risk, prevent phishing, and ensure compliance with ACSC Essential 8 and ISO 27001.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
@@ -15,448 +16,1070 @@
                             dark: '#0B1120', // Deep navy/black
                             primary: '#0056D2', // Corporate Blue
                             accent: '#00A3E0', // Cyan/Bright Blue
-                            purple: '#6D28D9', // Cyber purple nuance
+                            purple: '#6D28D9', // Strategic Purple
                             surface: '#1E293B',
-                            rose: '#E11D48' // Added for "Human Factor"
+                            rose: '#E11D48', // Alert/Action color
+                            success: '#10B981',
+                            warning: '#F59E0B'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'gradient-x': 'gradient-x 3s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: 0, transform: 'translateY(40px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        .hero-pattern {
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
             background-color: #0B1120;
-            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            color: #ffffff;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .hero-bg {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 86, 210, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 60%, rgba(0, 163, 224, 0.1) 0%, transparent 40%);
+        }
+
+        .grid-pattern {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
         }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
         }
-        .scroll-smooth {
-            scroll-behavior: smooth;
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
-        .gradient-border {
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .opacity-0-init {
+            opacity: 0;
+        }
+
+        .chart-bar {
+            width: 0;
+            transition: width 1.5s ease-out;
+        }
+        
+        .chart-bar.animate {
+            width: var(--target-width);
+        }
+
+        .check-list li {
             position: relative;
-            background: #1E293B;
-            border-radius: 1rem;
-            z-index: 1;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #cbd5e1;
         }
-        .gradient-border::before {
-            content: "";
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
             position: absolute;
-            inset: -2px;
-            z-index: -1;
-            border-radius: 1.1rem;
-            background: linear-gradient(45deg, #E11D48, #0056D2, #6D28D9);
-            opacity: 0.5;
+            left: 0;
+            color: #00A3E0;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-white font-sans antialiased scroll-smooth">
+<body class="font-sans antialiased overflow-x-hidden">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <nav class="fixed w-full z-50 bg-outcomex-dark/90 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <!-- Placeholder Logo Icon -->
-                    <div class="w-8 h-8 bg-gradient-to-br from-outcomex-primary to-outcomex-rose rounded-md"></div>
-                    <span class="font-bold text-2xl tracking-tight">Outcomex</span>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-outcomex-primary to-outcomex-accent rounded-lg flex items-center justify-center text-white shadow-lg shadow-blue-900/20">
+                        <i class="fas fa-users-shield text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight block leading-none">Outcomex</span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-[0.1em] font-bold">Awareness</span>
+                    </div>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#what-is-it" class="text-slate-300 hover:text-white transition-colors">The Human Risk</a>
-                    <a href="#importance" class="text-slate-300 hover:text-white transition-colors">Why Train?</a>
-                    <a href="#difference" class="text-slate-300 hover:text-white transition-colors">Methodology</a>
-                    <a href="#pricing" class="bg-outcomex-primary hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors">View Plans</a>
-                </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-slate-300 hover:text-white p-2">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#why-awareness" class="text-slate-300 hover:text-white text-sm font-semibold transition-colors">Why Awareness</a>
+                    <a href="#methodology" class="text-slate-300 hover:text-white text-sm font-semibold transition-colors">Methodology</a>
+                    <a href="#stand-alone" class="text-slate-300 hover:text-white text-sm font-semibold transition-colors">Why Outcomex</a>
+                    <a href="#outcomes" class="text-slate-300 hover:text-white text-sm font-semibold transition-colors">Value</a>
+                    <a href="#pricing" class="text-slate-300 hover:text-white text-sm font-semibold transition-colors">Packages</a>
+                    <a href="#contact" class="bg-outcomex-primary hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-blue-900/30 hover:shadow-blue-900/50">
+                        Book Consultation
+                    </a>
                 </div>
             </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700">
-            <a href="#what-is-it" class="block px-4 py-3 text-slate-300 hover:bg-slate-700">The Human Risk</a>
-            <a href="#importance" class="block px-4 py-3 text-slate-300 hover:bg-slate-700">Why Train?</a>
-            <a href="#difference" class="block px-4 py-3 text-slate-300 hover:bg-slate-700">Methodology</a>
-            <a href="#pricing" class="block px-4 py-3 text-outcomex-accent font-semibold hover:bg-slate-700">View Plans</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 hero-pattern overflow-hidden">
-        <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full bg-gradient-to-b from-outcomex-rose/10 to-transparent pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-outcomex-rose text-sm font-semibold mb-6">
-                <span class="w-2 h-2 rounded-full bg-outcomex-rose animate-pulse"></span>
-                Human-Centric Security
-            </div>
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-                Technology Can Fail.<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-outcomex-rose to-outcomex-primary">Humans Must Not.</span>
-            </h1>
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
-                Turn your employees from your biggest risk into your strongest defence. Our <strong>Cyber Security Awareness</strong> programs build a culture of vigilance, not just compliance.
-            </p>
-            <div class="flex justify-center gap-4">
-                <a href="#pricing" class="bg-outcomex-primary hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-lg shadow-blue-900/20">
-                    Training Packages
-                </a>
-                <a href="#difference" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-8 py-4 rounded-lg font-semibold transition-all">
-                    Our Method
-                </a>
+    <section class="relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden hero-bg">
+        <div class="absolute inset-0 grid-pattern opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="scroll-reveal visible">
+                    <!-- Badge -->
+                    <div class="opacity-0-init animate-slide-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-xs font-bold mb-8 backdrop-blur-sm uppercase tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-outcomex-accent animate-pulse"></span>
+                        Australian Human Risk Management
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] opacity-0-init animate-slide-up [animation-delay:200ms]">
+                        Turn Your Workforce<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-outcomex-accent to-outcomex-primary animate-gradient-x bg-[length:200%_200%]">Into Your First Line of Defence.</span>
+                    </h1>
+                    
+                    <p class="text-lg text-slate-300 mb-8 leading-relaxed max-w-xl font-medium opacity-0-init animate-slide-up [animation-delay:400ms]">
+                        Human error drives <strong>90% of cyber incidents</strong>. We help Australian businesses reduce risk, meet Essential Eight compliance, and prevent phishing attacks through engaging, culture-focused training.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 opacity-0-init animate-slide-up [animation-delay:600ms]">
+                        <a href="#contact" class="flex items-center justify-center gap-2 bg-outcomex-primary hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-xl shadow-blue-900/20 group hover:shadow-blue-900/40 transform hover:-translate-y-1">
+                            Start Your Program
+                            <i class="fas fa-arrow-right text-sm transform group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#methodology" class="flex items-center justify-center gap-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 text-white px-8 py-4 rounded-xl font-bold transition-all backdrop-blur-sm transform hover:-translate-y-1">
+                            <i class="fas fa-play-circle text-outcomex-accent"></i>
+                            See How It Works
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex items-center gap-6 text-slate-400 text-sm font-semibold opacity-0-init animate-slide-up [animation-delay:800ms]">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-outcomex-success"></i> Essential 8 Aligned
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-outcomex-success"></i> ISO 27001 Ready
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-outcomex-success"></i> APRA / ASIC
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animated Visual: Dashboard -->
+                <div class="relative lg:h-[600px] flex items-center justify-center scroll-reveal delay-200">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-outcomex-primary/20 to-outcomex-accent/10 rounded-full blur-[100px] animate-pulse-slow"></div>
+                    
+                    <!-- Dashboard Card -->
+                    <div class="relative w-full max-w-md glass-panel rounded-2xl p-0 overflow-hidden animate-float border-t-2 border-outcomex-accent">
+                        <div class="bg-slate-900/80 px-6 py-4 border-b border-white/10 flex justify-between items-center">
+                            <div class="text-xs font-mono text-slate-300">PROGRAM_METRICS :: Q4_REPORT</div>
+                            <div class="flex gap-2">
+                                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                                <div class="text-[10px] text-green-400 font-bold">COMPLIANT</div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 space-y-6">
+                            <!-- Metric 1 -->
+                            <div class="flex gap-4 items-center">
+                                <div class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center border border-slate-700 shrink-0">
+                                    <i class="fas fa-envelope-open text-outcomex-warning text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between mb-1">
+                                        <div class="text-sm font-bold text-white">Phish-prone Percentage</div>
+                                        <div class="text-xs text-green-400 font-bold">-12% ▼</div>
+                                    </div>
+                                    <div class="w-full bg-slate-700 h-1.5 rounded-full">
+                                        <div class="bg-outcomex-warning h-1.5 rounded-full" style="width: 4.2%"></div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-400 mt-1">Current Risk: Low (4.2%)</div>
+                                </div>
+                            </div>
+
+                            <!-- Metric 2 -->
+                            <div class="flex gap-4 items-center">
+                                <div class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center border border-slate-700 shrink-0">
+                                    <i class="fas fa-flag text-outcomex-accent text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between mb-1">
+                                        <div class="text-sm font-bold text-white">User Reporting Rate</div>
+                                        <div class="text-xs text-green-400 font-bold">+45% ▲</div>
+                                    </div>
+                                    <div class="w-full bg-slate-700 h-1.5 rounded-full">
+                                        <div class="bg-outcomex-accent h-1.5 rounded-full" style="width: 68%"></div>
+                                    </div>
+                                    <div class="text-[10px] text-slate-400 mt-1">Active Defence: High</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recent Activity -->
+                            <div class="pt-4 border-t border-white/5">
+                                <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-3">Recent Simulation Results</div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-white"><i class="fas fa-box text-slate-500 mr-2"></i>Parcel Delivery Scam</span>
+                                        <span class="text-green-400 bg-green-900/20 px-2 py-0.5 rounded">98% Resisted</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-white"><i class="fas fa-file-invoice-dollar text-slate-500 mr-2"></i>Fake Invoice (Xero)</span>
+                                        <span class="text-green-400 bg-green-900/20 px-2 py-0.5 rounded">95% Resisted</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- What is Awareness -->
-    <section id="what-is-it" class="py-20 bg-slate-900 border-t border-slate-800">
+    <!-- Why Awareness Matters -->
+    <section id="why-awareness" class="py-24 bg-outcomex-dark relative border-y border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6 text-white">What is Security Awareness?</h2>
-                    <p class="text-slate-400 mb-6 text-lg leading-relaxed">
-                        <strong>Cyber Security Awareness</strong> is the ongoing education of employees to recognize and report cyber threats. It moves beyond reading a policy document once a year to active engagement with real-world scenarios.
-                    </p>
-                    <p class="text-slate-400 mb-6 text-lg leading-relaxed">
-                        It encompasses <strong>Phishing Simulations</strong>, secure behavior training (password hygiene, physical security), and executive-level education, ensuring that every layer of the organization understands their role in protecting data.
-                    </p>
-                    <div class="flex items-center gap-4 text-outcomex-accent font-semibold">
-                        <i class="fas fa-brain"></i>
-                        <span>Building the "Human Firewall"</span>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-outcomex-rose to-purple-600 blur-3xl opacity-20 rounded-full"></div>
-                    <div class="glass-card p-8 rounded-2xl relative">
-                        <h3 class="text-xl font-semibold mb-4 border-b border-slate-700 pb-4">The Training Cycle</h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <div class="bg-slate-800 p-2 rounded text-outcomex-rose"><i class="fas fa-envelope-open-text"></i></div>
-                                <div>
-                                    <strong class="block text-white">Simulate</strong>
-                                    <span class="text-sm text-slate-400">Send realistic phishing emails to staff.</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="bg-slate-800 p-2 rounded text-blue-400"><i class="fas fa-chalkboard-teacher"></i></div>
-                                <div>
-                                    <strong class="block text-white">Educate</strong>
-                                    <span class="text-sm text-slate-400">Deliver "In-the-moment" micro-training if they click.</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="bg-slate-800 p-2 rounded text-green-400"><i class="fas fa-chart-line"></i></div>
-                                <div>
-                                    <strong class="block text-white">Measure</strong>
-                                    <span class="text-sm text-slate-400">Track "Click Rate" reduction over time.</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why is it Important -->
-    <section id="importance" class="py-20 bg-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Why It Matters to Business</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">You can spend millions on firewalls, but if one employee clicks a malicious link, the attacker is inside. People are the primary attack vector.</p>
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-outcomex-accent font-bold text-sm uppercase tracking-widest">The Australian Landscape</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-2 mb-4">Why Technical Controls Aren't Enough</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Firewalls and filters catch most threats, but social engineering bypasses technology to target your people directly.
+                </p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-slate-900 p-8 rounded-xl border border-slate-700 hover:border-outcomex-rose transition-colors">
-                    <div class="w-12 h-12 bg-rose-900/30 rounded-lg flex items-center justify-center text-outcomex-rose text-xl mb-6">
-                        <i class="fas fa-exclamation-triangle"></i>
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group hover:bg-slate-800/50 transition-colors scroll-reveal">
+                    <div class="w-12 h-12 bg-outcomex-rose/20 rounded-lg flex items-center justify-center text-outcomex-rose text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-user-injured"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">90% of Breaches</h3>
-                    <p class="text-slate-400 text-sm">Research consistently shows that over 90% of successful cyber attacks start with a phishing email. Closing this gap provides the highest ROI in security.</p>
+                    <h3 class="text-xl font-bold text-white mb-3">The Human Factor</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        90% of data breaches involve a human element. Whether it's a weak password or a clicked link, attackers exploit busy, untrained employees.
+                    </p>
                 </div>
+
                 <!-- Card 2 -->
-                <div class="bg-slate-900 p-8 rounded-xl border border-slate-700 hover:border-outcomex-primary transition-colors">
-                    <div class="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-400 text-xl mb-6">
-                        <i class="fas fa-file-signature"></i>
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group hover:bg-slate-800/50 transition-colors scroll-reveal delay-100">
+                    <div class="w-12 h-12 bg-outcomex-accent/20 rounded-lg flex items-center justify-center text-outcomex-accent text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-file-invoice-dollar"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Essential 8 Alignment</h3>
-                    <p class="text-slate-400 text-sm">While "User Application Hardening" is technical, the ASD strongly advises user education as a compensating control for sophisticated social engineering attacks.</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Local Threat Trends</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Australian businesses are heavily targeted by Invoice Fraud and Business Email Compromise (BEC). We train your team to spot the subtle signs of these financial scams.
+                    </p>
                 </div>
+
                 <!-- Card 3 -->
-                <div class="bg-slate-900 p-8 rounded-xl border border-slate-700 hover:border-purple-500 transition-colors">
-                    <div class="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-400 text-xl mb-6">
-                        <i class="fas fa-users"></i>
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group hover:bg-slate-800/50 transition-colors scroll-reveal delay-200">
+                    <div class="w-12 h-12 bg-outcomex-success/20 rounded-lg flex items-center justify-center text-outcomex-success text-xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-clipboard-check"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Cultural Shift</h3>
-                    <p class="text-slate-400 text-sm">A mature security culture means employees report incidents <em>fast</em> without fear of punishment, allowing your SOC to contain threats quicker.</p>
+                    <h3 class="text-xl font-bold text-white mb-3">Compliance Mandates</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Meeting requirements for ISO 27001, APRA CPS 234, and the Essential Eight requires evidential proof of ongoing security awareness training, not just a policy document.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Outcomex Differentiation -->
-    <section id="difference" class="py-20 bg-outcomex-dark relative overflow-hidden">
-        <div class="absolute right-0 top-0 w-1/3 h-full bg-outcomex-surface opacity-50 skew-x-12 transform translate-x-20"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">The Outcomex Difference</h2>
-                    <div class="space-y-8">
-                        <div class="flex gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-outcomex-primary flex items-center justify-center shadow-lg shadow-blue-500/30">
-                                <span class="font-bold">1</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Culture-First Methodology</h3>
-                                <p class="text-slate-400">We don't do boring "death by PowerPoint." Our program uses gamification, humor, and relatable storytelling to make security stick.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-outcomex-rose flex items-center justify-center shadow-lg shadow-rose-500/30">
-                                <span class="font-bold">2</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Contextual Phishing</h3>
-                                <p class="text-slate-400">Generic "Prince of Nigeria" emails don't work. We design campaigns mimicking <em>Australian</em> brands (e.g., MyGov, ATO, Australia Post) to test resilience against local threats.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
-                                <span class="font-bold">3</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Positive Reinforcement</h3>
-                                <p class="text-slate-400">We don't shame users who click. We treat a "click" as a learning opportunity. We celebrate users who "Report" suspicious emails, reinforcing good behavior.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="h-full flex items-center justify-center">
-                    <!-- Visual of Phishing Results -->
-                    <div class="p-6 bg-slate-800/50 border border-slate-700 rounded-2xl backdrop-blur-sm w-full max-w-md">
-                        <div class="text-sm font-bold text-white mb-4">Campaign Results: "ATO Tax Return"</div>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between text-xs text-slate-400 mb-1">
-                                    <span>Emails Sent</span>
-                                    <span>500</span>
-                                </div>
-                                <div class="w-full bg-slate-700 h-2 rounded-full">
-                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="flex justify-between text-xs text-slate-400 mb-1">
-                                    <span>Opened</span>
-                                    <span>350 (70%)</span>
-                                </div>
-                                <div class="w-full bg-slate-700 h-2 rounded-full">
-                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 70%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-xs text-slate-400 mb-1">
-                                    <span>Clicked Link (Risk)</span>
-                                    <span class="text-outcomex-rose font-bold">42 (8.4%)</span>
-                                </div>
-                                <div class="w-full bg-slate-700 h-2 rounded-full">
-                                    <div class="bg-outcomex-rose h-2 rounded-full" style="width: 8.4%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-xs text-slate-400 mb-1">
-                                    <span>Reported to SOC (Success)</span>
-                                    <span class="text-green-500 font-bold">128 (25.6%)</span>
-                                </div>
-                                <div class="w-full bg-slate-700 h-2 rounded-full">
-                                    <div class="bg-green-500 h-2 rounded-full" style="width: 25.6%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Tiers -->
-    <section id="pricing" class="py-20 bg-slate-900">
+    <!-- Methodology -->
+    <section id="methodology" class="py-24 bg-gradient-to-b from-slate-900 to-outcomex-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Awareness Packages</h2>
-                <p class="text-slate-400">Flexible options from automated testing to full culture change.</p>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 relative scroll-reveal">
+                     <!-- Interactive Element Placeholder -->
+                     <div class="relative bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
+                        <div class="bg-slate-900 px-4 py-2 border-b border-slate-700 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <div class="ml-4 text-xs text-slate-500 font-mono">Simulation: Internal_Alert.eml</div>
+                        </div>
+                        <div class="p-6">
+                            <!-- Mock Email -->
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4 border-b border-slate-700 pb-4">
+                                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">I</div>
+                                    <div>
+                                        <div class="text-white font-semibold">IT Helpdesk <span class="text-xs text-slate-500">&lt;helpdesk-support@corporate-login-auth.com&gt;</span></div>
+                                        <div class="text-xs text-red-400 mt-1"><i class="fas fa-exclamation-triangle mr-1"></i> External Sender</div>
+                                    </div>
+                                </div>
+                                <div class="text-slate-300 text-sm space-y-2">
+                                    <p>Your Microsoft 365 password expires in 2 hours. Click below to retain access.</p>
+                                    <button class="w-full bg-outcomex-primary text-white py-2 rounded hover:bg-blue-700 transition-colors">Keep Current Password</button>
+                                </div>
+                                <!-- Training Overlay -->
+                                <div class="absolute inset-0 bg-slate-900/95 flex flex-col items-center justify-center text-center p-6 opacity-0 hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                                    <div class="w-16 h-16 bg-outcomex-accent/20 text-outcomex-accent rounded-full flex items-center justify-center text-2xl mb-4">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-white mb-2">Just-in-Time Learning</h4>
+                                    <p class="text-slate-300 text-sm mb-4">Oops! You clicked a simulated link. Notice the domain mismatch?</p>
+                                    <span class="text-outcomex-accent text-sm font-bold">Short educational video playing...</span>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+
+                <div class="order-1 lg:order-2 scroll-reveal">
+                    <h2 class="text-3xl font-bold mb-6">Practical, Engaging, and Effective</h2>
+                    <p class="text-slate-400 text-lg mb-8">
+                        We move beyond "death by PowerPoint" to deliver short, relevant content that respects your employees' time while effectively reducing risk.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-outcomex-primary/20 rounded-xl flex items-center justify-center text-outcomex-primary">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Micro-Learning Modules</h3>
+                                <p class="text-slate-400 text-sm">Digestible 2-3 minute videos covering key topics like passwords, social media safety, and remote work security. </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-outcomex-rose/20 rounded-xl flex items-center justify-center text-outcomex-rose">
+                                <i class="fas fa-random text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Safe Phishing Simulations</h3>
+                                <p class="text-slate-400 text-sm">We safely test your team using realistic templates (e.g., Office 365, Xero, LinkedIn) to build muscle memory without the breach.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 bg-outcomex-accent/20 rounded-xl flex items-center justify-center text-outcomex-accent">
+                                <i class="fas fa-chart-line text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Measurable Culture Change</h3>
+                                <p class="text-slate-400 text-sm">We track metrics that matter: click rates, reporting rates, and training completion, proving ROI to your board.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Outcomex (Competitor Comparison) -->
+    <section class="py-24 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-outcomex-accent font-bold text-sm uppercase tracking-widest">Market Comparison</span>
+                <h2 class="text-3xl font-bold text-white mt-2 mb-4">Why Australian Organisations Choose Outcomex</h2>
+                <p class="text-slate-400">Local expertise matters when building a security culture.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Competitors -->
+                <div class="p-8 rounded-2xl border border-slate-700 opacity-60 bg-slate-800/50 scroll-reveal">
+                    <h3 class="text-xl font-bold text-slate-300 mb-6 flex items-center gap-2">
+                        <i class="fas fa-globe text-slate-500"></i> Generic Global Platforms
+                    </h3>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-times text-red-500 mt-1"></i>
+                            <span>Generic, US-centric content (IRS scams, etc.)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-times text-red-500 mt-1"></i>
+                            <span>"Tick-box" compliance focus without engagement</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-times text-red-500 mt-1"></i>
+                            <span>Offshore support & data hosting</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Outcomex -->
+                <div class="p-8 rounded-2xl border-2 border-outcomex-primary bg-slate-800 relative shadow-2xl shadow-blue-900/20 scroll-reveal delay-100">
+                    <div class="absolute -top-4 right-8 bg-outcomex-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        The Outcomex Standard
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="fas fa-shield-alt text-outcomex-primary"></i> Outcomex Managed Service
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-white">
+                            <i class="fas fa-check text-outcomex-success mt-1"></i>
+                            <span><strong>Australian Context:</strong> Scenarios relevant to local businesses.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white">
+                            <i class="fas fa-check text-outcomex-success mt-1"></i>
+                            <span><strong>Outcome Focused:</strong> Measured reduction in risk.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white">
+                            <i class="fas fa-check text-outcomex-success mt-1"></i>
+                            <span><strong>Sovereign Capability:</strong> Australian team, Australian data.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-white">
+                            <i class="fas fa-check text-outcomex-success mt-1"></i>
+                            <span><strong>Strategic:</strong> Regular reviews to improve participation.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Outcomex Stands Alone (New Section) -->
+    <section id="stand-alone" class="py-24 bg-outcomex-dark relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-outcomex-purple font-bold text-sm uppercase tracking-widest">Unmatched Capability</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-2 mb-4">Why Outcomex Stands Alone</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    We aren't just a training vendor. We are one of Australia's most awarded Systems Integrators, bringing deep technical DNA to human risk management.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700 hover:border-outcomex-accent transition-all group scroll-reveal">
+                    <div class="mb-6">
+                        <div class="text-4xl text-outcomex-accent mb-4"><i class="fas fa-trophy"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Award-Winning Excellence</h3>
+                        <p class="text-slate-400 text-sm">Consistent winner at the CRN Impact Awards and ARN Innovation Awards, recognised for delivering real customer outcomes, not just shelf-ware.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700 hover:border-outcomex-primary transition-all group scroll-reveal delay-100">
+                    <div class="mb-6">
+                        <div class="text-4xl text-outcomex-primary mb-4"><i class="fas fa-code-branch"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Technical DNA</h3>
+                        <p class="text-slate-400 text-sm">Our training is built by engineers and security architects who understand the actual anatomy of an attack, ensuring content is technically accurate and relevant.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700 hover:border-outcomex-success transition-all group scroll-reveal delay-200">
+                    <div class="mb-6">
+                        <div class="text-4xl text-outcomex-success mb-4"><i class="fas fa-flag-checkered"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2">Outcome Obsessed</h3>
+                        <p class="text-slate-400 text-sm">We don't measure success by "emails sent." We measure it by risk reduced, culture improved, and incidents prevented. We are partners in your defence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcomes / Value -->
+    <section id="outcomes" class="py-24 bg-gradient-to-b from-outcomex-dark to-slate-900 relative overflow-hidden">
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="scroll-reveal">
+                    <h2 class="text-3xl font-bold mb-6">Proven Business Value</h2>
+                    <p class="text-slate-400 mb-8">
+                        Investing in your "Human Firewall" delivers more than just security—it supports governance, compliance, and business continuity.
+                    </p>
+                    <ul class="check-list space-y-4 text-lg">
+                        <li>Reduce the likelihood of ransomware and data breaches</li>
+                        <li>Meet training requirements for ISO 27001 & SOC 2</li>
+                        <li>Empower employees to identify potential fraud</li>
+                        <li>Demonstrate due diligence to regulators and insurers</li>
+                    </ul>
+                </div>
                 
-                <!-- ESSENTIAL TIER -->
-                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 flex flex-col relative group hover:shadow-xl transition-all hover:-translate-y-1">
+                <div class="space-y-6 scroll-reveal delay-200">
+                    <!-- Outcome Bar 1 -->
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-slate-400 font-medium">Click Rate (Risk)</span>
+                            <span class="text-2xl font-bold text-white">-<span class="counter" data-target="85">0</span>%</span>
+                        </div>
+                        <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden">
+                            <div class="h-full bg-outcomex-accent chart-bar" style="--target-width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Outcome Bar 2 -->
+                    <div class="glass-panel p-6 rounded-xl">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-slate-400 font-medium">Reporting Rate (Culture)</span>
+                            <span class="text-2xl font-bold text-white">+<span class="counter" data-target="300">0</span>%</span>
+                        </div>
+                        <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden">
+                            <div class="h-full bg-outcomex-success chart-bar" style="--target-width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications & Strategic Partners (Expanded) -->
+    <section id="certifications" class="py-16 bg-white/5 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Certifications & Strategic Alliances</p>
+            </div>
+            
+            <!-- Strategic Partners -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center opacity-80 hover:opacity-100 transition-opacity duration-300 mb-12 border-b border-white/5 pb-12">
+                 <!-- Mock Logos (Replace with SVGs) -->
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fab fa-microsoft text-4xl text-white group-hover:text-blue-400 transition-colors"></i>
+                    <span class="font-bold text-sm text-slate-300">Solutions Partner</span>
+                    <span class="text-[10px] text-slate-500">Security</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fas fa-network-wired text-4xl text-white group-hover:text-blue-400 transition-colors"></i>
+                    <span class="font-bold text-sm text-slate-300">Cisco</span>
+                    <span class="text-[10px] text-slate-500">Master Security Specialisation</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fas fa-shield-alt text-4xl text-white group-hover:text-outcomex-accent transition-colors"></i>
+                    <span class="font-bold text-sm text-slate-300">CREST</span>
+                    <span class="text-[10px] text-slate-500">Member Company</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group">
+                    <i class="fas fa-award text-4xl text-white group-hover:text-outcomex-accent transition-colors"></i>
+                    <span class="font-bold text-sm text-slate-300">CRN Impact</span>
+                    <span class="text-[10px] text-slate-500">Award Winner</span>
+                </div>
+            </div>
+
+            <!-- Compliance Standards -->
+             <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="text-center group">
+                    <div class="font-bold text-white text-lg group-hover:text-outcomex-primary transition-colors">ACSC Essential 8</div>
+                    <div class="text-xs text-slate-400">Aligned</div>
+                </div>
+                <div class="text-center group">
+                    <div class="font-bold text-white text-lg group-hover:text-outcomex-primary transition-colors">ISO 27001</div>
+                    <div class="text-xs text-slate-400">Certified</div>
+                </div>
+                <div class="text-center group">
+                    <div class="font-bold text-white text-lg group-hover:text-outcomex-primary transition-colors">APRA CPS 234</div>
+                    <div class="text-xs text-slate-400">Compliant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 bg-outcomex-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+             <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-3xl font-bold mb-4">Trusted by Australian Industry</h2>
+                <p class="text-slate-400">Hear from leaders who have transformed their security culture.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-panel p-8 rounded-2xl relative scroll-reveal">
+                    <div class="absolute -top-4 left-8 text-6xl text-outcomex-primary opacity-20">"</div>
+                    <p class="text-slate-300 mb-6 relative z-10 italic">
+                        "The local context makes all the difference. Our staff actually relate to the scenarios because they mimic the brands and scams we see in Sydney daily. It’s not just generic training anymore."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-400">C</div>
+                        <div>
+                            <div class="text-white font-bold text-sm">CIO</div>
+                            <div class="text-slate-500 text-xs">NSW Government Agency</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-panel p-8 rounded-2xl relative scroll-reveal delay-100">
+                    <div class="absolute -top-4 left-8 text-6xl text-outcomex-primary opacity-20">"</div>
+                    <p class="text-slate-300 mb-6 relative z-10 italic">
+                        "Finally, a provider that doesn't just tick a box. The monthly reporting helped us demonstrate proactive risk management to our insurers, actually helping to stabilize our premium."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-400">S</div>
+                        <div>
+                            <div class="text-white font-bold text-sm">Risk Manager</div>
+                            <div class="text-slate-500 text-xs">Financial Services Firm</div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Testimonial 3 -->
+                <div class="glass-panel p-8 rounded-2xl relative scroll-reveal delay-200">
+                    <div class="absolute -top-4 left-8 text-6xl text-outcomex-primary opacity-20">"</div>
+                    <p class="text-slate-300 mb-6 relative z-10 italic">
+                        "The transition was seamless. Outcomex handled the Azure AD sync and whitelisting directly with our IT team. We went from 'zero' to a full baseline simulation in less than two weeks."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-400">M</div>
+                        <div>
+                            <div class="text-white font-bold text-sm">IT Director</div>
+                            <div class="text-slate-500 text-xs">Healthcare Provider</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awareness Packages (Business Focused) -->
+    <section id="pricing" class="py-24 bg-gradient-to-b from-outcomex-dark to-slate-900 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-3xl font-bold mb-4">Flexible Service Tiers</h2>
+                <p class="text-slate-400">Select the model that aligns with your organisation's size and compliance needs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                
+                <!-- Essential: Baseline Compliance -->
+                <div class="glass-panel p-8 rounded-2xl flex flex-col relative group hover:bg-slate-800/60 transition-colors scroll-reveal delay-100 border-t-4 border-slate-500">
                     <div class="mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-server text-slate-400"></i>
+                            <span class="text-slate-400 font-semibold text-xs uppercase tracking-wider">Foundation</span>
+                        </div>
                         <h3 class="text-2xl font-bold text-white">Essential</h3>
-                        <p class="text-slate-400 mt-2 text-sm">Testing & Compliance.</p>
+                        <p class="text-slate-400 mt-2 text-sm leading-relaxed border-b border-white/10 pb-4">
+                            Ideal for organisations requiring baseline compliance evidence (e.g. for ISO 27001 audit) with low administrative overhead.
+                        </p>
                     </div>
                     
                     <ul class="space-y-4 mb-8 flex-1">
                         <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-check text-outcomex-rose mt-1"></i>
-                            <span>Monthly Phishing Simulations</span>
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+                            <div>
+                                <strong class="text-white block">Automated Phishing Campaigns</strong>
+                                <span class="text-xs text-slate-500">Monthly simulations using standard templates to test alertness.</span>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-check text-outcomex-rose mt-1"></i>
-                            <span>Access to Training Video Library</span>
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+                            <div>
+                                <strong class="text-white block">User Sync Integration</strong>
+                                <span class="text-xs text-slate-500">Microsoft 365 / Azure AD integration for easy user management.</span>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-check text-outcomex-rose mt-1"></i>
-                            <span>Basic Reporting (Click Rates)</span>
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+                            <div>
+                                <strong class="text-white block">Training Library Access</strong>
+                                <span class="text-xs text-slate-500">Access to core security videos for onboarding and remediation.</span>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-check text-outcomex-rose mt-1"></i>
-                            <span>Automated Remediation Training</span>
+                            <div class="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+                            <div>
+                                <strong class="text-white block">Compliance Reporting</strong>
+                                <span class="text-xs text-slate-500">Standard monthly PDF reporting on participation and results.</span>
+                            </div>
                         </li>
                     </ul>
-                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg border border-slate-600 hover:border-outcomex-primary hover:bg-outcomex-primary/10 transition-colors font-semibold">Enquire</a>
+                    <a href="#contact" class="block w-full py-3 px-6 text-center rounded-lg border border-slate-600 hover:border-white hover:bg-white hover:text-slate-900 transition-all font-semibold text-sm">
+                        Select Essential
+                    </a>
                 </div>
 
-                <!-- ADVANTAGE TIER -->
-                <div class="bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl p-8 border-2 border-outcomex-rose flex flex-col relative shadow-2xl shadow-rose-900/20 transform md:-translate-y-4">
-                    <div class="absolute top-0 right-0 bg-outcomex-rose text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MOST POPULAR</div>
+                <!-- Advantage: Managed Human Risk -->
+                <div class="p-8 rounded-2xl border border-outcomex-primary bg-slate-800/90 relative shadow-2xl shadow-blue-900/20 flex flex-col transform md:-translate-y-4 scroll-reveal z-10">
+                    <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-outcomex-accent to-outcomex-primary rounded-t-2xl"></div>
+                    <div class="absolute top-4 right-4 bg-blue-900/50 text-blue-300 text-[10px] font-bold px-2 py-1 rounded border border-blue-500/30 uppercase tracking-wider">
+                        Recommended
+                    </div>
+                    
                     <div class="mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-shield-virus text-outcomex-accent"></i>
+                            <span class="text-outcomex-accent font-semibold text-xs uppercase tracking-wider">Managed Service</span>
+                        </div>
                         <h3 class="text-2xl font-bold text-white">Advantage</h3>
-                        <p class="text-slate-400 mt-2 text-sm">Managed Culture Change.</p>
+                        <p class="text-slate-300 mt-2 text-sm leading-relaxed border-b border-white/10 pb-4">
+                            A fully managed program designed to actively change behaviour and build a resilient security culture.
+                        </p>
                     </div>
                     
                     <ul class="space-y-4 mb-8 flex-1">
-                        <li class="flex items-start gap-3 text-sm font-semibold text-white">
-                            <i class="fas fa-check-double text-outcomex-rose mt-1"></i>
-                            <span><strong>Everything in Essential</strong></span>
+                        <li class="flex items-start gap-3 text-sm text-white">
+                            <div class="w-5 h-5 rounded-full bg-outcomex-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs text-outcomex-primary"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white">Adaptive Real-World Scenarios</strong>
+                                <span class="text-xs text-slate-400">Simulations based on current trends (e.g. MyGov, Parcel Delivery, DocuSign).</span>
+                            </div>
                         </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-check text-outcomex-rose mt-1"></i>
-                            <span>Custom Campaign Design (Targeted)</span>
+                        <li class="flex items-start gap-3 text-sm text-white">
+                            <div class="w-5 h-5 rounded-full bg-outcomex-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs text-outcomex-primary"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white">Smart Risk Groups</strong>
+                                <span class="text-xs text-slate-400">Targeted training for 'Repeat Clickers' or high-risk departments (Finance/HR).</span>
+                            </div>
                         </li>
-                         <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-check text-outcomex-rose mt-1"></i>
-                            <span>Monthly Analyst Review & Strategy</span>
+                        <li class="flex items-start gap-3 text-sm text-white">
+                            <div class="w-5 h-5 rounded-full bg-outcomex-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs text-outcomex-primary"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white">Advanced Business Templates</strong>
+                                <span class="text-xs text-slate-400">Scenarios mimicking tools you use (Teams, OneDrive, Xero) to test workflow resilience.</span>
+                            </div>
                         </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-check text-outcomex-rose mt-1"></i>
-                            <span>Gamified Learning Modules</span>
+                        <li class="flex items-start gap-3 text-sm text-white">
+                            <div class="w-5 h-5 rounded-full bg-outcomex-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fas fa-check text-xs text-outcomex-primary"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white">Quarterly Strategy Review</strong>
+                                <span class="text-xs text-slate-400">Consultation to interpret results, identify culture gaps, and refine the program.</span>
+                            </div>
                         </li>
                     </ul>
-                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg bg-outcomex-rose hover:bg-rose-500 transition-colors font-bold shadow-lg">Contact Sales</a>
+                    <a href="#contact" class="block w-full py-3 px-6 text-center rounded-lg bg-outcomex-primary hover:bg-blue-600 text-white transition-all font-bold shadow-lg text-sm">
+                        Request Advantage Proposal
+                    </a>
                 </div>
 
-                <!-- ADD-ONS TIER -->
-                <div class="bg-slate-800 rounded-2xl p-8 border border-slate-700 flex flex-col hover:border-purple-500 transition-colors">
-                    <div class="mb-6">
+                <!-- Add-Ons: Targeted High Risk -->
+                <div class="glass-panel p-8 rounded-2xl flex flex-col relative group hover:bg-slate-800/60 transition-colors scroll-reveal delay-200 border-t-4 border-purple-500">
+                     <div class="mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-crosshairs text-purple-400"></i>
+                            <span class="text-purple-400 font-semibold text-xs uppercase tracking-wider">Specialized</span>
+                        </div>
                         <h3 class="text-2xl font-bold text-white">Add-Ons</h3>
-                        <p class="text-slate-400 mt-2 text-sm">Executive & Specialized.</p>
+                        <p class="text-slate-400 mt-2 text-sm leading-relaxed border-b border-white/10 pb-4">
+                            Additional modules for Executives, Developers, and high-risk individuals.
+                        </p>
                     </div>
                     
                     <ul class="space-y-4 mb-8 flex-1">
                         <li class="flex items-start gap-3 text-sm text-slate-300">
                             <i class="fas fa-plus text-purple-500 mt-1"></i>
-                            <span>Face-to-Face Board Briefings</span>
+                            <div>
+                                <strong class="text-white block">Executive Awareness</strong>
+                                <span class="text-xs text-slate-500">Personalized coaching and simulations for C-Suite executives.</span>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3 text-sm text-slate-300">
                             <i class="fas fa-plus text-purple-500 mt-1"></i>
-                            <span>OSINT Risk Report for VIPS</span>
+                            <div>
+                                <strong class="text-white block">Digital Footprint Report</strong>
+                                <span class="text-xs text-slate-500">Identify exposed personal data that could be used for social engineering.</span>
+                            </div>
                         </li>
                         <li class="flex items-start gap-3 text-sm text-slate-300">
                             <i class="fas fa-plus text-purple-500 mt-1"></i>
-                            <span>Whaling / Spear-Phishing Simulations</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-slate-300">
-                            <i class="fas fa-plus text-purple-500 mt-1"></i>
-                            <span>Developer Secure Coding Workshop</span>
+                            <div>
+                                <strong class="text-white block">Secure Coding</strong>
+                                <span class="text-xs text-slate-500">Workshops for developers to prevent vulnerabilities in software.</span>
+                            </div>
                         </li>
                     </ul>
-                    <a href="#" class="block w-full py-3 px-6 text-center rounded-lg border border-slate-600 hover:border-white hover:bg-white hover:text-slate-900 transition-colors font-semibold">Enquire Now</a>
+                    <a href="#contact" class="block w-full py-3 px-6 text-center rounded-lg border border-slate-600 hover:border-white hover:bg-white hover:text-slate-900 transition-all font-semibold text-sm">
+                        Enquire About Add-Ons
+                    </a>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-outcomex-dark relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-slate-400">Everything you need to know about building a resilient security culture.</p>
+            </div>
+            
+            <div class="space-y-4 scroll-reveal delay-100">
+                <!-- Q1 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>How often should we run phishing simulations?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        We recommend monthly simulations. Consistency is key to building "muscle memory." Frequent, low-impact testing is more effective than annual, high-stress tests, ensuring staff stay alert to evolving scams like invoice fraud and smishing.
+                    </div>
+                </details>
+
+                <!-- Q2 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>Is this suitable for small teams or just enterprises?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        Our program is scalable. We work with Australian SMEs who need basic compliance (Essential 8) as well as large enterprises requiring complex, segmented training programs. The content is designed to be relevant for all users, regardless of company size.
+                    </div>
+                </details>
+
+                <!-- Q3 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>Does this help with cyber insurance applications?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        Yes. Most cyber insurance providers now require evidence of ongoing security awareness training. Our monthly reports provide the documented proof you need to demonstrate a proactive risk management stance to insurers.
+                    </div>
+                </details>
+
+                <!-- Q4 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>What happens if an employee keeps failing the phishing tests?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        Our approach is educational, not punitive. Users who click multiple times are automatically enrolled in a "Repeat Clicker" workflow, which provides additional, supportive training to help close their specific knowledge gaps without shaming them.
+                    </div>
+                </details>
+
+                <!-- Q5 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>Do you offer training for Board members and Executives?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        Yes. We offer specialized "Whaling" defence modules and face-to-face executive briefings. These sessions focus on the specific risks high-value targets face, such as deepfakes, BEC, and personal data exposure.
+                    </div>
+                </details>
+
+                <!-- Q6 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>How does this integrate with our existing IT systems?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        We support seamless integration with Microsoft 365, Azure AD, and Okta. This ensures user lists are automatically synced, so new hires are enrolled immediately and leavers are removed without manual admin work.
+                    </div>
+                </details>
+
+                <!-- Q7 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>Will the simulated emails get blocked by our spam filters?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        No. During onboarding, our team guides your IT department through the process of whitelisting (allow-listing) our simulation servers. This ensures training emails reach your users' inboxes reliably while keeping real threats out.
+                    </div>
+                </details>
+
+                <!-- Q8 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>Can we customise the content for our specific industry?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        Absolutely. We have libraries of industry-specific content for Healthcare, Finance, Government, Construction, and more. This ensures the scenarios (e.g., "Patient Data Update" vs "Site Inspection Schedule") feel relevant to your staff.
+                    </div>
+                </details>
+
+                <!-- Q9 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>Is the training Australian-based?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        Yes. Outcomex is Australian-owned and operated. Our content features local brands, Australian accent voiceovers, and scenarios relevant to the AUNZ threat landscape. All data is hosted onshore to meet data sovereignty requirements.
+                    </div>
+                </details>
+
+                <!-- Q10 -->
+                <details class="group glass-panel rounded-xl overflow-hidden transition-all duration-300 open:bg-slate-800/80">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer p-6 text-white hover:text-outcomex-accent transition-colors">
+                        <span>How long does onboarding take?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-outcomex-primary"></i>
+                        </span>
+                    </summary>
+                    <div class="text-slate-400 p-6 pt-0 leading-relaxed border-t border-white/5 mt-2">
+                        We aim for rapid time-to-value. For standard deployments, we can have your platform configured, whitelisted, and your first baseline simulation launched within 1-2 weeks of project kick-off.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="contact" class="py-24 bg-gradient-to-r from-outcomex-primary to-blue-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')] opacity-30"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 scroll-reveal">
+            <h2 class="text-4xl font-extrabold text-white mb-6">Ready to Strengthen Your Security Culture?</h2>
+            <p class="text-blue-100 text-lg mb-10 max-w-2xl mx-auto">
+                Protect your business from the inside out. Book a strategy session today to see how we can reduce your human risk profile.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-outcomex-primary hover:bg-slate-100 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-xl">
+                    Book a Strategy Session
+                </button>
+                <button class="bg-transparent border-2 border-white/30 hover:border-white text-white px-8 py-4 rounded-xl font-bold text-lg transition-all">
+                    Download Program Guide
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 py-12 border-t border-slate-800">
+    <footer class="bg-slate-950 py-12 border-t border-slate-800 text-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="w-6 h-6 bg-outcomex-primary rounded"></div>
-                        <span class="text-xl font-bold">Outcomex</span>
+                        <div class="w-8 h-8 bg-gradient-to-br from-outcomex-primary to-outcomex-accent rounded-lg flex items-center justify-center text-white">
+                            <i class="fas fa-shield-halved text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Outcomex</span>
                     </div>
-                    <p class="text-slate-500 text-sm max-w-sm">
-                        Australian-owned systems integrator delivering outcome-based cyber security solutions.
+                    <p class="text-slate-500 max-w-sm mb-6">
+                        Australian-owned systems integrator delivering outcome-based cyber security solutions for enterprise and government.
                     </p>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-4">Services</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#" class="hover:text-outcomex-accent">Security Awareness</a></li>
-                        <li><a href="#" class="hover:text-outcomex-accent">Cyber Fusion Centre</a></li>
-                        <li><a href="#" class="hover:text-outcomex-accent">Dark Web Monitoring</a></li>
-                        <li><a href="#" class="hover:text-outcomex-accent">Incident Response</a></li>
+                    <ul class="space-y-2 text-slate-500">
+                        <li><a href="#" class="hover:text-outcomex-accent transition-colors">Managed Security Awareness</a></li>
+                        <li><a href="#" class="hover:text-outcomex-accent transition-colors">Governance Risk & Compliance</a></li>
+                        <li><a href="#" class="hover:text-outcomex-accent transition-colors">Cyber Defence</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-white font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><i class="fas fa-phone mr-2"></i> 1300 123 456</li>
-                        <li><i class="fas fa-envelope mr-2"></i> sales@outcomex.com.au</li>
-                        <li><i class="fas fa-map-marker-alt mr-2"></i> Sydney, Melbourne, Brisbane</li>
+                    <ul class="space-y-2 text-slate-500">
+                        <li class="flex items-start gap-2"><i class="fas fa-map-marker-alt mt-1"></i> <span>Sydney (HQ), Melbourne, Brisbane</span></li>
+                        <li class="flex items-center gap-2"><i class="fas fa-phone"></i> <span>1300 123 456</span></li>
                     </ul>
                 </div>
             </div>
-            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-slate-600 text-sm">&copy; 2025 Outcomex. All rights reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="#" class="text-slate-600 hover:text-white"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="text-slate-600 hover:text-white"><i class="fab fa-twitter"></i></a>
+            <div class="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center text-slate-600">
+                <p>&copy; 2025 Outcomex. All rights reserved. ABN 12 345 678 901.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple scroll spy to highlight nav items
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('nav div.hidden a');
+        // Animations on Scroll
+        document.addEventListener('DOMContentLoaded', () => {
             
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= sectionTop - 150) {
-                    current = section.getAttribute('id');
+            // Navbar Glass Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-outcomex-dark/95', 'shadow-lg');
+                    navbar.classList.remove('bg-outcomex-dark/90');
+                } else {
+                    navbar.classList.remove('bg-outcomex-dark/95', 'shadow-lg');
+                    navbar.classList.add('bg-outcomex-dark/90');
                 }
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('text-white');
-                link.classList.add('text-slate-300');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.remove('text-slate-300');
-                    link.classList.add('text-white');
-                }
+            // Intersection Observer for Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('scroll-reveal')) {
+                            entry.target.classList.add('visible');
+                        }
+                        const charts = entry.target.querySelectorAll('.chart-bar');
+                        charts.forEach(chart => chart.classList.add('animate'));
+
+                        const counters = entry.target.querySelectorAll('.counter');
+                        counters.forEach(counter => {
+                            const target = +counter.getAttribute('data-target');
+                            const duration = 2000; // ms
+                            const increment = target / (duration / 16); // 60fps
+                            let current = 0;
+                            const updateCounter = () => {
+                                current += increment;
+                                if (current < target) {
+                                    counter.innerText = Math.ceil(current);
+                                    requestAnimationFrame(updateCounter);
+                                } else {
+                                    counter.innerText = target;
+                                }
+                            };
+                            updateCounter();
+                            counter.classList.remove('counter'); 
+                        });
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal, #outcomes').forEach((el) => {
+                observer.observe(el);
             });
         });
     </script>
