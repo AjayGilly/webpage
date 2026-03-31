@@ -112,7 +112,7 @@
         .stagger-2 { transition-delay: 200ms; }
         .stagger-3 { transition-delay: 300ms; }
 
-        /* Context Badge */
+        /* Badges */
         .context-badge {
             font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
             padding: 6px 14px; border-radius: 9999px;
@@ -146,12 +146,9 @@
         }
 
         /* Architecture Specific Styles */
-        .platform-node { cursor: pointer; transition: all 0.3s ease; background-color: rgba(15, 23, 42, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .platform-node:hover { border-color: #00f3ff; background-color: rgba(0, 243, 255, 0.05); }
-        .platform-node.active { border-color: #00f3ff; background-color: rgba(0, 243, 255, 0.1); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
+        .platform-node { cursor: pointer; transition: all 0.3s ease; }
         
-        .engine-btn { transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); color: #9ca3af; }
-        .engine-btn:hover:not(.active) { border-color: #00f3ff; color: #fff; }
+        .engine-btn { transition: all 0.3s ease; }
         .engine-btn.active {
             border-color: #00f3ff; 
             background-color: rgba(0, 243, 255, 0.1); 
@@ -166,7 +163,6 @@
 
         /* Ticker Container */
         .ticker-container { display: flex; width: 200%; }
-        
     </style>
 </head>
 
@@ -205,7 +201,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Content Writer Optimized) -->
+    <!-- Hero Section -->
     <section class="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -344,7 +340,7 @@
                 </div>
             </div>
 
-            <!-- Stats Grid (4 cards) -->
+            <!-- Stats Grid -->
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="hud-card p-8 rounded-xl text-center reveal border-t-2 border-t-cyber-cyan/50 hover:border-t-cyber-cyan transition-colors">
                     <div class="w-14 h-14 bg-cyber-cyan/10 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="expand" class="w-6 h-6 text-cyber-cyan"></i></div>
@@ -370,7 +366,7 @@
         </div>
     </section>
 
-    <!-- CONSOLIDATION & ROI SECTION (Content Writer Optimized) -->
+    <!-- CONSOLIDATION & ROI SECTION -->
     <section id="roi" class="py-20 bg-[#0b1221] relative border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
             <div class="md:w-2/3 reveal">
@@ -645,6 +641,46 @@
                         <h3 class="text-lg font-bold text-white leading-tight">Elevate Analysts<br><span class="text-[10px] text-cyber-blue font-mono font-normal tracking-widest uppercase">Force Multiplier</span></h3>
                     </div>
                     <p class="text-sm text-gray-400">A true single-pane-of-glass approach reduces context switching, empowering your internal Tier 1 analysts to perform complex Tier 2 investigations confidently.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERFORMANCE GUARANTEES (SLAs with ANIMATION) -->
+    <section class="py-24 bg-gray-900/30 border-b border-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="context-badge">Performance Guarantees</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-heading text-glow">Unmatched SLAs. Guaranteed.</h2>
+                <p class="mt-4 text-xl text-gray-400">We don't just promise fast response; we write it into your contract.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="hud-card p-8 rounded-xl text-center reveal border-t-4 border-t-cyber-cyan hover:shadow-[0_0_40px_rgba(0,243,255,0.2)] transition-shadow">
+                    <div class="text-5xl font-bold text-white mb-2 font-mono flex justify-center items-end">
+                        <span class="text-3xl text-gray-500 mr-1 mb-1">&lt;</span>
+                        <span class="sla-num" data-target="15">0</span>
+                        <span class="text-2xl text-cyber-cyan ml-1 mb-1">m</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-cyber-cyan mb-4 uppercase tracking-widest">Critical Triage</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">From the moment an alert fires, our AI and L2 analysts will triage and validate the threat within 15 minutes.</p>
+                </div>
+                <div class="hud-card p-8 rounded-xl text-center reveal stagger-1 border-t-4 border-t-cyber-purple hover:shadow-[0_0_40px_rgba(189,0,255,0.2)] transition-shadow">
+                    <div class="text-5xl font-bold text-white mb-2 font-mono flex justify-center items-end">
+                        <span class="text-3xl text-gray-500 mr-1 mb-1">&lt;</span>
+                        <span class="sla-num" data-target="30">0</span>
+                        <span class="text-2xl text-cyber-purple ml-1 mb-1">m</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-cyber-purple mb-4 uppercase tracking-widest">Threat Containment</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">If a critical threat is confirmed, we will execute containment playbooks (host isolation, account suspension) within 30 minutes.</p>
+                </div>
+                <div class="hud-card p-8 rounded-xl text-center reveal stagger-2 border-t-4 border-t-white hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-shadow">
+                    <div class="text-5xl font-bold text-white mb-2 font-mono flex justify-center items-end">
+                        <span class="sla-num" data-target="24">0</span>
+                        <span class="text-3xl text-gray-500 mx-1 mb-1">/</span>
+                        <span class="sla-num" data-target="7">0</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-4 uppercase tracking-widest">Active Threat Hunting</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Continuous, human-led threat hunting across your environment, mapping telemetry against the latest MITRE ATT&CK vectors.</p>
                 </div>
             </div>
         </div>
@@ -1257,6 +1293,14 @@
                 });
             });
 
+            // SLA Pipeline Progress Animation
+            gsap.to('.pipeline-progress', {
+                width: "100%",
+                duration: 3,
+                ease: "power2.inOut",
+                scrollTrigger: { trigger: '#sla', start: "top 60%" }
+            });
+
             // Mobile menu toggle
             const mobileNavBtn = document.getElementById('mobile-menu-btn');
             if (mobileNavBtn) {
@@ -1275,7 +1319,7 @@
                     }
                 });
             }
-        }); // <--- FIX IS HERE
+        });
 
         // Interactive Platform Logic (XDR Engine)
         const platformData = {
@@ -1296,6 +1340,9 @@
 
             const contentArea = document.getElementById('info-content-area');
             const iconEl = document.getElementById('info-icon');
+            const iconContainer = document.getElementById('info-icon-container');
+            const badgeEl = document.getElementById('inspector-badge');
+            const highlightEl = document.getElementById('inspector-highlight');
             
             if (contentArea) contentArea.style.opacity = '0';
             
@@ -1310,13 +1357,35 @@
                     iconEl.setAttribute('data-lucide', data.icon);
                     lucide.createIcons();
                 }
+
+                // Adjust highlight colors based on interaction side
+                const isPurpleSide = ['containment', 'dashboard', 'graphs', 'itsm'].includes(nodeId);
+                
+                if (iconContainer) {
+                    iconContainer.className = isPurpleSide 
+                        ? "mt-1 p-3 bg-gray-900 rounded-xl border border-gray-700 text-cyber-purple shrink-0 transition-colors duration-300"
+                        : "mt-1 p-3 bg-gray-900 rounded-xl border border-gray-700 text-cyber-cyan shrink-0 transition-colors duration-300";
+                }
+                
+                if (badgeEl) {
+                    badgeEl.className = isPurpleSide
+                        ? "absolute top-0 right-0 bg-cyber-purple text-white text-[10px] font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-widest transition-colors"
+                        : "absolute top-0 right-0 bg-cyber-cyan text-[#020408] text-[10px] font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl uppercase tracking-widest transition-colors";
+                }
+
+                if (highlightEl) {
+                    highlightEl.className = isPurpleSide
+                        ? "absolute top-0 left-0 w-1/4 h-1 bg-cyber-purple rounded-tl-2xl shadow-[0_0_15px_#bd00ff] transition-colors"
+                        : "absolute top-0 left-0 w-1/4 h-1 bg-cyber-cyan rounded-tl-2xl shadow-[0_0_15px_#00f3ff] transition-colors";
+                }
                 
                 if (contentArea) contentArea.style.opacity = '1';
             }, 300);
 
-            // Reset SVG Nodes
-            document.querySelectorAll('.svg-node').forEach(node => {
-                node.classList.remove('active');
+            // Reset HTML Nodes
+            document.querySelectorAll('.platform-node').forEach(node => {
+                node.classList.remove('border-cyber-cyan', 'bg-cyber-cyan/10', 'shadow-[0_0_15px_rgba(0,243,255,0.2)]', 'border-cyber-purple', 'bg-cyber-purple/10', 'shadow-[0_0_15px_rgba(189,0,255,0.2)]');
+                node.classList.add('bg-[#0f172a]', 'border-[#1e293b]');
             });
 
             // Reset Buttons
@@ -1328,11 +1397,16 @@
             // Highlight active target
             const activeNode = document.getElementById(`node-${nodeId}`);
             if (activeNode) {
-                if(activeNode.tagName === 'BUTTON') {
+                if(activeNode.classList.contains('engine-btn')) {
                     activeNode.classList.remove('bg-gray-800/50', 'border-gray-700', 'text-gray-400');
                     activeNode.classList.add('border-cyber-cyan', 'bg-cyber-cyan/10', 'text-cyber-cyan', 'shadow-[0_0_15px_rgba(0,243,255,0.2)]', 'active');
                 } else {
-                    activeNode.classList.add('active');
+                    activeNode.classList.remove('bg-[#0f172a]', 'border-[#1e293b]');
+                    if(['endpoint','cloud','network','identity'].includes(nodeId)) {
+                        activeNode.classList.add('border-cyber-cyan', 'bg-cyber-cyan/10', 'shadow-[0_0_15px_rgba(0,243,255,0.2)]');
+                    } else {
+                        activeNode.classList.add('border-cyber-purple', 'bg-cyber-purple/10', 'shadow-[0_0_15px_rgba(189,0,255,0.2)]');
+                    }
                 }
             }
         };
