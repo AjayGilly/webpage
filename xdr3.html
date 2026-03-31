@@ -187,7 +187,7 @@
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#reality" class="text-sm font-medium text-gray-400 hover:text-white transition">Market Reality</a>
                 <a href="#tech" class="text-sm font-medium text-gray-400 hover:text-white transition">Architecture</a>
-                <a href="#roi" class="text-sm font-medium text-gray-400 hover:text-white transition">Consolidation</a>
+                <a href="#integration" class="text-sm font-medium text-gray-400 hover:text-white transition">Integration</a>
                 <a href="#packages" class="text-sm font-medium text-gray-400 hover:text-white transition">Packages</a>
                 <a href="#contact" class="bg-gradient-to-r from-cyber-cyan to-cyber-blue text-[#020408] px-5 py-2.5 rounded-lg font-bold hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] transition-all transform hover:scale-105 duration-300">
                     Get Assessment
@@ -362,10 +362,9 @@
                 </div>
                 <!-- Stat 4 -->
                 <div class="hud-card p-8 rounded-xl text-center reveal stagger-3 border-t-2 border-t-cyber-blue/50 hover:border-t-cyber-blue transition-colors">
-                    <div class="w-14 h-14 bg-cyber-blue/10 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="clock" class="w-6 h-6 text-cyber-blue"></i></div>
-                    <h3 class="text-4xl font-bold text-white mb-2 font-heading"><span class="stat-counter" data-target="292">0</span> Days</h3>
-                    <p class="text-sm text-gray-300 font-bold uppercase tracking-wider mb-1">Time to Contain</p>
-                    <p class="text-xs text-gray-500 font-mono">Without AI/Automation</p>
+                    <div class="w-14 h-14 bg-cyber-blue/10 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="lock" class="w-6 h-6 text-cyber-blue"></i></div>
+                    <h3 class="text-lg font-bold text-white mb-3">Siloed Solutions</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Existing SIEM and EDR lack robust cross-control integrations. Teams cannot effectively aggregate, correlate, or prioritise detections.</p>
                 </div>
             </div>
         </div>
@@ -402,31 +401,60 @@
     </section>
 
     <!-- CONSOLIDATION & ROI SECTION -->
-    <section id="roi" class="py-20 bg-[#0b1221] relative border-b border-gray-800">
+    <section id="roi" class="py-20 bg-[#020408] relative border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
             <div class="md:w-2/3 reveal">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 font-heading">Maximise Your Existing Stack.</h2>
                 <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-2xl">
-                    Don't rip and replace. Outcomex MXDR acts as a unifying intelligence layer on top of your current investments. By consolidating tools into a single XDR engine, we significantly reduce Total Cost of Ownership (TCO) while improving detection fidelity.
-                </p>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Correlate perimeter alerts and phishing attempts directly into the unified XDR storyboard.
+                    </p>
+                    <ul class="space-y-3 text-sm font-semibold text-gray-300">
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-cyber-blue mr-3"></i> Mimecast & Proofpoint</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-cyber-blue mr-3"></i> Palo Alto & Fortinet</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-cyber-blue mr-3"></i> Cisco Secure Email</li>
+                    </ul>
+                </div>
+                
+                <!-- Custom Integration -->
+                <div class="bg-[#020408] border border-cyber-purple/40 p-8 rounded-xl shadow-[0_0_30px_rgba(189,0,255,0.1)] hover:shadow-[0_0_40px_rgba(189,0,255,0.2)] hover:border-cyber-purple transition-all duration-300 reveal stagger-2 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyber-purple/10 rounded-full blur-2xl"></div>
+                    <div class="w-14 h-14 bg-cyber-purple/10 border border-cyber-purple/40 rounded-xl flex items-center justify-center mb-6 text-cyber-purple relative z-10 group-hover:scale-110 transition-transform">
+                        <i data-lucide="code" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 font-heading relative z-10">Custom Integrations</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 relative z-10">
+                        Have a niche industry app or legacy mainframe? Our local engineering team builds <strong>bespoke API connectors and custom parsers</strong>.
+                    </p>
+                    <ul class="space-y-3 text-sm font-semibold text-gray-300 relative z-10">
+                        <li class="flex items-center"><i data-lucide="terminal" class="w-4 h-4 text-cyber-purple mr-3"></i> Legacy SCADA / OT Systems</li>
+                        <li class="flex items-center"><i data-lucide="terminal" class="w-4 h-4 text-cyber-purple mr-3"></i> Custom In-house Applications</li>
+                        <li class="flex items-center"><i data-lucide="terminal" class="w-4 h-4 text-cyber-purple mr-3"></i> Bespoke Syslog Parsing</li>
+                    </ul>
+                </div>
             </div>
-            <div class="md:w-1/3 flex justify-end reveal stagger-1">
-                <div class="bg-gradient-to-r from-cyber-cyan/10 to-transparent border border-cyber-cyan/20 p-6 rounded-xl flex items-center gap-6 shadow-[inset_0_0_20px_rgba(0,243,255,0.05)] w-full sm:w-auto">
-                    <div class="w-14 h-14 rounded-full bg-cyber-cyan/20 flex items-center justify-center shrink-0">
+            
+            <!-- ROI Callout -->
+            <div class="mt-12 bg-gradient-to-r from-cyber-cyan/10 to-transparent border border-cyber-cyan/20 p-6 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[inset_0_0_20px_rgba(0,243,255,0.05)] reveal">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-cyber-cyan/20 flex items-center justify-center shrink-0">
                         <i data-lucide="trending-down" class="w-6 h-6 text-cyber-cyan"></i>
                     </div>
                     <div>
-                        <div class="text-sm text-gray-400 font-bold uppercase tracking-wider mb-1">Potential ROI</div>
-                        <div class="text-3xl font-bold text-white font-mono">Up to 40%</div>
-                        <div class="text-xs text-gray-500 mt-1">Reduction in SecOps costs</div>
+                        <h4 class="text-white font-bold font-heading text-lg">Maximise your ROI</h4>
+                        <p class="text-gray-400 text-sm">By consolidating existing tools into a single XDR engine, we significantly reduce Total Cost of Ownership (TCO).</p>
                     </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-3xl font-bold text-cyber-cyan font-mono">Up to 40%</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-1">Reduction in SecOps costs</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 24/7 SOC SECTION -->
-    <section class="py-24 bg-[#020408] relative overflow-hidden border-b border-gray-800">
+    <!-- 24/7 SOC SECTION (With AI Noise Reduction Metric) -->
+    <section class="py-24 bg-outcomex-dark relative overflow-hidden border-b border-gray-800">
         <div class="absolute inset-0 bg-cyber-blue/5 blur-[120px] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -460,13 +488,14 @@
                         </div>
                         
                         <div class="space-y-4">
-                            <!-- AI NOISE REDUCTION METRIC -->
+                            <!-- REDESIGNED METRIC: AI NOISE REDUCTION -->
                             <div class="bg-[#020408] p-6 rounded-xl border border-gray-800/80 shadow-inner">
                                 <div class="flex justify-between items-end mb-3">
                                     <div class="text-[11px] text-gray-500 uppercase tracking-widest font-bold">AI Alert Triage & Noise Reduction</div>
                                     <div class="text-3xl text-cyber-cyan font-bold tracking-tight"><span class="noise-percent" data-target="99.8">0.0</span>%</div>
                                 </div>
                                 
+                                <!-- The Animated Fill Bar -->
                                 <div class="w-full bg-[#1e293b] h-3.5 rounded-full overflow-hidden mb-4 relative shadow-inner">
                                     <div class="noise-bar bg-gradient-to-r from-cyber-blue to-cyber-cyan h-full rounded-full shadow-[0_0_15px_rgba(0,243,255,0.4)]" style="width: 0%;" data-width="99.8%"></div>
                                 </div>
@@ -496,8 +525,8 @@
         </div>
     </section>
 
-    <!-- TECHNOLOGY (THE ENGINE) -->
-    <section id="tech" class="py-24 bg-[#020408] relative overflow-hidden border-b border-gray-800">
+    <!-- TECHNOLOGY: THE ENGINE (Restored exactly to image_04d1f9.png layout) -->
+    <section id="tech" class="py-24 bg-cyber-dark relative overflow-hidden border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
                 <span class="context-badge">The Architecture</span>
@@ -1360,16 +1389,14 @@
         // Interactive Platform Logic (XDR Engine - PROTECTED SECTION)
         const platformData = {
             'endpoint': { icon: 'monitor', title: 'Endpoint / EDR', desc: 'Ingests deep telemetry from endpoints, including process executions, registry modifications, and file system changes to detect evasive malware and ransomware.' },
-            'cloud': { icon: 'cloud', title: 'Cloud / Workloads', desc: 'Monitors cloud control planes and tracks user authentications, privilege escalations, and anomalous access patterns.' },
-            'network': { icon: 'network', title: 'Network / NDR', desc: 'Analyses network traffic flows and parses legacy system logs to identify lateral movement and data exfiltration.' },
-            'identity': { icon: 'fingerprint', title: 'Identity / IAM', desc: 'Tracks user authentications, privilege escalations, and anomalous access patterns across Entra ID, Okta, and on-premise Active Directory.' },
-            'containment': { icon: 'shield-alert', title: 'Active Containment', desc: 'Executes automated SOAR playbooks to instantly isolate compromised hosts, block malicious IPs, and suspend compromised user accounts.' },
-            'dashboard': { icon: 'layout-dashboard', title: 'Unified Dashboard', desc: 'Provides SOC analysts with a single pane of glass, visualizing prioritized incidents, threat scores, and system health in real-time.' },
-            'graphs': { icon: 'share-2', title: 'Threat Graphs', desc: 'Visualizes the complete attack chain, mapping the relationship between users, devices, and malicious indicators.' },
-            'itsm': { icon: 'ticket', title: 'ITSM Ticketing', desc: 'Automatically generates, populates, and syncs incident tickets in platforms like ServiceNow or Jira with full context and response logs.' },
+            'cloud': { icon: 'cloud', title: 'Cloud / Identity', desc: 'Monitors cloud control planes and tracks user authentications, privilege escalations, and anomalous access patterns.' },
+            'network': { icon: 'network', title: 'Network / Logs', desc: 'Analyses network traffic flows and parses legacy system logs to identify lateral movement and data exfiltration.' },
+            'alerts': { icon: 'bell', title: 'Risk-Based Triage', desc: 'Alerts are ranked by Business Risk, calculating a multi-variable score based on Asset Value and MITRE ATT&CK techniques to support SOCI Act compliance.' },
+            'graphs': { icon: 'share-2', title: 'Talos Intel Graph', desc: 'Combines global signals from Cisco Talos with local threat feeds from the ACSC. The XDR Storyboard dynamically visualises the entire attack lifecycle.' },
+            'containment': { icon: 'shield-alert', title: 'Response (SOAR)', desc: 'Isolate hosts, revoke access, or block domains in a single click. Automated timeline generation ensures readiness for mandatory ransomware reporting.' },
             'parse': { icon: 'code', title: 'Parse Engine', desc: 'Rapidly normalises diverse log formats into a unified schema (OCSF) for seamless, cross-platform analysis.' },
             'enrich': { icon: 'database', title: 'Enrichment Engine', desc: 'Augments raw data instantly with global threat intelligence (CTIS), local asset context, and identity graphs.' },
-            'correlate': { icon: 'cpu', title: 'AI Correlation', desc: 'Applies AI and UEBA models to connect disparate events across domains, identifying complex attack chains and reducing false positives.' }
+            'correlate': { icon: 'cpu', title: 'Agentic AI', desc: 'Utilising Agentic AI capabilities, the platform automatically validates alerts to distinguish between a true positive and a harmless anomaly.' }
         };
 
         window.updatePlatformInfo = function(nodeId) {
