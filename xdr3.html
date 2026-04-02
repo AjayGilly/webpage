@@ -57,6 +57,10 @@
                         'data-stream': { 
                             '0%': { backgroundPosition: '200% 0' }, 
                             '100%': { backgroundPosition: '-200% 0' } 
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
                         }
                     }
                 }
@@ -186,8 +190,9 @@
             </div>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#reality" class="text-sm font-medium text-gray-400 hover:text-white transition">Market Reality</a>
-                <a href="#tech" class="text-sm font-medium text-gray-400 hover:text-white transition">Architecture</a>
+                <a href="#timeline" class="text-sm font-medium text-gray-400 hover:text-white transition">Visibility</a>
                 <a href="#integration" class="text-sm font-medium text-gray-400 hover:text-white transition">Integration</a>
+                <a href="#tech" class="text-sm font-medium text-gray-400 hover:text-white transition">Architecture</a>
                 <a href="#packages" class="text-sm font-medium text-gray-400 hover:text-white transition">Packages</a>
                 <a href="#contact" class="bg-gradient-to-r from-cyber-cyan to-cyber-blue text-[#020408] px-5 py-2.5 rounded-lg font-bold hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] transition-all transform hover:scale-105 duration-300">
                     Get Assessment
@@ -208,7 +213,7 @@
                 <div class="reveal">
                     <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyber-cyan/30 bg-cyber-cyan/10 text-cyber-cyan text-xs font-mono mb-6 shadow-[0_0_15px_rgba(0,243,255,0.1)]">
                         <span class="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse"></span>
-                        POWERED BY CISCO XDR
+                        POWERED BY OUTCOMEX MXDR
                     </div>
                     <h1 class="text-5xl lg:text-[4rem] font-extrabold text-white leading-[1.1] mb-6 font-heading tracking-tight">
                         Stop Breaches at <br>
@@ -362,22 +367,126 @@
                 </div>
                 <!-- Stat 4 -->
                 <div class="hud-card p-8 rounded-xl text-center reveal stagger-3 border-t-2 border-t-cyber-blue/50 hover:border-t-cyber-blue transition-colors">
-                    <div class="w-14 h-14 bg-cyber-blue/10 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="lock" class="w-6 h-6 text-cyber-blue"></i></div>
-                    <h3 class="text-lg font-bold text-white mb-3">Siloed Solutions</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">Existing SIEM and EDR lack robust cross-control integrations. Teams cannot effectively aggregate, correlate, or prioritise detections.</p>
+                    <div class="w-14 h-14 bg-cyber-blue/10 rounded-full flex items-center justify-center mx-auto mb-6"><i data-lucide="clock" class="w-6 h-6 text-cyber-blue"></i></div>
+                    <h3 class="text-4xl font-bold text-white mb-2 font-heading"><span class="stat-counter" data-target="292">0</span> Days</h3>
+                    <p class="text-sm text-gray-300 font-bold uppercase tracking-wider mb-1">Time to Contain</p>
+                    <p class="text-xs text-gray-500 font-mono">Without AI/Automation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNIFIED TIMELINE SECTION (SOC OF THE FUTURE WITH GSAP) -->
+    <section id="timeline" class="py-24 bg-[#0b1221] relative overflow-hidden border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="context-badge">SOC of the Future</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-heading tracking-tight">Complete Visibility Across Network, Identity, & Endpoint</h2>
+                <p class="mt-4 text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">To neutralise advanced threats, isolated alerts aren't enough. We stitch together cross-domain telemetry to build a comprehensive, actionable timeline of every intrusion.</p>
+            </div>
+
+            <!-- The Timeline Graph -->
+            <div class="relative w-full max-w-5xl mx-auto mt-12 bg-[#020408] border border-gray-800 rounded-3xl p-6 md:p-10 shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-x-auto lg:overflow-hidden" id="timeline-container">
+                <div class="min-w-[800px]">
+                    <!-- Headers: Pre, Exploit, Post -->
+                    <div class="grid grid-cols-[1fr_1.2fr_1fr] gap-1 text-center mb-12 relative timeline-headers opacity-0">
+                        <div class="bg-cyber-blue/30 text-blue-200 py-3 rounded-l-lg font-bold uppercase tracking-wider text-sm flex items-center justify-center relative z-10 border-y border-l border-cyber-blue/50">
+                            Pre-exploitation
+                            <div class="absolute -right-4 top-0 w-0 h-0 border-y-[23px] border-y-transparent border-l-[16px] border-l-cyber-blue/40 z-20"></div>
+                        </div>
+                        <div class="bg-cyber-blue/60 text-white py-3 font-bold uppercase tracking-wider text-sm flex items-center justify-center relative z-20 border-y border-cyber-blue/80 shadow-[0_0_20px_rgba(0,102,255,0.4)]">
+                            Exploitation
+                            <div class="absolute -right-4 top-0 w-0 h-0 border-y-[23px] border-y-transparent border-l-[16px] border-l-cyber-blue/70 z-30"></div>
+                        </div>
+                        <div class="bg-[#003366] text-blue-100 py-3 rounded-r-lg font-bold uppercase tracking-wider text-sm flex items-center justify-center pl-6 z-10 border-y border-r border-[#004080]">
+                            Post-exploitation
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Tracks Container -->
+                    <div class="relative h-[350px]">
+                        
+                        <!-- Track 1: Endpoint -->
+                        <div class="absolute top-[20%] left-0 w-full h-[3px] bg-[#d97706]/40 origin-left scale-x-0 timeline-track"></div>
+                        <div class="absolute top-[20%] left-[45%] -translate-x-1/2 -translate-y-1/2 bg-[#020408] px-3 text-[#d97706] text-[10px] font-bold tracking-widest z-10 uppercase timeline-label opacity-0">Endpoint Events</div>
+                        <div class="absolute top-[35%] left-[45%] -translate-x-1/2 -translate-y-1/2 text-gray-500 font-bold text-2xl z-10 timeline-label opacity-0">+</div>
+
+                        <!-- Track 2: Identity -->
+                        <div class="absolute top-[50%] left-0 w-full h-[3px] bg-cyber-cyan/40 origin-left scale-x-0 timeline-track"></div>
+                        <div class="absolute top-[50%] left-[45%] -translate-x-1/2 -translate-y-1/2 bg-[#020408] px-3 text-cyber-cyan text-[10px] font-bold tracking-widest z-10 uppercase timeline-label opacity-0">Identity Events</div>
+                        <div class="absolute top-[65%] left-[45%] -translate-x-1/2 -translate-y-1/2 text-gray-500 font-bold text-2xl z-10 timeline-label opacity-0">+</div>
+
+                        <!-- Track 3: Network -->
+                        <div class="absolute top-[80%] left-0 w-full h-[3px] bg-cyber-blue/40 origin-left scale-x-0 timeline-track"></div>
+                        <div class="absolute top-[80%] left-[45%] -translate-x-1/2 -translate-y-1/2 bg-[#020408] px-3 text-cyber-blue text-[10px] font-bold tracking-widest z-10 uppercase timeline-label opacity-0">Network Events</div>
+
+
+                        <!-- VERTICAL CONNECTORS & NODES -->
+
+                        <!-- Phase 1: Pre-exploitation -->
+                        <div class="absolute left-[12%] top-[80%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-cyber-blue/50 origin-bottom scale-y-0 timeline-vert" style="height: 180px;"></div>
+                            <div class="absolute top-[-180px] w-2.5 h-2.5 bg-cyber-blue rounded-full shadow-[0_0_10px_#0066ff] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-28 py-2.5 bg-cyber-blue/10 border border-cyber-blue text-cyber-blue text-xs font-bold text-center rounded-full shadow-[0_0_15px_rgba(0,102,255,0.2)] backdrop-blur-sm timeline-pill opacity-0 scale-90">Initial Probe</div>
+                        </div>
+
+                        <div class="absolute left-[26%] top-[80%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-cyber-blue/50 origin-bottom scale-y-0 timeline-vert" style="height: 285px;"></div>
+                            <div class="absolute top-[-285px] w-2.5 h-2.5 bg-cyber-blue rounded-full shadow-[0_0_10px_#0066ff] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-32 py-2.5 bg-cyber-blue/10 border border-cyber-blue text-cyber-blue text-xs font-bold text-center rounded-full shadow-[0_0_15px_rgba(0,102,255,0.2)] backdrop-blur-sm timeline-pill opacity-0 scale-90">Active Scanning</div>
+                        </div>
+
+                        <!-- Phase 2: Exploitation -->
+                        <div class="absolute left-[38%] top-[50%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-cyber-cyan/50 origin-bottom scale-y-0 timeline-vert" style="height: 180px;"></div>
+                            <div class="absolute top-[-180px] w-2.5 h-2.5 bg-cyber-cyan rounded-full shadow-[0_0_10px_#00f3ff] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-32 py-2.5 bg-cyber-cyan/20 border border-cyber-cyan text-cyber-cyan text-xs font-bold text-center rounded-full shadow-[0_0_20px_rgba(0,243,255,0.3)] backdrop-blur-sm timeline-pill opacity-0 scale-90">Initial Access</div>
+                        </div>
+
+                        <div class="absolute left-[38%] top-[20%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-[#d97706]/50 origin-bottom scale-y-0 timeline-vert" style="height: 75px;"></div>
+                            <div class="absolute top-[-75px] w-2.5 h-2.5 bg-[#d97706] rounded-full shadow-[0_0_10px_#d97706] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-32 py-2.5 bg-[#d97706]/20 border border-[#d97706] text-[#d97706] text-xs font-bold text-center rounded-full shadow-[0_0_20px_rgba(217,119,6,0.3)] backdrop-blur-sm timeline-pill opacity-0 scale-90">Initial Access</div>
+                        </div>
+
+                        <div class="absolute left-[62%] top-[20%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-[#d97706]/50 origin-bottom scale-y-0 timeline-vert" style="height: 75px;"></div>
+                            <div class="absolute top-[-75px] w-2.5 h-2.5 bg-[#d97706] rounded-full shadow-[0_0_10px_#d97706] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-36 py-2.5 bg-[#0b1221] border-2 border-[#d97706] text-white text-xs font-bold text-center rounded-full shadow-[0_0_20px_rgba(217,119,6,0.5)] timeline-pill opacity-0 scale-90">Malware Download</div>
+                        </div>
+
+                        <!-- Phase 3: Post-exploitation -->
+                        <div class="absolute left-[70%] top-[50%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-cyber-cyan/50 origin-bottom scale-y-0 timeline-vert" style="height: 180px;"></div>
+                            <div class="absolute top-[-180px] w-2.5 h-2.5 bg-cyber-cyan rounded-full shadow-[0_0_10px_#00f3ff] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-36 py-2.5 bg-[#003366] border-2 border-cyber-cyan text-white text-xs font-bold text-center rounded-full shadow-[0_0_20px_rgba(0,243,255,0.4)] timeline-pill opacity-0 scale-90">Credential Access</div>
+                        </div>
+
+                        <div class="absolute left-[80%] top-[80%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-cyber-blue/50 origin-bottom scale-y-0 timeline-vert" style="height: 285px;"></div>
+                            <div class="absolute top-[-285px] w-2.5 h-2.5 bg-cyber-blue rounded-full shadow-[0_0_10px_#0066ff] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-32 py-2.5 bg-[#003366] border border-cyber-blue text-white text-xs font-bold text-center rounded-full shadow-[0_0_15px_rgba(0,102,255,0.3)] timeline-pill opacity-0 scale-90">Lateral Movement</div>
+                        </div>
+
+                        <div class="absolute left-[93%] top-[80%] -translate-y-1/2 flex flex-col items-center z-20">
+                            <div class="absolute bottom-full mb-4 w-[2px] bg-cyber-blue/50 origin-bottom scale-y-0 timeline-vert" style="height: 285px;"></div>
+                            <div class="absolute top-[-285px] w-2.5 h-2.5 bg-cyber-blue rounded-full shadow-[0_0_10px_#0066ff] timeline-dot opacity-0 scale-0"></div>
+                            <div class="w-32 py-2.5 bg-[#003366] border border-cyber-blue text-white text-xs font-bold text-center rounded-full shadow-[0_0_15px_rgba(0,102,255,0.3)] timeline-pill opacity-0 scale-90">Data Exfiltration</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- WHAT IS MXDR & WHY AS A SERVICE -->
-    <section id="what-is-mxdr" class="py-24 bg-[#0b1221] border-b border-gray-800 relative overflow-hidden">
+    <section id="what-is-mxdr" class="py-24 bg-[#020408] border-b border-gray-800 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
                 <span class="context-badge">The Solution</span>
                 <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-heading">Why Managed XDR?</h2>
                 <p class="text-lg text-gray-400 max-w-3xl mx-auto mt-6">
-                    Extended Detection and Response (XDR) connects telemetry from your endpoints, network, and cloud. <strong>Managed XDR (MXDR)</strong> pairs that powerful technology with a 24/7 team of sovereign experts to act on it.
+                    <strong>Managed XDR (MXDR)</strong> connects telemetry from your network, identity, and endpoints, pairing powerful correlation with a 24/7 team of sovereign experts to act on it.
                 </p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
@@ -400,54 +509,205 @@
         </div>
     </section>
 
-    <!-- CONSOLIDATION & ROI SECTION -->
-    <section id="roi" class="py-20 bg-[#020408] relative border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-            <div class="md:w-2/3 reveal">
-                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 font-heading">Maximise Your Existing Stack.</h2>
-                <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-2xl">
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Correlate perimeter alerts and phishing attempts directly into the unified XDR storyboard.
-                    </p>
-                    <ul class="space-y-3 text-sm font-semibold text-gray-300">
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-cyber-blue mr-3"></i> Mimecast & Proofpoint</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-cyber-blue mr-3"></i> Palo Alto & Fortinet</li>
-                        <li class="flex items-center"><i data-lucide="check" class="w-4 h-4 text-cyber-blue mr-3"></i> Cisco Secure Email</li>
-                    </ul>
-                </div>
+    <!-- NEW INTEGRATION / BRING YOUR OWN STACK SECTION (RADIAL DIAGRAM) -->
+    <section id="integration" class="py-28 bg-[#0b1221] border-b border-gray-800 relative overflow-hidden">
+        <!-- Ambient Backgrounds -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyber-blue/5 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-24 reveal">
+                <span class="context-badge">Universal Compatibility</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-heading tracking-tight">Outcomex XDR integrates with other security tools</h2>
+                <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                    Outcomex XDR has curated integrations with the top best-of-breed security vendors. Don't rip and replace—unify your existing investments.
+                </p>
+            </div>
+
+            <!-- MOTION DIAGRAM CONTAINER -->
+            <div class="relative w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-4 reveal stagger-1">
                 
-                <!-- Custom Integration -->
-                <div class="bg-[#020408] border border-cyber-purple/40 p-8 rounded-xl shadow-[0_0_30px_rgba(189,0,255,0.1)] hover:shadow-[0_0_40px_rgba(189,0,255,0.2)] hover:border-cyber-purple transition-all duration-300 reveal stagger-2 group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyber-purple/10 rounded-full blur-2xl"></div>
-                    <div class="w-14 h-14 bg-cyber-purple/10 border border-cyber-purple/40 rounded-xl flex items-center justify-center mb-6 text-cyber-purple relative z-10 group-hover:scale-110 transition-transform">
-                        <i data-lucide="code" class="w-7 h-7"></i>
+                <!-- LEFT COLUMN: Cloud & Network/Firewall -->
+                <div class="w-full lg:w-1/3 flex flex-col gap-10 relative z-10">
+                    <!-- Cloud Telemetry -->
+                    <div class="group relative bg-[#020408] border border-gray-800 p-6 rounded-2xl hover:border-cyber-cyan transition-all duration-300">
+                        <div class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-0.5 bg-cyber-cyan/50 hidden lg:block overflow-hidden">
+                            <div class="w-full h-full bg-cyber-cyan animate-[slideRight_1.5s_linear_infinite]"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-cyber-cyan mb-2 font-heading flex items-center gap-2">
+                            <i data-lucide="cloud" class="w-5 h-5"></i> Cloud Telemetry
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Amazon Web Services,<br>
+                            Google Cloud Platform, Microsoft Azure,<br>
+                            Oracle Cloud Infrastructure
+                        </p>
+                        <!-- Tooltip Popup -->
+                        <div class="absolute left-full top-0 ml-8 w-64 p-3 bg-gradient-to-r from-cyber-cyan/20 to-transparent border-l-2 border-cyber-cyan rounded text-xs text-cyber-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none hidden lg:block z-50 backdrop-blur-md">
+                            <strong>Cisco Talos:</strong> Unrivaled collection of actionable intelligence for known and emerging threats.
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3 font-heading relative z-10">Custom Integrations</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6 relative z-10">
-                        Have a niche industry app or legacy mainframe? Our local engineering team builds <strong>bespoke API connectors and custom parsers</strong>.
-                    </p>
-                    <ul class="space-y-3 text-sm font-semibold text-gray-300 relative z-10">
-                        <li class="flex items-center"><i data-lucide="terminal" class="w-4 h-4 text-cyber-purple mr-3"></i> Legacy SCADA / OT Systems</li>
-                        <li class="flex items-center"><i data-lucide="terminal" class="w-4 h-4 text-cyber-purple mr-3"></i> Custom In-house Applications</li>
-                        <li class="flex items-center"><i data-lucide="terminal" class="w-4 h-4 text-cyber-purple mr-3"></i> Bespoke Syslog Parsing</li>
-                    </ul>
+
+                    <!-- Firewall & Network Telemetry -->
+                    <div class="group relative bg-[#020408] border border-gray-800 p-6 rounded-2xl hover:border-cyber-blue transition-all duration-300">
+                        <div class="absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-0.5 bg-cyber-blue/50 hidden lg:block overflow-hidden">
+                            <div class="w-full h-full bg-cyber-blue animate-[slideRight_1.5s_linear_infinite_0.5s]"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-cyber-blue mb-2 font-heading flex items-center gap-2">
+                            <i data-lucide="shield" class="w-5 h-5"></i> Firewall Telemetry
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed mb-4">
+                            Cisco Secure Firewall, Cisco Meraki MX, Check Point, Fortinet, Palo Alto Networks
+                        </p>
+                        <h3 class="text-xl font-bold text-cyber-blue mb-2 font-heading flex items-center gap-2">
+                            <i data-lucide="network" class="w-5 h-5"></i> Network Telemetry
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Cisco Secure Network Analytics, Darktrace, ExtraHop
+                        </p>
+                    </div>
                 </div>
+
+                <!-- CENTER CORE: Outcomex XDR -->
+                <div class="relative w-72 h-72 md:w-96 md:h-96 shrink-0 z-20 flex items-center justify-center my-10 lg:my-0 group cursor-default">
+                    <!-- Spinning Text Ring -->
+                    <svg class="absolute inset-0 w-full h-full animate-[spin_25s_linear_infinite] opacity-60 group-hover:opacity-100 transition-opacity duration-500" viewBox="0 0 400 400">
+                        <defs>
+                            <path id="circlePath" d="M 200, 200 m -150, 0 a 150,150 0 1,1 300,0 a 150,150 0 1,1 -300,0" />
+                        </defs>
+                        <text fill="#e2e8f0" font-family="JetBrains Mono, monospace" font-size="14" font-weight="bold" letter-spacing="4">
+                            <textPath href="#circlePath" startOffset="0%">
+                                CISCO TALOS THREAT INTELLIGENCE • AUTOMATED THREAT PRIORITIZATION • IDENTITY INTELLIGENCE • THIRD-PARTY THREAT INTELLIGENCE • 
+                            </textPath>
+                        </text>
+                    </svg>
+
+                    <!-- Inner pulse rings -->
+                    <div class="absolute inset-10 border border-cyber-cyan/20 rounded-full animate-[ping_4s_cubic-bezier(0,0,0.2,1)_infinite]"></div>
+                    <div class="absolute inset-16 border border-cyber-blue/30 rounded-full animate-[spin_10s_linear_infinite_reverse] border-dashed border-2"></div>
+
+                    <!-- Core Orb -->
+                    <div class="relative w-48 h-48 bg-gradient-to-b from-[#003366] to-[#020408] rounded-full flex items-center justify-center shadow-[0_0_60px_rgba(0,163,224,0.4)] border border-cyber-cyan/50 group-hover:shadow-[0_0_90px_rgba(0,243,255,0.6)] transition-all duration-500">
+                        <div class="text-center">
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-white font-heading leading-tight tracking-tight">Outcomex<br>XDR</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: Endpoint & Apps/Access -->
+                <div class="w-full lg:w-1/3 flex flex-col gap-10 relative z-10">
+                    <!-- Endpoint Telemetry -->
+                    <div class="group relative bg-[#020408] border border-gray-800 p-6 rounded-2xl hover:border-cyber-cyan transition-all duration-300 text-right lg:text-left">
+                        <div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-0.5 bg-cyber-cyan/50 hidden lg:block overflow-hidden transform rotate-180">
+                            <div class="w-full h-full bg-cyber-cyan animate-[slideRight_1.5s_linear_infinite_0.2s]"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-cyber-cyan mb-2 font-heading flex items-center justify-end lg:justify-start gap-2">
+                            Endpoint Telemetry <i data-lucide="monitor" class="w-5 h-5 lg:order-first"></i>
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Cisco Secure Endpoint, CrowdStrike,<br>Cybereason, Microsoft Defender,<br>Palo Alto Networks, SentinelOne, Trend Micro
+                        </p>
+                        <!-- Tooltip Popup -->
+                        <div class="absolute right-full top-0 mr-8 w-56 p-3 bg-gradient-to-l from-cyber-cyan/20 to-transparent border-r-2 border-cyber-cyan rounded text-xs text-cyber-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none hidden lg:block z-50 backdrop-blur-md text-right">
+                            Identifies tactics, techniques, and procedures (TTPs) used.
+                        </div>
+                    </div>
+
+                    <!-- Apps/Email & Access Telemetry -->
+                    <div class="group relative bg-[#020408] border border-gray-800 p-6 rounded-2xl hover:border-cyber-blue transition-all duration-300 text-right lg:text-left">
+                        <div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-0.5 bg-cyber-blue/50 hidden lg:block overflow-hidden transform rotate-180">
+                            <div class="w-full h-full bg-cyber-blue animate-[slideRight_1.5s_linear_infinite_0.7s]"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-cyber-blue mb-2 font-heading flex items-center justify-end lg:justify-start gap-2">
+                            Apps/Access Telemetry <i data-lucide="lock" class="w-5 h-5 lg:order-first"></i>
+                        </h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Cisco Secure Access, Microsoft 365, Proofpoint
+                        </p>
+                        <!-- Tooltip Popup -->
+                        <div class="absolute right-full bottom-0 mr-8 w-56 p-3 bg-gradient-to-l from-cyber-blue/20 to-transparent border-r-2 border-cyber-blue rounded text-xs text-cyber-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none hidden lg:block z-50 backdrop-blur-md text-right">
+                            Prioritising threats based on impact to the business.
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
             <!-- ROI Callout -->
-            <div class="mt-12 bg-gradient-to-r from-cyber-cyan/10 to-transparent border border-cyber-cyan/20 p-6 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[inset_0_0_20px_rgba(0,243,255,0.05)] reveal">
+            <div class="mt-24 bg-gradient-to-r from-cyber-cyan/10 to-transparent border border-cyber-cyan/20 p-6 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[inset_0_0_20px_rgba(0,243,255,0.05)] reveal stagger-2">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full bg-cyber-cyan/20 flex items-center justify-center shrink-0">
                         <i data-lucide="trending-down" class="w-6 h-6 text-cyber-cyan"></i>
                     </div>
                     <div>
-                        <h4 class="text-white font-bold font-heading text-lg">Maximise your ROI</h4>
+                        <h4 class="text-white font-bold font-heading text-lg">Maximise Your Existing Stack.</h4>
                         <p class="text-gray-400 text-sm">By consolidating existing tools into a single XDR engine, we significantly reduce Total Cost of Ownership (TCO).</p>
                     </div>
                 </div>
-                <div class="text-right">
+                <div class="text-right shrink-0">
                     <div class="text-3xl font-bold text-cyber-cyan font-mono">Up to 40%</div>
                     <div class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-1">Reduction in SecOps costs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEY CAPABILITIES (The Outcomex MXDR Difference) -->
+    <section id="capabilities" class="py-24 bg-[#020408] relative border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="context-badge">The Outcomex XDR Advantage</span>
+                <h2 class="text-3xl font-bold text-white mt-4 font-heading">Proactive Defence Capabilities</h2>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Building an effective XDR capability requires defending across the entire threat lifecycle. Here is how Outcomex delivers.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1 -->
+                <div class="hud-card p-8 rounded-xl reveal hover:border-cyber-cyan transition-all">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="zap" class="w-6 h-6 text-cyber-cyan"></i></div>
+                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Detect Threats Sooner<br><span class="text-[10px] text-cyber-cyan font-mono font-normal tracking-widest uppercase">Deep Network Visibility</span></h3>
+                    </div>
+                    <p class="text-sm text-gray-400">Unified telemetry correlates data from the widest range of sources. Crucially, we analyse deep network traffic (NDR) alongside endpoint data to catch threats standard EDR misses.</p>
+                </div>
+                <!-- 2 -->
+                <div class="hud-card p-8 rounded-xl reveal stagger-1 hover:border-cyber-blue transition-all">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="globe" class="w-6 h-6 text-cyber-blue"></i></div>
+                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Proactive Hunting<br><span class="text-[10px] text-cyber-blue font-mono font-normal tracking-widest uppercase">Talos + ACSC</span></h3>
+                    </div>
+                    <p class="text-sm text-gray-400">Combines global signals from Cisco Talos with local threat feeds from the ACSC. The XDR Storyboard dynamically visualises the entire attack lifecycle.</p>
+                </div>
+                <!-- 3 -->
+                <div class="hud-card p-8 rounded-xl reveal stagger-2 hover:border-cyber-purple transition-all">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="target" class="w-6 h-6 text-cyber-purple"></i></div>
+                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Prioritise by Risk<br><span class="text-[10px] text-cyber-purple font-mono font-normal tracking-widest uppercase">Risk-Based AI-Driven</span></h3>
+                    </div>
+                    <p class="text-sm text-gray-400">Alerts are processed by risk-based, AI-driven analytics, calculating a multi-variable score based on Asset Value and MITRE ATT&CK techniques to eliminate false positives.</p>
+                </div>
+                <!-- 4 -->
+                <div class="hud-card p-8 rounded-xl reveal hover:border-cyber-cyan transition-all">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="search" class="w-6 h-6 text-cyber-cyan"></i></div>
+                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Accelerate Investigations<br><span class="text-[10px] text-cyber-cyan font-mono font-normal tracking-widest uppercase">Automated Forensics</span></h3>
+                    </div>
+                    <p class="text-sm text-gray-400">Progressive disclosure presents only relevant data to prevent analysis paralysis. XDR Forensics captures instant snapshots to preserve volatile evidence.</p>
+                </div>
+                <!-- 5 -->
+                <div class="hud-card p-8 rounded-xl reveal stagger-1 hover:border-cyber-red transition-all">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="shield-alert" class="w-6 h-6 text-cyber-red"></i></div>
+                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Rapid Response<br><span class="text-[10px] text-cyber-red font-mono font-normal tracking-widest uppercase">Built-In SOAR</span></h3>
+                    </div>
+                    <p class="text-sm text-gray-400">Leverage built-in SOAR to execute playbooks, isolate hosts, revoke access, or block domains in a single click. Automated timeline generation ensures readiness for mandatory reporting.</p>
+                </div>
+                <!-- 6 -->
+                <div class="hud-card p-8 rounded-xl reveal stagger-2 hover:border-cyber-blue transition-all">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="trending-up" class="w-6 h-6 text-cyber-blue"></i></div>
+                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Elevate Analysts<br><span class="text-[10px] text-cyber-blue font-mono font-normal tracking-widest uppercase">Force Multiplier</span></h3>
+                    </div>
+                    <p class="text-sm text-gray-400">A true single-pane-of-glass approach reduces context switching, empowering your internal Tier 1 analysts to perform complex Tier 2 investigations confidently.</p>
                 </div>
             </div>
         </div>
@@ -525,10 +785,10 @@
         </div>
     </section>
 
-    <!-- TECHNOLOGY: THE ENGINE (Restored exactly to image_04d1f9.png layout) -->
+    <!-- TECHNOLOGY: THE ENGINE -->
     <section id="tech" class="py-24 bg-cyber-dark relative overflow-hidden border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 reveal">
+            <div class="text-center mb-10 reveal">
                 <span class="context-badge">The Architecture</span>
                 <h2 class="text-3xl md:text-5xl font-bold text-white mt-4 font-heading">The Outcomex XDR platform</h2>
                 <p class="mt-4 text-gray-400 max-w-2xl mx-auto text-lg">We don't just collect logs; we connect dots. Explore the interactive diagram below to see how telemetry transforms into automated defence.</p>
@@ -647,70 +907,8 @@
         </div>
     </section>
 
-    <!-- KEY CAPABILITIES (The Cisco XDR Advantage) -->
-    <section id="capabilities" class="py-24 bg-gray-900/30 relative border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <span class="context-badge">Cisco XDR Advantage</span>
-                <h2 class="text-3xl font-bold text-white mt-4 font-heading">Proactive Defence Capabilities</h2>
-                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">Building an effective XDR capability requires defending across the entire threat lifecycle. Here is how Outcomex and Cisco deliver.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 1 -->
-                <div class="hud-card p-8 rounded-xl reveal hover:border-cyber-cyan transition-all">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="zap" class="w-6 h-6 text-cyber-cyan"></i></div>
-                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Detect Threats Sooner<br><span class="text-[10px] text-cyber-cyan font-mono font-normal tracking-widest uppercase">AI-Driven</span></h3>
-                    </div>
-                    <p class="text-sm text-gray-400">Unified telemetry correlates data from the widest range of sources. Agentic AI instantly validates alerts to distinguish true positives from harmless anomalies.</p>
-                </div>
-                <!-- 2 -->
-                <div class="hud-card p-8 rounded-xl reveal stagger-1 hover:border-cyber-blue transition-all">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="globe" class="w-6 h-6 text-cyber-blue"></i></div>
-                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Proactive Hunting<br><span class="text-[10px] text-cyber-blue font-mono font-normal tracking-widest uppercase">Talos + ACSC</span></h3>
-                    </div>
-                    <p class="text-sm text-gray-400">Combines global signals from Cisco Talos with local threat feeds from the ACSC. The XDR Storyboard dynamically visualises the entire attack lifecycle.</p>
-                </div>
-                <!-- 3 -->
-                <div class="hud-card p-8 rounded-xl reveal stagger-2 hover:border-cyber-purple transition-all">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="target" class="w-6 h-6 text-cyber-purple"></i></div>
-                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Prioritise by Risk<br><span class="text-[10px] text-cyber-purple font-mono font-normal tracking-widest uppercase">SOCI Alignment</span></h3>
-                    </div>
-                    <p class="text-sm text-gray-400">Alerts are ranked by Business Risk, calculating a multi-variable score based on Asset Value and MITRE ATT&CK techniques to support SOCI Act compliance.</p>
-                </div>
-                <!-- 4 -->
-                <div class="hud-card p-8 rounded-xl reveal hover:border-cyber-cyan transition-all">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="search" class="w-6 h-6 text-cyber-cyan"></i></div>
-                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Accelerate Investigations<br><span class="text-[10px] text-cyber-cyan font-mono font-normal tracking-widest uppercase">Automated Forensics</span></h3>
-                    </div>
-                    <p class="text-sm text-gray-400">Progressive disclosure presents only relevant data to prevent analysis paralysis. XDR Forensics captures instant snapshots to preserve volatile evidence.</p>
-                </div>
-                <!-- 5 -->
-                <div class="hud-card p-8 rounded-xl reveal stagger-1 hover:border-cyber-red transition-all">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="shield-alert" class="w-6 h-6 text-cyber-red"></i></div>
-                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Rapid Response<br><span class="text-[10px] text-cyber-red font-mono font-normal tracking-widest uppercase">1-Click Contain</span></h3>
-                    </div>
-                    <p class="text-sm text-gray-400">Isolate hosts, revoke access, or block domains in a single click. Automated timeline generation ensures readiness for mandatory 72-hour ransomware reporting.</p>
-                </div>
-                <!-- 6 -->
-                <div class="hud-card p-8 rounded-xl reveal stagger-2 hover:border-cyber-blue transition-all">
-                    <div class="flex items-center gap-4 mb-5">
-                        <div class="w-12 h-12 bg-cyber-blue/20 rounded-lg flex items-center justify-center border border-cyber-blue/50"><i data-lucide="trending-up" class="w-6 h-6 text-cyber-blue"></i></div>
-                        <h3 class="text-lg font-bold text-white leading-tight font-heading">Elevate Analysts<br><span class="text-[10px] text-cyber-blue font-mono font-normal tracking-widest uppercase">Force Multiplier</span></h3>
-                    </div>
-                    <p class="text-sm text-gray-400">A true single-pane-of-glass approach reduces context switching, empowering your internal Tier 1 analysts to perform complex Tier 2 investigations confidently.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- PERFORMANCE GUARANTEES (SLAs with ANIMATION) -->
-    <section class="py-24 bg-[#020408] border-b border-gray-800 relative">
+    <section class="py-24 bg-[#0b1221] border-b border-gray-800 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
                 <span class="context-badge">Performance Guarantees</span>
@@ -750,7 +948,7 @@
     </section>
 
     <!-- SHARED RESPONSIBILITY SLA MODEL (Visual Pipeline) -->
-    <section id="sla" class="py-24 bg-[#0b1221] relative border-b border-gray-800 overflow-hidden">
+    <section id="sla" class="py-24 bg-[#020408] relative border-b border-gray-800 overflow-hidden">
          <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
          <div class="max-w-7xl mx-auto px-6 text-center reveal relative z-10">
              <span class="context-badge">Operational Model</span>
@@ -771,7 +969,7 @@
                              <i data-lucide="bell" class="w-6 h-6 text-gray-400 group-hover:text-cyber-cyan transition-colors"></i>
                          </div>
                          <h3 class="text-sm font-bold text-white mb-2 font-heading">1. Alert Generated</h3>
-                         <p class="text-xs text-gray-400 leading-relaxed">Anomalous behavior or alert appears within Cisco XDR.</p>
+                         <p class="text-xs text-gray-400 leading-relaxed">Anomalous behavior or alert appears within Outcomex XDR.</p>
                      </div>
 
                      <!-- Step 2 -->
@@ -817,7 +1015,7 @@
     </section>
 
     <!-- ZERO TO ACTIVE DEFENSE IN 14 DAYS (Deployment Timeline) -->
-    <section class="py-24 bg-[#020408] relative border-b border-gray-800">
+    <section class="py-24 bg-[#0b1221] relative border-b border-gray-800">
          <div class="max-w-7xl mx-auto px-6 text-center reveal">
              <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-heading">Zero to Active Defence in 14 Days</h2>
              <p class="text-gray-400 mb-16 max-w-2xl mx-auto">Enterprise SOC deployments shouldn't take 6 months. Our streamlined onboarding gets you protected instantly.</p>
@@ -859,7 +1057,7 @@
     </section>
 
     <!-- PACKAGES / PRICING -->
-    <section id="packages" class="py-24 bg-[#0b1221] border-t border-gray-800 relative">
+    <section id="packages" class="py-24 bg-[#020408] border-t border-gray-800 relative">
         <div class="absolute top-0 right-0 w-1/2 h-full bg-cyber-cyan/5 blur-[150px] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
@@ -921,15 +1119,11 @@
                     <a href="#contact" class="block w-full py-4 bg-[#111827] border border-gray-700 text-white font-bold text-center rounded-lg text-base hover:bg-cyber-purple hover:border-cyber-purple transition-all">Inquire Now</a>
                 </div>
             </div>
-            
-            <div class="mt-12 text-center text-sm text-gray-500 max-w-3xl mx-auto">
-                <p>Pricing assumes standard endpoint counts. Excludes base SIEM/Data Lake licensing costs.</p>
-            </div>
         </div>
     </section>
 
     <!-- OPTIONAL ADD-ONS SECTION -->
-    <section id="addons" class="py-24 bg-[#020408] border-t border-gray-800">
+    <section id="addons" class="py-24 bg-[#0b1221] border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
                 <span class="context-badge">Extend Your Capability</span>
@@ -963,7 +1157,7 @@
     </section>
 
     <!-- TESTIMONIALS -->
-    <section class="py-24 bg-[#0b1221] border-t border-gray-800">
+    <section class="py-24 bg-[#020408] border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
                 <span class="context-badge">Proven Impact</span>
@@ -989,7 +1183,7 @@
                 </div>
                 <div class="hud-card p-8 rounded-2xl reveal stagger-2 relative">
                     <i data-lucide="quote" class="absolute top-6 right-6 w-12 h-12 text-gray-700/30"></i>
-                    <p class="text-gray-300 text-sm mb-8 leading-relaxed relative z-10 pt-2 font-medium">"Meeting our DISP requirements was a massive headache until we engaged Outcomex. Their reporting maps directly to the governance standards our board requires."</p>
+                    <p class="text-gray-300 text-sm mb-8 leading-relaxed relative z-10 pt-2 font-medium">"Meeting our compliance requirements was a massive headache until we engaged Outcomex. Their reporting maps directly to the governance standards our board requires."</p>
                     <div class="flex items-center gap-4 border-t border-gray-800 pt-6">
                         <div class="w-12 h-12 bg-cyber-purple/20 border border-cyber-purple/50 rounded-full flex items-center justify-center text-sm font-bold text-cyber-purple">MT</div>
                         <div><div class="text-white font-bold">Marcus Thorne</div><div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Ops Director, Defence</div></div>
@@ -1000,7 +1194,7 @@
     </section>
 
     <!-- PROVEN EXPERTISE -->
-    <section class="py-20 bg-[#020408] border-t border-gray-800">
+    <section class="py-20 bg-[#0b1221] border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
                 <span class="context-badge">Proven Expertise</span>
@@ -1014,8 +1208,8 @@
                     <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">ISO 27001 Certified</span>
                 </div>
                 <div class="flex flex-col items-center justify-center p-6 bg-gray-900/50 rounded-xl border border-gray-800 hover:border-cyber-cyan transition duration-300 stagger-1">
-                    <span class="text-2xl font-black text-white mb-1">DISP</span>
-                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Defence Industry Member</span>
+                    <span class="text-2xl font-black text-white mb-1">SOC 2</span>
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Type II Certified</span>
                 </div>
                  <div class="flex flex-col items-center justify-center p-6 bg-gray-900/50 rounded-xl border border-gray-800 hover:border-cyber-cyan transition duration-300 stagger-2">
                     <span class="text-2xl font-black text-white mb-1">CREST</span>
@@ -1042,6 +1236,10 @@
                     <div class="text-[10px] text-cyber-cyan font-bold tracking-widest uppercase mt-1">Falcon Elite</div>
                  </div>
                  <div class="text-center group cursor-default hover:opacity-100 transition">
+                    <div class="text-2xl font-extrabold text-gray-400 group-hover:text-white transition duration-300">Palo Alto</div>
+                    <div class="text-[10px] text-cyber-cyan font-bold tracking-widest uppercase mt-1">Cortex XDR</div>
+                 </div>
+                 <div class="text-center group cursor-default hover:opacity-100 transition">
                     <div class="text-2xl font-extrabold text-gray-400 group-hover:text-white transition duration-300">SentinelOne</div>
                     <div class="text-[10px] text-cyber-cyan font-bold tracking-widest uppercase mt-1">Singularity XDR</div>
                  </div>
@@ -1050,14 +1248,14 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-24 bg-[#0b1221] border-t border-gray-800">
+    <section id="faq" class="py-24 bg-[#020408] border-t border-gray-800">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
                 <span class="context-badge">Common Questions</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 font-heading">Frequently Asked Questions</h2>
             </div>
             <div class="space-y-4">
-                <details class="group bg-[#020408] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
+                <details class="group bg-[#0b1221] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-bold hover:text-cyber-cyan transition-colors font-heading text-lg">
                         1. What is the difference between XDR, EDR, and SIEM?
                         <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-gray-500"></i>
@@ -1065,7 +1263,7 @@
                     <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">Think of <strong>EDR</strong> as a camera in one room (Endpoint). <strong>SIEM</strong> is the storage room for all the tapes (Logs). <strong>XDR</strong> is the active security guard watching all cameras (Endpoint, Network, Cloud, Identity) simultaneously. Unlike SIEM which just alerts, XDR correlates signals to validate threats and automatically takes action to stop them.</div>
                 </details>
                 
-                <details class="group bg-[#020408] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
+                <details class="group bg-[#0b1221] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-bold hover:text-cyber-cyan transition-colors font-heading text-lg">
                         2. Does Outcomex XDR replace our internal security team?
                         <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-gray-500"></i>
@@ -1073,7 +1271,7 @@
                     <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">No, it acts as a <strong>force multiplier</strong>. We handle the 24/7 monitoring and "noise" (Level 1/2 Triage), filtering out 98% of false positives. This frees your internal team to focus on strategic initiatives, architecture, and insider risk, rather than burning out on alert fatigue at 2 AM.</div>
                 </details>
                 
-                 <details class="group bg-[#020408] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
+                 <details class="group bg-[#0b1221] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-bold hover:text-cyber-cyan transition-colors font-heading text-lg">
                         3. Is my data processed and stored in Australia?
                         <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-gray-500"></i>
@@ -1081,7 +1279,7 @@
                     <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4"><strong>Yes. 100%.</strong> Outcomex is a sovereign Australian provider. Unlike global vendors who may support you from offshore "Follow-the-Sun" centres, our analysts, infrastructure, and data lakes are located strictly within Australian borders. This ensures full alignment with <strong>SOCI Act</strong> requirements and IRAP controls.</div>
                 </details>
                 
-                 <details class="group bg-[#020408] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
+                 <details class="group bg-[#0b1221] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-bold hover:text-cyber-cyan transition-colors font-heading text-lg">
                         4. Can we keep our existing tools (Microsoft, CrowdStrike, Cisco)?
                         <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-gray-500"></i>
@@ -1089,7 +1287,7 @@
                     <div class="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">Absolutely. Our XDR platform is <strong>Open and Vendor-Agnostic</strong>. We ingest data via API from your existing stack—whether it's Microsoft Defender, CrowdStrike Falcon, SentinelOne, or Palo Alto firewalls. You do not need to "rip and replace" your investments to get unified visibility.</div>
                 </details>
                 
-                <details class="group bg-[#020408] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
+                <details class="group bg-[#0b1221] border border-gray-800 rounded-xl open:border-cyber-cyan/50 transition-all duration-300">
                     <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-white font-bold hover:text-cyber-cyan transition-colors font-heading text-lg">
                         5. How does "Active Response" work?
                         <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-gray-500"></i>
@@ -1101,7 +1299,7 @@
     </section>
 
     <!-- CONTACT (CTA FORM) -->
-    <section id="contact" class="py-24 bg-[#020408] relative overflow-hidden border-t border-gray-800">
+    <section id="contact" class="py-24 bg-[#0b1221] relative overflow-hidden border-t border-gray-800">
         <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-cyber-blue/10 rounded-full blur-[150px] pointer-events-none"></div>
 
@@ -1312,6 +1510,34 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+            // Timeline Nodes Animation (GSAP)
+            if (document.getElementById('timeline-container')) {
+                let timelineTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#timeline-container",
+                        start: "top 65%",
+                    }
+                });
+
+                // 1. Fade in Headers
+                timelineTl.to(".timeline-headers", { opacity: 1, duration: 0.5 });
+                
+                // 2. Draw horizontal tracks left to right
+                timelineTl.to(".timeline-track", { scaleX: 1, duration: 1, ease: "power2.inOut", stagger: 0.15 }, "-=0.2");
+                
+                // 3. Fade in labels
+                timelineTl.to(".timeline-label", { opacity: 1, duration: 0.5, stagger: 0.1 }, "-=0.6");
+                
+                // 4. Draw vertical lines up
+                timelineTl.to(".timeline-vert", { scaleY: 1, duration: 0.6, ease: "power1.out", stagger: 0.1 }, "-=0.2");
+                
+                // 5. Pop dots
+                timelineTl.to(".timeline-dot", { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)", stagger: 0.1 }, "-=0.4");
+                
+                // 6. Pop pills
+                timelineTl.to(".timeline-pill", { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)", stagger: 0.1 }, "-=0.4");
+            }
+
             // Init Platform architecture state
             window.updatePlatformInfo('correlate');
 
@@ -1364,6 +1590,14 @@
                     snap: { innerText: 1 },
                     scrollTrigger: { trigger: el, start: "top 85%" }
                 });
+            });
+
+            // SLA Pipeline Progress Animation
+            gsap.to('.pipeline-progress', {
+                width: "100%",
+                duration: 3,
+                ease: "power2.inOut",
+                scrollTrigger: { trigger: '#sla', start: "top 60%" }
             });
 
             // Mobile menu toggle
