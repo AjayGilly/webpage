@@ -78,6 +78,17 @@
             70% { transform: scale(1); box-shadow: 0 0 0 30px rgba(59, 130, 246, 0); }
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
         }
+        
+        @keyframes pulse-ring-rose {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(244, 63, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+
+        @keyframes radar-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
         @keyframes float-top {
             0%, 100% { transform: translate(-50%, -50%); }
@@ -146,8 +157,8 @@
                 <!-- Hero Copy -->
                 <div class="lg:col-span-7">
                     <div class="fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/40 border border-blue-500/30 text-xs font-bold uppercase tracking-widest text-blue-400 mb-8 backdrop-blur-md shadow-[0_0_15px_rgba(59,130,246,0.15)]" data-immediate="true" data-delay="0">
-                        <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-                        <span>Elite Australian Cybersecurity</span>
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                        <span>24x7 Sovereign SOC & Unmatched SLA</span>
                     </div>
                     
                     <h1 class="fade-up text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight" data-immediate="true" data-delay="50">
@@ -183,13 +194,17 @@
                                 <div class="w-3 h-3 rounded-full bg-amber-500/80 shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
                                 <div class="w-3 h-3 rounded-full bg-emerald-500/80 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
                             </div>
-                            <div class="flex items-center gap-2 text-xs text-slate-300 font-mono bg-white/10 px-2 py-1 rounded font-bold">
-                                <i data-lucide="shield-alert" class="w-3 h-3"></i> SOC_LIVE_FEED
+                            <div class="flex items-center gap-2 text-xs text-emerald-400 font-mono bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded font-bold">
+                                <span class="relative flex h-2 w-2 mr-1">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                SOC_LIVE_FEED
                             </div>
                         </div>
                         <!-- Terminal Body -->
                         <div class="font-mono text-sm space-y-4 font-medium">
-                            <p class="text-slate-300"><span class="text-blue-400">root@outcomex:~#</span> ./init_estate_audit --comprehensive --region=APAC</p>
+                            <p class="text-slate-300"><span class="text-blue-400">root@outcomex:~#</span> ./init_estate_audit --comprehensive</p>
                             <p class="text-slate-400" style="animation: fadeIn 0.5s ease-in 1s both;">[i] Initializing end-to-end security assessment...</p>
                             <div class="bg-white/5 border border-white/10 rounded-lg p-3 space-y-2" style="animation: fadeIn 0.5s ease-in 1.5s both;">
                                 <p class="text-slate-200 flex items-center gap-2">
@@ -201,15 +216,15 @@
                                 <p class="text-amber-400 flex items-center gap-2">
                                     <i data-lucide="alert-triangle" class="w-4 h-4"></i> 3 Vulnerabilities detected (Legacy Net)
                                 </p>
+                                <p class="text-emerald-400 flex items-center gap-2 pt-2 border-t border-white/10" style="animation: fadeIn 0.5s ease-in 2s both;">
+                                    <i data-lucide="timer" class="w-4 h-4"></i> SLA: &lt; 15-Min Response Guaranteed
+                                </p>
                             </div>
-                            <p class="text-slate-400" style="animation: fadeIn 0.5s ease-in 2.5s both;">[i] Deploying XDR sensors & routing to Sydney SOC...</p>
+                            <p class="text-slate-400" style="animation: fadeIn 0.5s ease-in 2.5s both;">[i] Deploying XDR sensors & routing to 24x7 Sovereign SOC...</p>
                             <div class="mt-4 pt-4 border-t border-white/10" style="animation: fadeIn 0.5s ease-in 3s both;">
-                                <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-lg p-3 font-bold flex items-center gap-3">
-                                    <div class="relative flex h-3 w-3">
-                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                                    </div>
-                                    Estate secured. Sovereign SOC monitoring active.
+                                <div class="bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-lg p-3 font-bold flex items-center gap-3 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                    Estate secured. 24x7 active monitoring.
                                 </div>
                             </div>
                         </div>
@@ -313,6 +328,23 @@
                             <h4 class="text-4xl font-extrabold text-white mb-1">Zero</h4>
                             <p class="text-xs text-slate-400 font-bold uppercase tracking-wide">Tooling Overlap</p>
                         </div>
+                        <!-- NEW STATS -->
+                        <div class="mt-4">
+                            <h4 class="text-4xl font-extrabold text-white mb-1">&lt;<span class="animated-counter" data-end="15">0</span>m</h4>
+                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wide">Unmatched SLA</p>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-4xl font-extrabold text-white mb-1"><span class="animated-counter" data-end="50">0</span>+</h4>
+                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wide">Certified Experts</p>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-4xl font-extrabold text-white mb-1"><span class="animated-counter" data-end="99">0</span>.9%</h4>
+                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wide">Threat Block Rate</p>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-4xl font-extrabold text-white mb-1"><span class="animated-counter" data-end="100">0</span>%</h4>
+                            <p class="text-xs text-slate-400 font-bold uppercase tracking-wide">Data Sovereignty</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -333,7 +365,7 @@
     <section class="py-20 relative bg-[#060A16] z-10 border-y border-white/5">
         <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1] mix-blend-overlay"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Metric 1 -->
                 <div class="fade-up p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-1 group relative overflow-hidden shadow-lg" data-delay="0">
                     <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-emerald-600/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -378,6 +410,52 @@
                         <div class="text-sm text-slate-300 leading-relaxed font-medium">Continuous compliance mapping to Essential 8, ISO 27001, and NIST.</div>
                     </div>
                 </div>
+                
+                <!-- NEW METRICS -->
+                <!-- Metric 5 -->
+                <div class="fade-up p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-1 group relative overflow-hidden shadow-lg" data-delay="400">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-emerald-600/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative">
+                        <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 mb-3 group-hover:from-blue-400 group-hover:to-emerald-400 transition-all duration-500">
+                            &lt;15<span class="text-3xl">m</span>
+                        </div>
+                        <div class="text-lg font-bold text-white mb-2">Unmatched SLA</div>
+                        <div class="text-sm text-slate-300 leading-relaxed font-medium">Industry-leading rapid response times for critical security incidents.</div>
+                    </div>
+                </div>
+                <!-- Metric 6 -->
+                <div class="fade-up p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-1 group relative overflow-hidden shadow-lg" data-delay="500">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-emerald-600/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative">
+                        <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 mb-3 group-hover:from-blue-400 group-hover:to-emerald-400 transition-all duration-500">
+                            <span class="animated-counter" data-end="99">0</span>.99%
+                        </div>
+                        <div class="text-lg font-bold text-white mb-2">Uptime Guarantee</div>
+                        <div class="text-sm text-slate-300 leading-relaxed font-medium">Rock-solid infrastructure ensuring your defenses never go offline.</div>
+                    </div>
+                </div>
+                <!-- Metric 7 -->
+                <div class="fade-up p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-1 group relative overflow-hidden shadow-lg" data-delay="600">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-emerald-600/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative">
+                        <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 mb-3 group-hover:from-blue-400 group-hover:to-emerald-400 transition-all duration-500">
+                            <span class="animated-counter" data-end="10">0</span>k+
+                        </div>
+                        <div class="text-lg font-bold text-white mb-2">Daily Threats Blocked</div>
+                        <div class="text-sm text-slate-300 leading-relaxed font-medium">Proactive neutralization of automated attacks and targeted strikes.</div>
+                    </div>
+                </div>
+                <!-- Metric 8 -->
+                <div class="fade-up p-8 rounded-3xl bg-white/[0.02] border border-white/10 hover:border-blue-500/40 transition-all duration-500 hover:-translate-y-1 group relative overflow-hidden shadow-lg" data-delay="700">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-emerald-600/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative">
+                        <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 mb-3 group-hover:from-blue-400 group-hover:to-emerald-400 transition-all duration-500">
+                            360°
+                        </div>
+                        <div class="text-lg font-bold text-white mb-2">Total Visibility</div>
+                        <div class="text-sm text-slate-300 leading-relaxed font-medium">Complete monitoring across cloud, endpoint, network, and identity.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -393,6 +471,7 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
+                <!-- Original 3 -->
                 <div class="fade-up bg-white/[0.03] border border-white/10 p-10 rounded-3xl hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-2 group h-full relative overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]" data-delay="0">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-bl-full pointer-events-none"></div>
                     <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-blue-900/40 transition-all duration-500">
@@ -423,6 +502,37 @@
                         We carefully curate and integrate best-of-breed vendor solutions. We eliminate overlap, reduce TCO, and ensure every alert is high-fidelity.
                     </p>
                 </div>
+                <!-- NEW 3 -->
+                <div class="fade-up bg-white/[0.03] border border-white/10 p-10 rounded-3xl hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-2 group h-full relative overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]" data-delay="450">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-bl-full pointer-events-none"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-rose-900/40 transition-all duration-500">
+                        <i data-lucide="timer" class="w-8 h-8 text-rose-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Unmatched 15-Min SLA</h3>
+                    <p class="text-slate-300 leading-relaxed font-medium">
+                        When under attack, every second counts. We guarantee an unmatched sub-15 minute response time for critical incidents to stop threats in their tracks.
+                    </p>
+                </div>
+                <div class="fade-up bg-white/[0.03] border border-white/10 p-10 rounded-3xl hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-2 group h-full relative overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]" data-delay="600">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-bl-full pointer-events-none"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-amber-900/40 transition-all duration-500">
+                        <i data-lucide="award" class="w-8 h-8 text-amber-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Elite Certified Talent</h3>
+                    <p class="text-slate-300 leading-relaxed font-medium">
+                        Our sovereign team holds the industry's highest accreditations, including CREST, OSCP, and CISSP, ensuring you are defended by elite specialists.
+                    </p>
+                </div>
+                <div class="fade-up bg-white/[0.03] border border-white/10 p-10 rounded-3xl hover:bg-white/[0.06] transition-all duration-500 hover:-translate-y-2 group h-full relative overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]" data-delay="750">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-bl-full pointer-events-none"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-emerald-900/40 transition-all duration-500">
+                        <i data-lucide="dollar-sign" class="w-8 h-8 text-emerald-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Predictable Value</h3>
+                    <p class="text-slate-300 leading-relaxed font-medium">
+                        We align our services with your business risk and budget. Enjoy clear, fixed pricing with no hidden costs for a massive reduction in Total Cost of Ownership.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -438,52 +548,96 @@
                 </div>
                 <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Complete Security Ecosystem</h2>
                 <p class="text-xl text-slate-300 font-medium leading-relaxed">
-                    We don't just find holes; we fix them, monitor them, and build the strategic frameworks to ensure they never return. Explore our core disciplines.
+                    We don't just find holes; we fix them, monitor them, and build the strategic frameworks to ensure they never return. Explore our 25+ core disciplines.
                 </p>
+                <p class="text-sm text-blue-400 font-bold mt-4 animate-pulse">Click any service to learn more <i data-lucide="arrow-down" class="inline w-4 h-4 ml-1"></i></p>
             </div>
 
             <div class="space-y-8">
                 
                 <!-- Category 1: Offensive Security -->
                 <div class="fade-up relative bg-[#02050D]/80 border border-white/10 rounded-3xl p-8 lg:p-12 backdrop-blur-md hover:border-white/20 transition-all duration-700 shadow-xl overflow-hidden group/card" data-delay="0">
-                    <div class="absolute top-0 right-0 w-[500px] h-[500px] blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 transition-colors duration-1000 bg-rose-500/5 group-hover/card:bg-rose-500/10 pointer-events-none"></div>
+                    
+                    <div class="absolute top-0 right-0 w-[500px] h-[500px] blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 transition-colors duration-1000 bg-rose-500/5 group-hover/card:bg-rose-500/20 pointer-events-none"></div>
+                    <div class="absolute top-1/2 right-0 w-[800px] h-[800px] -translate-y-1/2 translate-x-1/3 pointer-events-none opacity-10 group-hover/card:opacity-40 transition-opacity duration-1000">
+                        <div class="absolute inset-0 rounded-full border border-rose-500/30 border-dashed" style="animation: radar-spin 40s linear infinite;"></div>
+                        <div class="absolute inset-[100px] rounded-full border-[2px] border-rose-500/20" style="animation: radar-spin 30s linear infinite reverse;"></div>
+                        <div class="absolute inset-[200px] rounded-full border border-rose-500/50 border-dotted" style="animation: radar-spin 20s linear infinite;"></div>
+                        <div class="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,rgba(244,63,94,0.1)_90deg,transparent_90deg)]" style="animation: radar-spin 4s linear infinite;"></div>
+                    </div>
+                    <div class="absolute top-[15%] left-[20%] w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_15px_rgba(244,63,94,1)] animate-ping pointer-events-none"></div>
+                    <div class="absolute bottom-[20%] right-[30%] w-2.5 h-2.5 rounded-full bg-rose-400 shadow-[0_0_20px_rgba(244,63,94,1)] animate-pulse pointer-events-none"></div>
+
                     <div class="relative z-10 mb-10 lg:flex justify-between items-end border-b border-white/10 pb-8">
                         <div>
                             <h3 class="text-3xl font-extrabold text-white mb-3 flex items-center gap-4">
-                                <div class="w-2 h-10 rounded-full bg-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.5)]"></div>
+                                <div class="w-2 h-10 rounded-full bg-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.8)]" style="animation: pulse-ring-rose 2s infinite;"></div>
                                 Offensive Security & Intelligence
                             </h3>
                             <p class="text-slate-300 font-medium text-lg">Proactive identification of vulnerabilities before threat actors exploit them.</p>
                         </div>
                     </div>
-                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
-                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-rose-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                                <i data-lucide="target" class="w-5 h-5 text-rose-400"></i>
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-rose-500/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(244,63,94,0.2)] group cursor-pointer service-card" 
+                             data-title="Vulnerability & Penetration Testing" 
+                             data-desc="Rigorous real-world attack simulations to identify and exploit vulnerabilities across your network, applications, and human elements before malicious actors do." 
+                             data-icon="target">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-rose-500/10 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 group-hover:bg-rose-500/30 transition-all duration-500 group-hover:scale-110">
+                                <i data-lucide="target" class="w-5 h-5 text-rose-400" style="animation: pulse-ring-rose 3s infinite;"></i>
                             </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Vulnerability & Penetration Testing</span>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-rose-100 transition-colors relative z-10">Vulnerability & Penetration Testing</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
-                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-rose-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                                <i data-lucide="crosshair" class="w-5 h-5 text-rose-400"></i>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-rose-500/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(244,63,94,0.2)] group cursor-pointer service-card" 
+                             data-title="Red Teaming" 
+                             data-desc="Full-scope, multi-layered attack simulations designed to measure how well your people, networks, applications, and physical security controls withstand real-life adversaries." 
+                             data-icon="crosshair">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-rose-500/10 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 group-hover:bg-rose-500/30 transition-all duration-500 group-hover:scale-110">
+                                <i data-lucide="crosshair" class="w-5 h-5 text-rose-400" style="animation: pulse-ring-rose 3s infinite; animation-delay: 0.5s;"></i>
                             </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Red Teaming</span>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-rose-100 transition-colors relative z-10">Red Teaming</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
-                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-rose-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                                <i data-lucide="cpu" class="w-5 h-5 text-rose-400"></i>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-rose-500/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(244,63,94,0.2)] group cursor-pointer service-card" 
+                             data-title="Automated Red Teaming (Horizon3)" 
+                             data-desc="Continuous, autonomous penetration testing that safely executes real-world attacks to verify your security posture in real-time." 
+                             data-icon="cpu">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-rose-500/10 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 group-hover:bg-rose-500/30 transition-all duration-500 group-hover:scale-110">
+                                <i data-lucide="cpu" class="w-5 h-5 text-rose-400" style="animation: pulse-ring-rose 3s infinite; animation-delay: 1s;"></i>
                             </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Automated Red Teaming (Horizon3)</span>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-rose-100 transition-colors relative z-10">Automated Red Teaming (Horizon3)</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
-                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-rose-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                                <i data-lucide="eye" class="w-5 h-5 text-rose-400"></i>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-rose-500/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(244,63,94,0.2)] group cursor-pointer service-card" 
+                             data-title="Dark Web Monitoring" 
+                             data-desc="Proactive surveillance of hidden corners of the internet to detect compromised credentials, leaked data, and emerging threats targeting your organization." 
+                             data-icon="eye">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-rose-500/10 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 group-hover:bg-rose-500/30 transition-all duration-500 group-hover:scale-110">
+                                <i data-lucide="eye" class="w-5 h-5 text-rose-400" style="animation: pulse-ring-rose 3s infinite; animation-delay: 1.5s;"></i>
                             </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Dark Web Monitoring</span>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-rose-100 transition-colors relative z-10">Dark Web Monitoring</span>
+                        </div>
+                        <!-- NEW ITEMS -->
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-rose-500/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(244,63,94,0.2)] group cursor-pointer service-card" 
+                             data-title="Social Engineering & Phishing" 
+                             data-desc="Targeted simulations to evaluate employee susceptibility to phishing, spear-phishing, and vishing attacks." 
+                             data-icon="users">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-rose-500/10 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 group-hover:bg-rose-500/30 transition-all duration-500 group-hover:scale-110">
+                                <i data-lucide="users" class="w-5 h-5 text-rose-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-rose-100 transition-colors relative z-10">Social Engineering & Phishing</span>
+                        </div>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-rose-500/50 hover:bg-rose-500/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(244,63,94,0.2)] group cursor-pointer service-card" 
+                             data-title="Physical Breach Simulations" 
+                             data-desc="Testing physical access controls, tailgating, and facility security to ensure your hardware and servers cannot be compromised on-site." 
+                             data-icon="lock">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-rose-500/10 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 group-hover:bg-rose-500/30 transition-all duration-500 group-hover:scale-110">
+                                <i data-lucide="lock" class="w-5 h-5 text-rose-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-rose-100 transition-colors relative z-10">Physical Breach Simulations</span>
                         </div>
                     </div>
                 </div>
@@ -500,36 +654,61 @@
                             <p class="text-slate-300 font-medium text-lg">Continuous monitoring, rapid response, and active threat neutralization.</p>
                         </div>
                     </div>
-                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="SOC Services (24x7)" 
+                             data-desc="24/7/365 monitoring, detection, and rapid incident response by our sovereign Australian security analysts to keep your environment secure." 
+                             data-icon="activity">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-blue-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="activity" class="w-5 h-5 text-blue-400"></i>
                             </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">SOC Services</span>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">SOC Services (24x7)</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="XDR as a Service" 
+                             data-desc="Extended Detection and Response capabilities that unify multiple security products into a cohesive, automated security operations system." 
+                             data-icon="shield-check">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-blue-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="shield-check" class="w-5 h-5 text-blue-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">XDR as a Service</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Managed SIEM" 
+                             data-desc="Centralized log management, correlation, and alerting handled completely by our experts to turn massive data sets into actionable intelligence." 
+                             data-icon="database">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-blue-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                                <i data-lucide="database" class="w-5 h-5 text-blue-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Managed SIEM</span>
+                        </div>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Vulnerability Management (VMaaS)" 
+                             data-desc="Continuous identification, evaluation, treating, and reporting on security vulnerabilities in systems and the software that runs on them." 
+                             data-icon="server">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-blue-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="server" class="w-5 h-5 text-blue-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Vulnerability Management (VMaaS)</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Digital Forensics & Incident Response (DFIR)" 
+                             data-desc="Immediate, expert response to live breaches followed by deep forensic analysis to determine root cause and prevent future occurrences." 
+                             data-icon="microscope">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-blue-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                                <i data-lucide="anchor" class="w-5 h-5 text-blue-400"></i>
+                                <i data-lucide="microscope" class="w-5 h-5 text-blue-400"></i>
                             </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Patch Management (with VMaaS)</span>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Digital Forensics (DFIR)</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Threat Intelligence & Hunting" 
+                             data-desc="Proactively searching through networks to detect and isolate advanced threats that evade traditional automated security solutions." 
+                             data-icon="search">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-blue-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="search" class="w-5 h-5 text-blue-400"></i>
@@ -551,62 +730,142 @@
                             <p class="text-slate-300 font-medium text-lg">Aligning your security posture with global standards and business objectives.</p>
                         </div>
                     </div>
-                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Security Control Audit & Review" 
+                             data-desc="Comprehensive evaluation of your existing security measures to ensure they are configured correctly and operating at peak effectiveness." 
+                             data-icon="file-check">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="file-check" class="w-5 h-5 text-emerald-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Security Control Audit & Review</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Assessments & Health Checks" 
+                             data-desc="Point-in-time reviews of your IT environment against industry best practices to identify critical gaps and recommend improvements." 
+                             data-icon="check-square">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="check-square" class="w-5 h-5 text-emerald-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Assessments & Health Checks</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Cyber Strategy & Roadmap" 
+                             data-desc="Strategic planning to align your cybersecurity initiatives with your overarching business goals and compliance requirements over the next 1-3 years." 
+                             data-icon="compass">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="compass" class="w-5 h-5 text-emerald-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Cyber Strategy & Roadmap</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Compliance & Maturity Assessments" 
+                             data-desc="Evaluating your security posture against recognized frameworks like NIST and ISO 27001 to establish your current maturity level." 
+                             data-icon="book-open">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="book-open" class="w-5 h-5 text-emerald-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Compliance & Maturity Assessments</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Essential 8 Audit & Implementation" 
+                             data-desc="Specialized assessment and deployment services to achieve compliance with the ACSC's Essential Eight mitigation strategies." 
+                             data-icon="shield">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="shield" class="w-5 h-5 text-emerald-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Essential 8 Audit & Implementation</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="vCISO Services" 
+                             data-desc="Executive-level security leadership on-demand, helping your business build strategy, manage risk, and navigate board-level security discussions." 
+                             data-icon="user-check">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                                <i data-lucide="user-check" class="w-5 h-5 text-emerald-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">vCISO Services</span>
+                        </div>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Third-Party Risk Management" 
+                             data-desc="Auditing and securing your supply chain by assessing the cybersecurity posture of your vendors, partners, and third-party tools." 
+                             data-icon="link">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                                <i data-lucide="link" class="w-5 h-5 text-emerald-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Third-Party Risk Management</span>
+                        </div>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="GRC (via SafeCulcha)" 
+                             data-desc="Governance, Risk, and Compliance management platforms to streamline your regulatory requirements and quantify your risk posture." 
+                             data-icon="briefcase">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                             <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
                                 <i data-lucide="briefcase" class="w-5 h-5 text-emerald-400"></i>
                             </div>
                             <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">GRC (via SafeCulcha)</span>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
-                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                                <i data-lucide="alert-triangle" class="w-5 h-5 text-emerald-400"></i>
-                            </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Incident Response Readiness</span>
+                    </div>
+                </div>
+
+                <!-- Category 4: Cloud & Identity Security (NEW) -->
+                <div class="fade-up relative bg-[#02050D]/80 border border-white/10 rounded-3xl p-8 lg:p-12 backdrop-blur-md hover:border-white/20 transition-all duration-700 shadow-xl overflow-hidden group/card" data-delay="450">
+                    <div class="absolute top-0 right-0 w-[500px] h-[500px] blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 transition-colors duration-1000 bg-indigo-500/5 group-hover/card:bg-indigo-500/10 pointer-events-none"></div>
+                    <div class="relative z-10 mb-10 lg:flex justify-between items-end border-b border-white/10 pb-8">
+                        <div>
+                            <h3 class="text-3xl font-extrabold text-white mb-3 flex items-center gap-4">
+                                <div class="w-2 h-10 rounded-full bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.5)]"></div>
+                                Cloud & Identity Security
+                            </h3>
+                            <p class="text-slate-300 font-medium text-lg">Securing your perimeter-less environments, cloud workloads, and user access.</p>
                         </div>
-                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group">
+                    </div>
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Cloud Posture Management (CSPM)" 
+                             data-desc="Continuous monitoring of your AWS, Azure, and GCP environments to identify misconfigurations and compliance risks before they are exploited." 
+                             data-icon="cloud">
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
-                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-emerald-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
-                                <i data-lucide="users" class="w-5 h-5 text-emerald-400"></i>
+                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-indigo-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                                <i data-lucide="cloud" class="w-5 h-5 text-indigo-400"></i>
                             </div>
-                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Cyber Security Awareness</span>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Cloud Posture Mgmt (CSPM)</span>
+                        </div>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Identity & Access Management (IAM)" 
+                             data-desc="Designing and implementing robust identity controls, MFA, and SSO to ensure only authorized users access your critical data." 
+                             data-icon="fingerprint">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-indigo-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                                <i data-lucide="fingerprint" class="w-5 h-5 text-indigo-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Identity & Access Mgmt (IAM)</span>
+                        </div>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Data Loss Prevention (DLP)" 
+                             data-desc="Strategy and tooling to prevent sensitive data from leaving your corporate boundaries, whether accidental or malicious." 
+                             data-icon="shield-half">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-indigo-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                                <i data-lucide="shield-half" class="w-5 h-5 text-indigo-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Data Loss Prevention (DLP)</span>
+                        </div>
+                        <div class="relative overflow-hidden flex items-center gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-indigo-500/50 hover:bg-white/[0.05] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.5)] group cursor-pointer service-card"
+                             data-title="Zero Trust Architecture Design" 
+                             data-desc="Transitioning your network to a Zero Trust model ('Never trust, always verify') to contain breaches and secure hybrid workforces." 
+                             data-icon="box">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+                            <div class="relative p-2.5 rounded-xl bg-white/5 group-hover:bg-indigo-500/20 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                                <i data-lucide="box" class="w-5 h-5 text-indigo-400"></i>
+                            </div>
+                            <span class="font-bold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors relative z-10">Zero Trust Architecture Design</span>
                         </div>
                     </div>
                 </div>
@@ -703,8 +962,25 @@
                                 <p class="text-slate-300 font-medium text-base leading-relaxed mb-5">24/7 SOC oversight, isolating threats instantly and providing continuous exposure management.</p>
                                 <div class="grid sm:grid-cols-2 gap-3 border-t border-white/10 pt-5">
                                     <div class="flex items-center gap-2 text-sm text-slate-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500/70"></i>24/7 Sovereign Eyes on Glass</div>
-                                    <div class="flex items-center gap-2 text-sm text-slate-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500/70"></i>Instant Threat Isolation</div>
+                                    <div class="flex items-center gap-2 text-sm text-slate-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500/70"></i>Unmatched 15-Min SLA</div>
                                     <div class="flex items-center gap-2 text-sm text-slate-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500/70"></i>Continuous Penetration Testing</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- NEW Step 5 -->
+                        <div class="fade-up flex gap-6 group cursor-pointer relative z-10 bg-white/[0.02] p-8 rounded-3xl hover:bg-white/[0.04] transition-all duration-500 border border-white/5 hover:border-white/20 shadow-xl hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:-translate-y-1" data-delay="600">
+                            <div class="flex-shrink-0">
+                                <div class="w-14 h-14 rounded-2xl bg-[#060A16] border border-white/10 flex items-center justify-center text-slate-300 font-bold text-lg group-hover:bg-blue-900/30 group-hover:border-blue-500/50 transition-all duration-500 shadow-inner relative overflow-hidden">
+                                    <i data-lucide="refresh-cw" class="w-6 h-6 text-indigo-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">5. Govern & Evolve</h4>
+                                <p class="text-slate-300 font-medium text-base leading-relaxed mb-5">Cybersecurity is not a destination. We continuously review threat intelligence to adapt your defenses to emerging attack vectors.</p>
+                                <div class="grid sm:grid-cols-2 gap-3 border-t border-white/10 pt-5">
+                                    <div class="flex items-center gap-2 text-sm text-slate-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500/70"></i>Continuous Threat Modeling</div>
+                                    <div class="flex items-center gap-2 text-sm text-slate-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500/70"></i>Executive Board Reporting</div>
+                                    <div class="flex items-center gap-2 text-sm text-slate-400 font-medium"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-500/70"></i>Architecture Evolution</div>
                                 </div>
                             </div>
                         </div>
@@ -924,22 +1200,22 @@
                     
                     <div class="space-y-8">
                         <div class="flex items-center gap-5 text-slate-300 group">
-                            <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-300">
-                                <i data-lucide="map-pin" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-white text-lg">Headquarters</p>
-                                <p class="text-sm font-medium text-slate-400">Sydney, NSW, Australia</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-5 text-slate-300 group">
                             <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-300">
                                 <i data-lucide="shield-alert" class="w-6 h-6"></i>
                             </div>
                             <div>
-                                <p class="font-bold text-white text-lg">24/7 SOC Support</p>
+                                <p class="font-bold text-white text-lg">24/7 SOC with Unmatched SLA</p>
                                 <p class="text-sm font-medium text-slate-400">1300 CYBER DEF</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-5 text-slate-300 group">
+                            <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-300">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-white text-lg">Sovereign Headquarters</p>
+                                <p class="text-sm font-medium text-slate-400">Sydney, NSW, Australia</p>
                             </div>
                         </div>
 
@@ -1008,7 +1284,7 @@
                         <li><a href="#" class="hover:text-blue-400 transition-colors">Offensive Security</a></li>
                         <li><a href="#" class="hover:text-blue-400 transition-colors">Managed Defense (SOC/XDR)</a></li>
                         <li><a href="#" class="hover:text-blue-400 transition-colors">GRC & Strategy</a></li>
-                        <li><a href="#" class="hover:text-blue-400 transition-colors">Compliance Audits</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Cloud & Identity</a></li>
                     </ul>
                 </div>
                 
@@ -1034,6 +1310,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- Service Details Modal -->
+    <div id="service-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4">
+        <div id="modal-backdrop" class="absolute inset-0 bg-[#02050D]/80 backdrop-blur-md cursor-pointer"></div>
+        <div id="modal-content" class="relative bg-white/[0.03] border border-white/10 rounded-3xl p-8 lg:p-10 max-w-lg w-full shadow-[0_0_50px_rgba(37,99,235,0.15)] transform scale-95 translate-y-4 transition-all duration-300">
+            <button id="modal-close-btn" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div id="modal-icon" class="w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 shadow-inner">
+                <!-- Icon inserted via JS -->
+            </div>
+            <h3 id="modal-title" class="text-2xl font-extrabold text-white mb-4"></h3>
+            <p id="modal-desc" class="text-slate-300 font-medium leading-relaxed mb-8"></p>
+            <div class="flex items-center gap-4">
+                <button class="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+                    Request Assessment
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Logic Script -->
     <script>
@@ -1071,6 +1367,56 @@
                 iconClose.classList.add('hidden');
             }
         });
+
+        // Modal Interaction Logic
+        const serviceCards = document.querySelectorAll('.service-card');
+        const modal = document.getElementById('service-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalContent = document.getElementById('modal-content');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalIcon = document.getElementById('modal-icon');
+
+        function openModal(title, desc, iconName) {
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            
+            // Update the icon inside the modal container dynamically
+            modalIcon.innerHTML = `<i data-lucide="${iconName}" class="w-8 h-8 text-blue-400"></i>`;
+            lucide.createIcons(); // Force lucide to re-render the newly injected tag
+            
+            modal.classList.remove('hidden');
+            
+            // trigger reflow so the transition fires
+            void modal.offsetWidth;
+            
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95', 'translate-y-4');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95', 'translate-y-4');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300); // Matches the CSS duration
+        }
+
+        // Attach listeners to every service card
+        serviceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                openModal(
+                    card.getAttribute('data-title'),
+                    card.getAttribute('data-desc'),
+                    card.getAttribute('data-icon')
+                );
+            });
+        });
+
+        modalBackdrop.addEventListener('click', closeModal);
+        modalCloseBtn.addEventListener('click', closeModal);
 
         // Intersection Observer for FadeUp Components
         const fadeUpElements = document.querySelectorAll('.fade-up');
