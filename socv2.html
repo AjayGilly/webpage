@@ -46,7 +46,8 @@
                         'float-delayed': 'float 8s ease-in-out 4s infinite',
                         'scan': 'scan 3s linear infinite',
                         'ticker': 'ticker 50s linear infinite',
-                        'glow-pulse': 'glow-pulse 4s ease-in-out infinite alternate',
+                        'ticker-fast': 'ticker 25s linear infinite',
+                        'ticker-reverse': 'ticker-reverse 35s linear infinite',
                         'scan-vertical': 'scan-vertical 3s ease-in-out infinite',
                         'flow-line': 'flow-line 4s linear infinite',
                         'slide-in-right': 'slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
@@ -58,6 +59,9 @@
                         'sweep': 'sweep 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
                         'cta-pulse': 'pulseCta 8s infinite',
                         'progress': 'progress 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'orbit': 'orbit 20s linear infinite',
+                        'orbit-reverse': 'orbit 25s linear infinite reverse',
+                        'orbit-slow': 'orbit 40s linear infinite',
                     },
                     keyframes: {
                         float: {
@@ -71,6 +75,10 @@
                         ticker: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-100%)' },
+                        },
+                        'ticker-reverse': {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0)' },
                         },
                         'glow-pulse': {
                             '0%': { opacity: 0.3, filter: 'blur(40px)' },
@@ -116,6 +124,10 @@
                             '0%': { width: '0%', opacity: '1' },
                             '90%': { width: '100%', opacity: '1' },
                             '100%': { width: '100%', opacity: '0' },
+                        },
+                        orbit: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
                         }
                     }
                 }
@@ -184,6 +196,7 @@
     <div class="fixed top-[-10%] left-[-10%] w-[60vw] h-[60vw] orb-cyan rounded-full animate-float pointer-events-none z-[-1]"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] orb-purple rounded-full animate-float-delayed pointer-events-none z-[-1]"></div>
 
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-500 glass-ultra border-b border-white/5" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
@@ -196,10 +209,10 @@
                     <span class="font-heading font-extrabold text-2xl tracking-tighter text-white">OUTCOME<span class="text-cyber-cyan">X</span></span>
                 </div>
                 <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
-                    <a href="#evolution" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Evolution</a>
-                    <a href="#always-on" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">24x7</a>
+                    <a href="#capabilities" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Capabilities</a>
                     <a href="#ai-ml-engine" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">AI Engine</a>
-                    <a href="#process" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">How We Work</a>
+                    <a href="#posture" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Posture</a>
+                    <a href="#dashboard-preview" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">Platform</a>
                     <a href="#slas" class="text-sm font-medium text-gray-300 hover:text-white transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-0.5 after:bg-cyber-cyan after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">SLAs</a>
                     
                     <a href="#scan" class="flex items-center gap-2 text-sm font-bold text-white bg-white/5 border border-white/10 px-4 py-2 rounded-lg hover:bg-white/10 hover:border-cyber-cyan transition-all group">
@@ -336,8 +349,141 @@
         </div>
     </div>
 
-    <!-- 4. THE EVOLUTION MATRIX (Comparison - MOVED UP AS PER REQUEST) -->
-    <section id="evolution" class="py-32 bg-[#0a0d14] relative overflow-hidden border-b border-white/5">
+    <!-- 4. ALWAYS ON 24/7 -->
+    <section id="always-on" class="py-32 relative overflow-hidden bg-black border-b border-white/5">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjMDMwNTA4Ij48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDBMOCA4Wk04IDBMMCA4WiIgc3Ryb2tlPSIjMWEyMDI1IiBzdHJva2Utd2lkdGg9IjEiPjwvcGF0aD4KPC9zdmc+')] opacity-[0.05] animate-[data-flow_20s_linear_infinite] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <div class="fade-in-up order-2 md:order-1">
+                    <div class="relative w-full h-[400px] flex items-center justify-center group pointer-events-auto">
+                        <!-- Orbiting Rings -->
+                        <div class="absolute inset-0 rounded-full border border-cyber-cyan/20 animate-[orbit_20s_linear_infinite] pointer-events-none">
+                            <div class="absolute top-0 left-1/2 w-2 h-2 bg-cyber-cyan rounded-full shadow-[0_0_10px_#00e5ff]"></div>
+                        </div>
+                        <div class="absolute inset-8 rounded-full border border-purple-500/20 animate-[orbit-reverse_30s_linear_infinite] pointer-events-none">
+                            <div class="absolute bottom-0 left-1/2 w-2 h-2 bg-purple-500 rounded-full shadow-[0_0_10px_#b000ff]"></div>
+                            <div class="absolute top-1/2 right-0 w-1 h-1 bg-purple-400 rounded-full"></div>
+                        </div>
+                        <div class="absolute inset-16 rounded-full border border-dashed border-gray-700 animate-[orbit-slow_40s_linear_infinite] pointer-events-none"></div>
+
+                        <!-- Center Core -->
+                        <div class="bg-[#0a0d14] p-8 rounded-full border border-cyber-cyan z-20 shadow-[0_0_40px_rgba(0,229,255,0.2)] text-center w-64 h-64 flex flex-col justify-center items-center animate-[breathe_4s_ease-in-out_infinite] group-hover:scale-105 transition-transform duration-500 relative">
+                            <i data-lucide="shield-check" class="w-10 h-10 text-cyber-cyan mb-3"></i>
+                            <div class="text-4xl font-bold text-white font-mono">24x7x365</div>
+                            <div class="text-xs text-cyber-cyan tracking-widest mt-2 uppercase">Active Defense</div>
+                        </div>
+
+                        <!-- Tooltips -->
+                        <div class="absolute top-10 left-10 bg-black/80 backdrop-blur border border-gray-800 px-3 py-1.5 rounded text-[10px] text-gray-300 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 z-30 pointer-events-none"><span class="text-green-500">●</span> Active analyst session</div>
+                        <div class="absolute bottom-16 right-4 bg-black/80 backdrop-blur border border-gray-800 px-3 py-1.5 rounded text-[10px] text-gray-300 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300 z-30 pointer-events-none"><span class="text-blue-500">●</span> Threat hunt in progress</div>
+                        <div class="absolute top-1/2 -right-8 bg-black/80 backdrop-blur border border-gray-800 px-3 py-1.5 rounded text-[10px] text-gray-300 font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200 z-30 pointer-events-none"><span class="text-purple-500">●</span> Playbook armed</div>
+                    </div>
+                </div>
+                
+                <div class="fade-in-up order-1 md:order-2">
+                    <span class="text-cyber-cyan font-mono text-sm tracking-widest uppercase flex items-center gap-2"><span class="w-8 h-px bg-cyber-cyan"></span> The Operational Difference</span>
+                    <h2 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-8 tracking-tight group/heading">
+                        <span class="relative overflow-hidden inline-block"><span class="relative z-10">Actually 24/7.</span><span class="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[sweep_3s_infinite]"></span></span><br>
+                        <span class="relative inline-block group-hover/heading:text-gray-200 transition-colors after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-cyber-cyan after:scale-x-0 group-hover/heading:after:scale-x-100 after:transition-transform after:duration-500 after:origin-left">No On-Call Delays.</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        Many providers claim 24/7 coverage but rely on escalation models that introduce delays during critical moments.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        OutcomeX operates a fully staffed SOC with continuous shift coverage across Australia. Our analysts actively monitor, investigate, and respond in real time—ensuring threats are handled without delay.
+                    </p>
+                    <ul class="space-y-4 font-mono text-sm text-gray-300">
+                        <li class="flex items-center gap-3 group/item hover:text-white transition-colors fade-in-up" style="animation-delay: 100ms;"><i data-lucide="check" class="text-green-500 w-5 h-5 group-hover/item:scale-125 group-hover/item:drop-shadow-[0_0_8px_rgba(34,197,94,0.8)] transition-all"></i> No responder wake-up delays</li>
+                        <li class="flex items-center gap-3 group/item hover:text-white transition-colors fade-in-up" style="animation-delay: 200ms;"><i data-lucide="check" class="text-green-500 w-5 h-5 group-hover/item:scale-125 group-hover/item:drop-shadow-[0_0_8px_rgba(34,197,94,0.8)] transition-all"></i> 100% Australian-based analysts across all shifts</li>
+                        <li class="flex items-center gap-3 group/item hover:text-white transition-colors fade-in-up" style="animation-delay: 300ms;"><i data-lucide="check" class="text-green-500 w-5 h-5 group-hover/item:scale-125 group-hover/item:drop-shadow-[0_0_8px_rgba(34,197,94,0.8)] transition-all"></i> Immediate execution of response playbooks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. NEW SECTION: FULL-SPECTRUM DEFENSE (CAPABILITIES MATRIX) -->
+    <section id="capabilities" class="py-24 bg-[#0a0d14] relative border-b border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="text-cyber-cyan font-mono text-sm tracking-widest uppercase">Capabilities Matrix</span>
+                <h2 class="text-4xl font-bold text-white mt-3 tracking-tight">Full-Spectrum Defense</h2>
+                <p class="text-gray-400 mt-4 text-lg">Protecting the modern hybrid enterprise against identity, endpoint, and cloud-native threats.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up border-t border-transparent hover:border-blue-500/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-blue-500/50 transition-colors">
+                        <i data-lucide="bot" class="w-5 h-5 text-blue-400"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">AI-Driven MDR</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Autonomous triage and containment using behavioral OutcomeX AI models on endpoint telemetry.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up delay-75 border-t border-transparent hover:border-purple-500/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-purple-500/50 transition-colors">
+                        <i data-lucide="cloud" class="w-5 h-5 text-purple-400"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">CNAPP / Cloud SOC</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Continuous posture management and threat detection across AWS, Azure, and GCP workloads.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up delay-150 border-t border-transparent hover:border-orange-500/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-orange-500/50 transition-colors">
+                        <i data-lucide="fingerprint" class="w-5 h-5 text-orange-400"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Identity (ITDR)</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Detecting impossible travel, token theft, and deepfake-driven credential abuse in real-time.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up delay-200 border-t border-transparent hover:border-green-500/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-green-500/50 transition-colors">
+                        <i data-lucide="crosshair" class="w-5 h-5 text-green-400"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Continuous Pentesting</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Automated purple-teaming to validate controls and discover exposures before adversaries do.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up border-t border-transparent hover:border-blue-600/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-blue-600/50 transition-colors">
+                        <i data-lucide="database" class="w-5 h-5 text-blue-500"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Next-Gen SIEM</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">High-volume log ingestion with AI correlation, built on Microsoft Sentinel or Splunk.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up delay-75 border-t border-transparent hover:border-red-500/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-red-500/50 transition-colors">
+                        <i data-lucide="siren" class="w-5 h-5 text-red-400"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Digital Forensics (DFIR)</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Rapid breach containment, reverse engineering of malware, and legal-grade reporting.</p>
+                </div>
+                <!-- Card 7 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up delay-150 border-t border-transparent hover:border-yellow-500/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-yellow-500/50 transition-colors">
+                        <i data-lucide="factory" class="w-5 h-5 text-yellow-400"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">OT / SCADA Security</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Passive monitoring of critical infrastructure networks, adhering to SOCI act requirements.</p>
+                </div>
+                <!-- Card 8 -->
+                <div class="glass-ultra p-6 rounded-2xl hover:-translate-y-2 transition-all duration-300 fade-in-up delay-200 border-t border-transparent hover:border-cyber-cyan/30 group">
+                    <div class="w-10 h-10 bg-[#05070a] rounded-lg flex items-center justify-center mb-4 border border-gray-800 group-hover:border-cyber-cyan/50 transition-colors">
+                        <i data-lucide="map" class="w-5 h-5 text-cyber-cyan"></i>
+                    </div>
+                    <h4 class="text-white font-bold mb-2">Continuous Posture</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Continuous mapping of technical controls (CSPM) to stop drift before it becomes an alert.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. THE EVOLUTION MATRIX -->
+    <section id="evolution" class="py-32 bg-[#05070a] relative overflow-hidden border-b border-white/5">
         <div class="max-w-6xl mx-auto px-4 relative z-10">
             <div class="text-center mb-16 fade-in-up">
                 <span class="text-cyber-red font-mono text-sm tracking-widest uppercase">The Paradigm Shift</span>
@@ -387,46 +533,8 @@
         </div>
     </section>
 
-    <!-- 5. ALWAYS ON 24/7 -->
-    <section id="always-on" class="py-32 relative overflow-hidden bg-black border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="fade-in-up order-2 md:order-1">
-                    <div class="relative w-full h-[400px] flex items-center justify-center pointer-events-none">
-                        <div class="absolute inset-0 rounded-full border border-gray-800 border-dashed animate-[spin_60s_linear_infinite]"></div>
-                        <div class="absolute inset-4 rounded-full border border-gray-800 border-dashed animate-[spin_40s_linear_infinite_reverse]"></div>
-                        <div class="absolute inset-10 rounded-full border border-cyber-cyan/20 animate-pulse-slow"></div>
-                        <div class="absolute w-1/2 h-1/2 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(0,229,255,0.2)_90deg,transparent_90deg)] rounded-full animate-[spin_4s_linear_infinite] origin-bottom-right top-0 left-0"></div>
-                        
-                        <div class="bg-[#0a0d14] p-8 rounded-full border border-cyber-cyan z-10 shadow-[0_0_40px_rgba(0,229,255,0.2)] text-center w-64 h-64 flex flex-col justify-center items-center pointer-events-auto">
-                            <i data-lucide="clock" class="w-10 h-10 text-white mb-3"></i>
-                            <div class="text-4xl font-bold text-cyber-cyan font-mono">24x7x365</div>
-                            <div class="text-xs text-gray-400 tracking-widest mt-2 uppercase">Eyes on Glass</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="fade-in-up order-1 md:order-2">
-                    <span class="text-cyber-cyan font-mono text-sm tracking-widest uppercase flex items-center gap-2"><span class="w-8 h-px bg-cyber-cyan"></span> The Operational Difference</span>
-                    <h2 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-8 tracking-tight">Actually 24/7. <br>No "On-Call" Ghosts.</h2>
-                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                        Many providers claim 24/7 coverage, but simply route critical alerts to an offshore helpdesk or page a sleeping "on-call" analyst at 3 AM. <strong class="text-white">That is not a SOC.</strong>
-                    </p>
-                    <p class="text-gray-400 leading-relaxed mb-8">
-                        Ransomware doesn't wait for your team to wake up. OutcomeX runs fully staffed, continuously rotating shifts in our secure Sydney and Melbourne facilities. Real, highly-certified L2/L3 analysts are actively hunting and monitoring your environment at all hours.
-                    </p>
-                    <ul class="space-y-4 font-mono text-sm text-gray-300">
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5"></i> Zero "wake-up" latency for responders.</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5"></i> 100% Australian personnel on night shifts.</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-5 h-5"></i> Immediate SOAR playbook execution.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. NEW SECTION: TECHNOLOGY ECOSYSTEM / INTEGRATIONS -->
-    <section id="integrations" class="py-24 bg-[#05070a] border-b border-white/5 relative overflow-hidden">
+    <!-- 7. TECHNOLOGY ECOSYSTEM / INTEGRATIONS -->
+    <section id="integrations" class="py-24 bg-[#0a0d14] border-b border-white/5 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
             <span class="text-blue-500 font-mono text-sm tracking-widest uppercase">Agnostic Architecture</span>
             <h2 class="text-4xl font-bold text-white mt-3 tracking-tight mb-4">Seamless Integration. Zero Friction.</h2>
@@ -461,8 +569,8 @@
         </div>
     </section>
 
-    <!-- 7. THE AI/ML ENGINE DEEP DIVE -->
-    <section id="ai-ml-engine" class="py-32 relative bg-[#0a0d14] border-b border-white/5">
+    <!-- 8. THE AI/ML ENGINE DEEP DIVE -->
+    <section id="ai-ml-engine" class="py-32 relative bg-[#05070a] border-b border-white/5">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(176,0,255,0.05)_0%,transparent_60%)] pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 relative z-10">
             <div class="text-center mb-20 fade-in-up">
@@ -502,8 +610,46 @@
         </div>
     </section>
 
-    <!-- 8. CUSTOM DETECTION ENGINEERING -->
-    <section class="py-24 bg-black relative overflow-hidden border-b border-white/5">
+    <!-- 9. NEW SECTION: THREAT INTELLIGENCE ECOSYSTEM -->
+    <section id="threat-intel" class="py-24 bg-[#0a0d14] relative border-b border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="text-red-500 font-mono text-sm tracking-widest uppercase">Global Visibility</span>
+                <h2 class="text-4xl font-bold text-white mt-3 tracking-tight">Threat Intelligence Ecosystem</h2>
+                <p class="text-gray-400 mt-4 text-lg max-w-3xl mx-auto">We don't wait for signatures. Our SOC ingests live IoCs from across the globe to predict attacks before they hit Australia.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-[#05070a] border border-gray-800 p-8 rounded-2xl text-center hover:border-blue-500/50 transition-colors fade-in-up group">
+                    <i data-lucide="shield" class="w-10 h-10 text-blue-500 mx-auto mb-5 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-white font-bold mb-3 text-lg">Government Feeds</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Direct integration with ACSC (CTIS) and global CERT advisories.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-[#05070a] border border-gray-800 p-8 rounded-2xl text-center hover:border-red-500/50 transition-colors fade-in-up delay-75 group">
+                    <i data-lucide="eye-off" class="w-10 h-10 text-red-500 mx-auto mb-5 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-white font-bold mb-3 text-lg">Dark Web Monitoring</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Scraping ransomware leak sites and initial access broker forums.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-[#05070a] border border-gray-800 p-8 rounded-2xl text-center hover:border-purple-500/50 transition-colors fade-in-up delay-150 group">
+                    <i data-lucide="network" class="w-10 h-10 text-purple-500 mx-auto mb-5 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-white font-bold mb-3 text-lg">Commercial Intel</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Premium feeds from CrowdStrike Falcon X and Mandiant Advantage.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-[#05070a] border border-gray-800 p-8 rounded-2xl text-center hover:border-cyber-cyan/50 transition-colors fade-in-up delay-200 group">
+                    <i data-lucide="target" class="w-10 h-10 text-cyber-cyan mx-auto mb-5 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-white font-bold mb-3 text-lg">Proprietary Sensors</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">OutcomeX global honeypot network capturing zero-day exploitation attempts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. CUSTOM DETECTION ENGINEERING -->
+    <section class="py-24 bg-[#05070a] relative overflow-hidden border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 relative z-10">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="fade-in-up">
@@ -555,7 +701,57 @@
         </div>
     </section>
 
-    <!-- 9. CONTINUOUS POSTURE MANAGEMENT (INTERACTIVE) -->
+    <!-- 11. NEW SECTION: ZERO TRUST MONITORING -->
+    <section id="zero-trust" class="py-24 bg-[#0a0d14] relative border-b border-white/5 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left: Visual -->
+                <div class="fade-in-up relative flex justify-center items-center h-[400px]">
+                    <!-- Background Grid -->
+                    <div class="absolute inset-0 bg-mesh opacity-20 pointer-events-none"></div>
+                    
+                    <!-- Concentric Circles -->
+                    <div class="absolute inset-4 rounded-full border border-gray-800 animate-[spin_40s_linear_infinite]"></div>
+                    <div class="absolute inset-16 rounded-full border border-gray-700 animate-[spin_30s_linear_infinite_reverse]"></div>
+                    
+                    <!-- Core Glow -->
+                    <div class="absolute w-32 h-32 bg-green-500/20 rounded-full blur-[40px] animate-pulse-slow"></div>
+                    
+                    <!-- Center Checkmark -->
+                    <div class="relative z-10 w-24 h-24 rounded-full border-4 border-green-500 flex items-center justify-center bg-[#0a0d14] shadow-[0_0_30px_rgba(34,197,94,0.3)]">
+                        <i data-lucide="check" class="w-10 h-10 text-green-400"></i>
+                    </div>
+
+                    <!-- Floating Tags -->
+                    <div class="absolute top-[20%] left-[10%] bg-[#05070a] border border-gray-800 px-4 py-2 rounded-lg text-xs font-mono text-gray-400 shadow-xl animate-float">
+                        <span class="text-gray-500">Device</span> Posture
+                    </div>
+                    <div class="absolute top-[45%] right-[5%] bg-[#05070a] border border-gray-800 px-4 py-2 rounded-lg text-xs font-mono text-gray-400 shadow-xl animate-float-delayed">
+                        <span class="text-gray-500">Context</span> Analytics
+                    </div>
+                    <div class="absolute bottom-[20%] right-[15%] bg-[#05070a] border border-gray-800 px-4 py-2 rounded-lg text-xs font-mono text-gray-400 shadow-xl animate-float">
+                        <span class="text-gray-500">Identity</span> Risk
+                    </div>
+                </div>
+
+                <!-- Right: Content -->
+                <div class="fade-in-up delay-150">
+                    <span class="text-green-500 font-mono text-sm tracking-widest uppercase">Architecture Enablement</span>
+                    <h2 class="text-4xl font-bold text-white mt-3 tracking-tight mb-6">Zero Trust Monitoring.</h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        The perimeter is gone. Modern defense requires validating every access request, everywhere. OutcomeX SOC is built to monitor and enforce Zero Trust Architectures.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        We natively integrate with Conditional Access policies (Entra ID, Okta) and ZTNA gateways (Zscaler, Palo Alto Prisma) to ensure that compromised sessions are revoked the second anomalous behavior is detected, regardless of the user's location or device.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. CONTINUOUS POSTURE MANAGEMENT (INTERACTIVE) -->
     <section id="posture" class="py-24 bg-[#030508] relative overflow-hidden border-b border-white/5">
         
         <!-- BACKGROUND INTELLIGENCE LAYER -->
@@ -598,7 +794,7 @@
                             OutcomeX continuously monitors your cloud and identity fabric for <span class="hover-highlight">configuration drift</span>, identifying risky exposures and recommending remediation actions—<span class="hover-highlight">before attackers</span> can exploit them.
                         </p>
                         
-                        <button class="mt-4 relative overflow-hidden inline-flex items-center justify-center px-6 py-3 font-bold text-white transition-all duration-300 ease-out transform hover:-translate-y-0.5 rounded-xl bg-black border border-white/10 hover:border-[#ff6a00] hover:shadow-[0_0_20px_rgba(255,106,0,0.3)] animate-[cta-pulse_8s_infinite] group/btn">
+                        <button class="mt-4 relative overflow-hidden inline-flex items-center justify-center px-6 py-3 font-bold text-white transition-all duration-300 ease-out transform hover:-translate-y-0.5 rounded-xl bg-black border border-white/10 hover:border-[#ff6a00] hover:shadow-[0_0_20px_rgba(255,106,0,0.3)] animate-cta-pulse group/btn">
                             <span class="absolute inset-0 w-full h-full -translate-x-[100%] bg-gradient-to-r from-transparent via-[#ff6a00]/20 to-transparent group-hover/btn:animate-sweep pointer-events-none"></span>
                             <span class="relative z-10 flex items-center gap-2 text-sm">
                                 See Posture Dashboard <i data-lucide="arrow-right" class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"></i>
@@ -719,7 +915,7 @@
                     </div>
 
                     <!-- Alert 3 (Risk: 15) -->
-                    <div id="posture-alert-3" class="relative p-5 rounded-2xl transition-all duration-700 overflow-hidden group opacity-0 animate-slide-in-right border border-gray-800 bg-black hover:border-gray-600 hover:bg-[#0f1219] hover:scale-[1.01] animate-[flicker_4s_ease-in-out_infinite]" style="animation-delay: 1000ms;">
+                    <div id="posture-alert-3" class="relative p-5 rounded-2xl transition-all duration-700 overflow-hidden group opacity-0 animate-slide-in-right border border-gray-800 bg-black hover:border-gray-600 hover:bg-[#0f1219] hover:scale-[1.01] animate-flicker" style="animation-delay: 1000ms;">
                         <div id="indicator-3" class="absolute left-0 top-0 bottom-0 w-1 bg-[#eab308] shadow-[0_0_10px_#eab308] transition-colors duration-500"></div>
                         <div class="flex flex-col sm:flex-row justify-between items-start gap-4 relative z-10">
                             <div class="flex-1">
@@ -755,7 +951,312 @@
     <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
-    <!-- 10. HOW IT WORKS: THE AUTONOMOUS LIFECYCLE (FIXED & ANIMATED) -->
+    <!-- 13. DEMO APP PLATFORM (INTERACTIVE) -->
+    <section id="dashboard-preview" class="py-32 bg-black relative overflow-hidden border-y border-white/5">
+        <div class="absolute inset-0 bg-mesh opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-20 fade-in-up">
+                <span class="text-cyber-cyan font-mono text-sm tracking-widest uppercase">Interactive Demo</span>
+                <h2 class="text-4xl lg:text-5xl font-bold text-white mt-4 tracking-tight">Experience Radical Transparency.</h2>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">Click through our platform to see how analysts hunt, triage, and contain threats in real-time.</p>
+            </div>
+
+            <!-- Main App Window -->
+            <div class="relative bg-[#05070a] border border-gray-800 rounded-2xl shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col md:flex-row h-[650px] fade-in-up group">
+                
+                <!-- Sidebar Navigation -->
+                <div class="w-64 bg-[#0a0d14] border-r border-gray-800 p-6 hidden md:flex flex-col z-20">
+                    <div class="text-cyber-cyan font-bold mb-10 tracking-widest flex items-center gap-2 font-heading text-lg">
+                        <i data-lucide="shield-half" class="w-5 h-5"></i> SOC_OS
+                    </div>
+                    <div class="space-y-2">
+                        <button id="btn-command-center" onclick="switchTab('command-center')" class="sidebar-btn w-full flex items-center gap-3 text-white bg-white/5 px-4 py-3 rounded-lg border-l-2 border-cyber-cyan transition-colors text-sm font-medium">
+                            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Command Center
+                        </button>
+                        <button id="btn-active-incidents" onclick="switchTab('active-incidents')" class="sidebar-btn w-full flex items-center gap-3 text-gray-400 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors text-sm font-medium">
+                            <i data-lucide="activity" class="w-4 h-4"></i> Active Incidents <span class="bg-red-500/20 text-red-400 text-xs px-2 py-0.5 rounded-full ml-auto border border-red-500/30">2</span>
+                        </button>
+                        <button id="btn-threat-intel" onclick="switchTab('threat-intel')" class="sidebar-btn w-full flex items-center gap-3 text-gray-400 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors text-sm font-medium">
+                            <i data-lucide="radar" class="w-4 h-4"></i> Threat Intel
+                        </button>
+                        <button id="btn-executive-reports" onclick="switchTab('executive-reports')" class="sidebar-btn w-full flex items-center gap-3 text-gray-400 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors text-sm font-medium">
+                            <i data-lucide="file-bar-chart" class="w-4 h-4"></i> Executive Reports
+                        </button>
+                    </div>
+                    
+                    <div class="mt-auto pt-6 border-t border-gray-800">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></div>
+                            <span class="text-xs text-gray-400 font-mono">SOC ONLINE</span>
+                        </div>
+                        <div class="text-[10px] text-gray-500 font-mono">Connected: CrowdStrike, M365</div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="flex-1 flex flex-col z-10 bg-[#080b10] relative overflow-hidden">
+                    <!-- Top Bar -->
+                    <div class="h-16 border-b border-gray-800 flex items-center justify-between px-8 bg-black/40 backdrop-blur-md sticky top-0 z-30">
+                        <div class="flex items-center gap-4">
+                            <h3 id="dashboard-title" class="text-white font-semibold">Incident Triage Queue</h3>
+                        </div>
+                        <div class="flex items-center gap-4">
+                             <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-cyber-dark border-2 border-gray-800 flex items-center justify-center text-[10px] font-bold text-cyber-cyan shadow-[0_0_10px_rgba(0,229,255,0.2)]">AI</div>
+                                <div class="w-8 h-8 rounded-full bg-cyber-dark border-2 border-gray-800 flex items-center justify-center text-[10px] font-bold text-white">L2</div>
+                             </div>
+                            <button class="bg-white/5 border border-white/10 text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-white hover:text-black transition-colors">Export Logs</button>
+                        </div>
+                    </div>
+                    
+                    <!-- TAB 1: Command Center (Default) -->
+                    <div id="view-command-center" class="tab-content flex-1 overflow-y-auto p-8 space-y-6 block">
+                        <!-- High Level Metrics -->
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-white/5 border border-white/10 p-5 rounded-xl">
+                                <div class="text-gray-400 text-xs mb-2 font-mono uppercase tracking-wider">Events Analyzed (24h)</div>
+                                <div class="text-3xl font-bold text-white font-mono">24.5M</div>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-5 rounded-xl">
+                                <div class="text-gray-400 text-xs mb-2 font-mono uppercase tracking-wider">Auto-Remediated</div>
+                                <div class="text-3xl font-bold text-green-400 font-mono">1,204</div>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-5 rounded-xl relative overflow-hidden">
+                                <div class="absolute inset-0 bg-red-500/5 animate-pulse"></div>
+                                <div class="text-gray-400 text-xs mb-2 font-mono uppercase tracking-wider relative z-10">Active Criticals</div>
+                                <div class="text-3xl font-bold text-red-500 font-mono relative z-10">2</div>
+                            </div>
+                        </div>
+
+                        <div class="text-sm font-bold text-white mt-8 mb-4 border-b border-gray-800 pb-2">Priority Queue</div>
+
+                        <!-- Incident Item 1 (Active) -->
+                        <div class="bg-red-950/20 border border-red-900/50 p-5 rounded-xl relative overflow-hidden group hover:bg-red-900/20 transition-colors">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-red-500 shadow-[0_0_10px_#ef4444]"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded border border-red-500/30 font-bold tracking-widest">CRITICAL</span>
+                                        <span class="text-xs text-gray-400 font-mono">INC-2026-992</span>
+                                    </div>
+                                    <h4 class="text-white font-bold text-lg">Ransomware Behavior Detected on SRV-DB-01</h4>
+                                    <p class="text-sm text-gray-400 mt-1">CrowdStrike indicates vssadmin.exe used to delete shadow copies. OutcomeX AI confidence: 99%.</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs text-red-400 font-mono mb-1 animate-pulse">ACTION REQUIRED</div>
+                                    <div class="text-xs text-gray-500">T+ 2m 14s</div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-red-900/30 flex gap-3">
+                                <button onclick="isolateHost()" class="bg-red-500 text-white text-xs font-bold px-4 py-2 rounded shadow-[0_0_15px_rgba(239,68,68,0.4)] hover:bg-red-400 transition-colors flex items-center gap-2"><i data-lucide="shield-alert" class="w-3 h-3"></i> Isolate Host</button>
+                                <button onclick="viewTimeline()" class="bg-transparent border border-gray-600 text-gray-300 text-xs font-bold px-4 py-2 rounded hover:bg-white/5 transition-colors flex items-center gap-2"><i data-lucide="clock" class="w-3 h-3"></i> View Timeline</button>
+                            </div>
+                        </div>
+                        
+                         <!-- Incident Item 2 -->
+                         <div class="bg-gray-900/50 border border-gray-800 p-5 rounded-xl relative hover:bg-gray-800/50 transition-colors">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded border border-orange-500/30 font-bold tracking-widest">HIGH</span>
+                                        <span class="text-xs text-gray-400 font-mono">INC-2026-991</span>
+                                    </div>
+                                    <h4 class="text-white font-bold text-lg">Suspicious Inbox Forwarding Rule (AiTM)</h4>
+                                    <p class="text-sm text-gray-400 mt-1">Entra ID shows login from unknown ASN followed by rule creation. Likely session hijacking.</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs text-orange-400 font-mono mb-1">INVESTIGATING</div>
+                                    <div class="text-xs text-gray-500">Analyst AG assigned</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: Active Incidents -->
+                    <div id="view-active-incidents" class="tab-content flex-1 overflow-y-auto p-8 space-y-4 hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="text-gray-400 text-sm">Showing 2 unresolved incidents.</div>
+                            <div class="flex gap-2">
+                                <span class="px-3 py-1 border border-gray-700 rounded text-xs text-white bg-gray-800 cursor-pointer">All</span>
+                                <span class="px-3 py-1 border border-red-900/50 rounded text-xs text-red-400 bg-red-950/20 cursor-pointer">Critical</span>
+                            </div>
+                        </div>
+                        <div class="bg-red-950/20 border border-red-900/50 p-5 rounded-xl relative overflow-hidden group">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-red-500"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2"><span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded border border-red-500/30 font-bold">CRITICAL</span><span class="text-xs text-gray-400 font-mono">INC-2026-992</span></div>
+                                    <h4 class="text-white font-bold text-lg">Ransomware Behavior Detected on SRV-DB-01</h4>
+                                </div>
+                                <div class="text-right"><button onclick="viewTimeline()" class="text-cyber-cyan text-xs font-bold hover:underline">Open Case ></button></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-900/50 border border-gray-800 p-5 rounded-xl relative">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-orange-500"></div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-2"><span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded border border-orange-500/30 font-bold">HIGH</span><span class="text-xs text-gray-400 font-mono">INC-2026-991</span></div>
+                                    <h4 class="text-white font-bold text-lg">Suspicious Inbox Forwarding Rule (AiTM)</h4>
+                                </div>
+                                <div class="text-right"><button class="text-cyber-cyan text-xs font-bold hover:underline">Open Case ></button></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: Threat Intel -->
+                    <div id="view-threat-intel" class="tab-content flex-1 overflow-y-auto p-8 space-y-6 hidden">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-[#0a0d14] border border-gray-800 p-5 rounded-xl">
+                                <h4 class="text-white font-bold mb-4 flex items-center gap-2"><i data-lucide="crosshair" class="w-4 h-4 text-cyber-red"></i> Monitored Actors</h4>
+                                <ul class="space-y-3 text-sm font-mono text-gray-400">
+                                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>Scattered Spider</span><span class="text-red-500">Active</span></li>
+                                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>LockBit 3.0</span><span class="text-orange-500">Elevated</span></li>
+                                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>APT29</span><span class="text-gray-500">Dormant</span></li>
+                                </ul>
+                            </div>
+                            <div class="bg-[#0a0d14] border border-gray-800 p-5 rounded-xl">
+                                <h4 class="text-white font-bold mb-4 flex items-center gap-2"><i data-lucide="globe" class="w-4 h-4 text-cyber-cyan"></i> Geo-IP Blocks</h4>
+                                <ul class="space-y-3 text-sm font-mono text-gray-400">
+                                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>RU (Russia)</span><span class="text-green-500">BLOCKED</span></li>
+                                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>KP (North Korea)</span><span class="text-green-500">BLOCKED</span></li>
+                                    <li class="flex justify-between border-b border-gray-800 pb-2"><span>IR (Iran)</span><span class="text-green-500">BLOCKED</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-[#0a0d14] border border-gray-800 p-5 rounded-xl">
+                            <h4 class="text-white font-bold mb-4">Latest Ingested IOCs (Indicators of Compromise)</h4>
+                            <div class="bg-black p-4 rounded text-xs font-mono text-gray-500 space-y-1">
+                                <div>[10:42:01] ADDED IP: 194.55.22.1 (Malicious C2)</div>
+                                <div>[10:15:22] ADDED HASH: a3f92b... (Ransomware Payload)</div>
+                                <div>[09:05:44] ADDED DOMAIN: auth-microsoft-secure.com (AiTM Phishing)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: Executive Reports -->
+                    <div id="view-executive-reports" class="tab-content flex-1 overflow-y-auto p-8 space-y-4 hidden">
+                        <button class="bg-cyber-cyan text-black px-4 py-2 rounded font-bold text-sm mb-4 hover:bg-white transition-colors">Generate New Report</button>
+                        
+                        <div class="bg-[#0a0d14] border border-gray-800 p-4 rounded-xl flex items-center justify-between hover:border-gray-600 transition-colors cursor-pointer group">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-red-500/10 p-3 rounded-lg border border-red-500/20 text-red-500"><i data-lucide="file-warning" class="w-5 h-5"></i></div>
+                                <div>
+                                    <h4 class="text-white font-bold">Incident Summary: INC-2026-992</h4>
+                                    <p class="text-xs text-gray-500 mt-1">Generated: Today, 04:00 AM</p>
+                                </div>
+                            </div>
+                            <i data-lucide="download" class="w-5 h-5 text-gray-600 group-hover:text-cyber-cyan"></i>
+                        </div>
+
+                        <div class="bg-[#0a0d14] border border-gray-800 p-4 rounded-xl flex items-center justify-between hover:border-gray-600 transition-colors cursor-pointer group">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20 text-blue-500"><i data-lucide="file-bar-chart" class="w-5 h-5"></i></div>
+                                <div>
+                                    <h4 class="text-white font-bold">Monthly SOC Posture Report</h4>
+                                    <p class="text-xs text-gray-500 mt-1">Generated: Feb 01, 2026</p>
+                                </div>
+                            </div>
+                            <i data-lucide="download" class="w-5 h-5 text-gray-600 group-hover:text-cyber-cyan"></i>
+                        </div>
+                    </div>
+
+                    <!-- TAB 5: Incident Timeline (Hidden default) -->
+                    <div id="view-timeline" class="tab-content flex-1 overflow-y-auto p-8 hidden">
+                        <div class="mb-8">
+                            <button onclick="switchTab('command-center')" class="text-cyber-cyan text-xs font-bold hover:underline flex items-center gap-1"><i data-lucide="arrow-left" class="w-3 h-3"></i> Back to Queue</button>
+                        </div>
+                        <h4 class="text-white font-bold text-2xl mb-2">INC-2026-992 Forensic Timeline</h4>
+                        <p class="text-gray-400 text-sm mb-8">Target: SRV-DB-01 (10.0.4.55)</p>
+                        
+                        <div class="relative pl-6 border-l-2 border-gray-800 space-y-8 ml-2">
+                            <div class="relative">
+                                <div class="absolute -left-[33px] bg-gray-800 w-4 h-4 rounded-full border-4 border-[#080b10]"></div>
+                                <div class="text-xs text-gray-500 font-mono mb-1">03:14:02 AM</div>
+                                <div class="text-white font-bold text-lg">Initial Access</div>
+                                <div class="text-sm text-gray-400 mt-1">Malicious macro enabled in document downloaded via Spear Phishing email.</div>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[33px] bg-orange-500 w-4 h-4 rounded-full border-4 border-[#080b10] shadow-[0_0_10px_#f97316]"></div>
+                                <div class="text-xs text-gray-500 font-mono mb-1">03:14:15 AM</div>
+                                <div class="text-white font-bold text-lg">Execution</div>
+                                <div class="text-sm text-gray-400 mt-1">Obfuscated PowerShell spawned by WINWORD.EXE. Attempting to disable AMSI.</div>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[33px] bg-red-500 w-4 h-4 rounded-full border-4 border-[#080b10] shadow-[0_0_10px_#ef4444]"></div>
+                                <div class="text-xs text-gray-500 font-mono mb-1">03:14:22 AM</div>
+                                <div class="text-white font-bold text-lg">Defense Evasion Detected</div>
+                                <div class="text-sm text-gray-400 mt-1">Process vssadmin.exe called with parameters to delete Volume Shadow Copies.</div>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[33px] bg-cyber-cyan w-4 h-4 rounded-full border-4 border-[#080b10] shadow-[0_0_10px_#00e5ff] animate-pulse"></div>
+                                <div class="text-xs text-gray-500 font-mono mb-1">03:14:23 AM</div>
+                                <div class="text-white font-bold text-lg">OutcomeX AI Alert Triggered</div>
+                                <div class="text-sm text-gray-400 mt-1">Behavior matched against ransomware heuristic model. Escalating to Critical.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 6: Isolate Host Animation (Hidden default) -->
+                    <div id="view-isolate" class="tab-content flex-1 overflow-y-auto p-8 hidden flex-col">
+                        <div class="flex items-center gap-3 mb-6 border-b border-gray-800 pb-4">
+                            <i data-lucide="shield-alert" class="w-6 h-6 text-red-500 animate-pulse"></i>
+                            <div>
+                                <h4 class="text-white font-bold text-xl">Executing SOAR Playbook</h4>
+                                <p class="text-gray-400 text-sm">Action: Network Containment (SRV-DB-01)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-[#0a0d14] border border-gray-700 rounded-lg p-6 font-mono text-sm text-gray-400 flex-1 overflow-y-auto shadow-inner relative">
+                            <div id="isolate-log" class="space-y-2">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-end">
+                            <button id="btn-back-isolate" onclick="switchTab('command-center')" class="bg-cyber-cyan text-black font-bold px-6 py-2 rounded hover:bg-white transition-colors opacity-0 pointer-events-none transition-opacity duration-500">Acknowledge & Return</button>
+                        </div>
+                    </div>
+
+                    <!-- Abstract Background Graphic for Container -->
+                    <div class="absolute -right-40 -bottom-40 w-96 h-96 bg-cyber-cyan/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. THE ONBOARDING JOURNEY -->
+    <section class="py-24 bg-black relative overflow-hidden border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+            <span class="text-cyber-cyan font-mono text-sm tracking-widest uppercase">Rapid Onboarding</span>
+            <h2 class="text-4xl lg:text-5xl font-bold text-white mt-4 tracking-tight">Operational in Days, Not Months</h2>
+            <p class="text-gray-400 mt-4 max-w-3xl mx-auto text-lg leading-relaxed mb-16">From onboarding to active threat defence in under 14 days. Our structured approach ensures rapid integration, intelligent baselining, and full operational coverage—delivering measurable security outcomes from day one.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="border border-gray-800 bg-[#0a0d14] p-8 rounded-2xl relative fade-in-up hover:border-blue-500 transition-colors text-center">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-800 text-white font-mono text-xs px-4 py-1.5 rounded-full border border-gray-600 tracking-wider">DAYS 1 - 3</div>
+                    <i data-lucide="plug" class="w-8 h-8 text-blue-500 mx-auto mb-6 mt-2"></i>
+                    <h4 class="text-white font-bold mb-3 text-xl">Connect & Ingest</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">API integrations established across EDR, Identity (IdP), and Cloud platforms. Telemetry ingestion begins immediately, providing initial visibility.</p>
+                </div>
+                <div class="border border-gray-800 bg-[#0a0d14] p-8 rounded-2xl relative fade-in-up delay-75 hover:border-purple-500 transition-colors text-center">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gray-800 text-white font-mono text-xs px-4 py-1.5 rounded-full border border-gray-600 tracking-wider">DAYS 4 - 7</div>
+                    <i data-lucide="brain" class="w-8 h-8 text-purple-500 mx-auto mb-6 mt-2"></i>
+                    <h4 class="text-white font-bold mb-3 text-xl">Baseline & Tune</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">Behavioural baselines built across users, devices, and workloads. Detection rules and parsing logic are tuned to reduce noise and improve signal quality.</p>
+                </div>
+                <div class="border border-cyber-cyan/30 bg-[#0a0d14] p-8 rounded-2xl relative fade-in-up delay-150 shadow-[0_0_30px_rgba(0,229,255,0.05)] hover:bg-cyber-cyan/5 transition-colors text-center group">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-cyber-cyan text-black font-bold font-mono text-xs px-4 py-1.5 rounded-full border border-cyber-cyan tracking-wider shadow-[0_0_15px_rgba(0,229,255,0.4)]">DAYS 8 - 14</div>
+                    <i data-lucide="shield-check" class="w-8 h-8 text-cyber-cyan mx-auto mb-6 mt-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="text-white font-bold mb-3 text-xl">Active Defence</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Playbooks activated with continuous monitoring. Threat hunting begins. Environment is fully onboarded with 24/7 coverage and SLA-backed response.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. HOW IT WORKS: THE AUTONOMOUS LIFECYCLE -->
     <section id="process" class="py-32 bg-[#05070a] relative overflow-hidden border-b border-white/5">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(0,229,255,0.05)_0%,transparent_50%)] pointer-events-none"></div>
         <div class="max-w-5xl mx-auto px-4 relative z-10">
@@ -882,7 +1383,7 @@
         </div>
     </section>
 
-    <!-- 11. REAL STORIES FROM THE FRONTLINE -->
+    <!-- 16. REAL STORIES FROM THE FRONTLINE -->
     <section id="war-stories" class="py-24 bg-black relative border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 relative z-10">
             <div class="text-center mb-16 fade-in-up">
@@ -944,7 +1445,7 @@
         </div>
     </section>
 
-    <!-- 12. IRONCLAD SLAs -->
+    <!-- 17. IRONCLAD SLAs -->
     <section id="slas" class="py-24 bg-[#05070a] relative overflow-hidden border-b border-white/5">
         <div class="absolute inset-0 bg-mesh opacity-20 pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 relative z-10">
@@ -984,7 +1485,7 @@
         </div>
     </section>
 
-    <!-- 13. CERTIFICATIONS + SKILL MATRIX + LEADERSHIP -->
+    <!-- 18. LEADERSHIP & SKILL MATRIX -->
     <section id="certifications" class="py-32 bg-[#0a0d14] relative overflow-hidden border-b border-white/5">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,119,255,0.03)_0%,transparent_70%)] pointer-events-none z-0"></div>
         
@@ -997,36 +1498,62 @@
                 <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">100% Australian-based personnel. OutcomeX is a proud CREST member, holding the most rigorous individual certifications in the global cybersecurity market.</p>
             </div>
 
-            <div class="mb-24 fade-in-up">
+            <!-- Enhanced Motion Skill Matrix -->
+            <div class="mb-24 fade-in-up overflow-hidden">
                 <div class="flex items-center justify-center gap-4 mb-8">
                     <div class="h-px bg-gradient-to-r from-transparent to-gray-800 w-16"></div>
                     <span class="text-gray-500 font-mono text-xs tracking-widest uppercase">Analyst Skill Matrix</span>
                     <div class="h-px bg-gradient-to-l from-transparent to-gray-800 w-16"></div>
                 </div>
                 
-                <div class="relative w-full overflow-hidden flex items-center before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-32 before:bg-gradient-to-r before:from-[#0a0d14] before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-32 after:bg-gradient-to-l after:from-[#0a0d14] after:to-transparent">
-                    <div class="flex gap-4 animate-ticker-fast whitespace-nowrap hover:[animation-play-state:paused]">
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCP</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCE</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISSP</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISM</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIA</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIH</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> CCSP</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> SC-100</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> AZ-500</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-orange-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#ff6a00]"></span> AWS Security</div>
+                <div class="relative w-full overflow-hidden flex flex-col gap-4 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-32 before:bg-gradient-to-r before:from-[#0a0d14] before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-32 after:bg-gradient-to-l after:from-[#0a0d14] after:to-transparent">
+                    
+                    <!-- Row 1: Right to Left -->
+                    <div class="flex gap-4 animate-[ticker_35s_linear_infinite] whitespace-nowrap hover:[animation-play-state:paused]">
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCP</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCE</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 hover:shadow-[0_0_15px_rgba(176,0,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISSP</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 hover:shadow-[0_0_15px_rgba(176,0,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISM</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIA</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIH</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> CCSP</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> SC-100</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> AZ-500</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-orange-500 hover:shadow-[0_0_15px_rgba(255,106,0,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#ff6a00]"></span> AWS Security</div>
                         
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCP</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCE</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISSP</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISM</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIA</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIH</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> CCSP</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> SC-100</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> AZ-500</div>
-                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-orange-500 transition-colors cursor-default"><span class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#ff6a00]"></span> AWS Security</div>
+                        <!-- Duplicate for infinite loop -->
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCP</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-red shadow-[0_0_8px_#ff2a5f]"></span> OSCE</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 hover:shadow-[0_0_15px_rgba(176,0,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISSP</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-500 hover:shadow-[0_0_15px_rgba(176,0,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#b000ff]"></span> CISM</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIA</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GCIH</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> CCSP</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> SC-100</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> AZ-500</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-orange-500 hover:shadow-[0_0_15px_rgba(255,106,0,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#ff6a00]"></span> AWS Security</div>
+                    </div>
+
+                    <!-- Row 2: Left to Right -->
+                    <div class="flex gap-4 animate-ticker-reverse whitespace-nowrap hover:[animation-play-state:paused]">
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00e5ff]"></span> Splunk Core</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> AZ-900</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-red-500 hover:shadow-[0_0_15px_rgba(255,42,95,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ff2a5f]"></span> CRTE</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GSEC</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_#60a5fa]"></span> SC-200</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-400 hover:shadow-[0_0_15px_rgba(192,132,252,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]"></span> CISA</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-yellow-500 shadow-[0_0_8px_#eab308]"></span> CompTIA Sec+</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316]"></span> eCPPT</div>
+                        
+                        <!-- Duplicate for infinite loop -->
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-cyber-cyan hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-cyber-cyan shadow-[0_0_8px_#00e5ff]"></span> Splunk Core</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></span> AZ-900</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-red-500 hover:shadow-[0_0_15px_rgba(255,42,95,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_#ff2a5f]"></span> CRTE</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-green-500 hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#00ff88]"></span> GSEC</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_8px_#60a5fa]"></span> SC-200</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-purple-400 hover:shadow-[0_0_15px_rgba(192,132,252,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc]"></span> CISA</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-yellow-500 shadow-[0_0_8px_#eab308]"></span> CompTIA Sec+</div>
+                        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-800 bg-black/50 text-gray-300 font-mono text-sm hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.2)] hover:-translate-y-0.5 transition-all cursor-default"><span class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316]"></span> eCPPT</div>
                     </div>
                 </div>
             </div>
@@ -1064,7 +1591,7 @@
         </div>
     </section>
 
-    <!-- 14. SOVEREIGNTY & COMPLIANCE -->
+    <!-- 19. SOVEREIGNTY & COMPLIANCE -->
     <section id="sovereignty" class="py-24 bg-[#0a0d14] relative overflow-hidden border-b border-white/5">
         <div class="absolute inset-0 bg-mesh opacity-[0.03] animate-[pulse_15s_ease-in-out_infinite] pointer-events-none"></div>
         <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/10 to-transparent pointer-events-none animate-scan-vertical"></div>
@@ -1117,7 +1644,7 @@
         </div>
     </section>
 
-    <!-- 15. FAQ -->
+    <!-- 20. FAQ -->
     <section class="py-24 bg-black border-b border-white/5">
         <div class="max-w-4xl mx-auto px-4">
             <h2 class="text-4xl font-bold text-white mb-12 text-center">Frequently Asked Questions</h2>
@@ -1196,7 +1723,7 @@
         </div>
     </section>
 
-    <!-- 16. FREE HEALTH CHECK (CTA) -->
+    <!-- 21. FREE HEALTH CHECK (CTA) -->
     <section id="scan" class="py-24 relative bg-[#05070a] border-b border-white/5 overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,229,255,0.1)_0%,transparent_70%)] pointer-events-none"></div>
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -1213,7 +1740,7 @@
         </div>
     </section>
 
-    <!-- 17. FOOTER -->
+    <!-- 22. FOOTER -->
     <footer class="bg-black py-12 border-t border-gray-900 text-sm">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3">
@@ -1238,6 +1765,7 @@
                 lucide.createIcons();
             }
 
+            // Intersection Observer for fade-in animations
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1251,6 +1779,7 @@
                 observer.observe(el);
             });
 
+            // Terminal Typewriter Logic
             const terminalLines = [
                 ">_ Ingesting Identity Telemetry...",
                 "[SUCCESS] Log pipeline active. 4.2M EPS.",
@@ -1296,7 +1825,7 @@
             }
             if(terminalContent) setTimeout(typeWriter, 1500);
 
-            // --- POSTURE DASHBOARD INTERACTIVITY LOGIC ---
+            // POSTURE DASHBOARD INTERACTIVITY LOGIC
             window.handlePostureFix = function(button, alertId, isCritical, fixMessage, riskValue) {
                 if (button.disabled) return;
                 button.disabled = true;
@@ -1344,7 +1873,7 @@
                     // Replace button area with mitigated badge
                     const btnContainer = document.getElementById(`btn-container-${alertId}`);
                     btnContainer.innerHTML = `
-                        <div class="w-full font-bold text-xs px-4 py-3 rounded-xl bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20 flex items-center justify-center gap-2 animate-[slideInRight_0.3s_ease-out_forwards]">
+                        <div class="w-full font-bold text-xs px-4 py-3 rounded-xl bg-[#00ff88]/10 text-[#00ff88] border border-[#00ff88]/20 flex items-center justify-center gap-2 animate-slide-in-right-fast">
                             <i data-lucide="check-circle" class="w-4 h-4"></i> Mitigated
                         </div>`;
 
@@ -1415,6 +1944,85 @@
                     setTimeout(() => toast.remove(), 500);
                 }, 5000);
             }
+
+            // INTERACTIVE DEMO (RADICAL TRANSPARENCY) TABS LOGIC
+            window.switchTab = function(tabId) {
+                document.querySelectorAll('.tab-content').forEach(el => {
+                    el.classList.add('hidden');
+                    el.classList.remove('block');
+                });
+                
+                const targetTab = document.getElementById('view-' + tabId);
+                if(targetTab) {
+                    targetTab.classList.remove('hidden');
+                    targetTab.classList.add('block', 'flex'); // flex needed for isolate tab
+                }
+
+                document.querySelectorAll('.sidebar-btn').forEach(el => {
+                    el.classList.remove('bg-white/5', 'border-l-2', 'border-cyber-cyan', 'text-white');
+                    el.classList.add('text-gray-400');
+                });
+
+                const activeBtn = document.getElementById('btn-' + tabId);
+                if(activeBtn) {
+                    activeBtn.classList.add('bg-white/5', 'border-l-2', 'border-cyber-cyan', 'text-white');
+                    activeBtn.classList.remove('text-gray-400');
+                } else if (tabId === 'timeline' || tabId === 'isolate') {
+                    document.getElementById('btn-command-center').classList.add('bg-white/5', 'border-l-2', 'border-cyber-cyan', 'text-white');
+                    document.getElementById('btn-command-center').classList.remove('text-gray-400');
+                }
+
+                const titles = {
+                    'command-center': 'Incident Triage Queue',
+                    'active-incidents': 'Active Incidents (2)',
+                    'threat-intel': 'Global Threat Intelligence',
+                    'executive-reports': 'Executive Reporting',
+                    'timeline': 'Forensic Analysis: INC-2026-992',
+                    'isolate': 'SOAR Playbook Execution'
+                };
+                document.getElementById('dashboard-title').innerText = titles[tabId] || 'SOC Command Center';
+            };
+
+            window.viewTimeline = function() {
+                window.switchTab('timeline');
+            };
+
+            window.isolateHost = function() {
+                window.switchTab('isolate');
+                const isolateLog = document.getElementById('isolate-log');
+                const btnBack = document.getElementById('btn-back-isolate');
+                isolateLog.innerHTML = '';
+                btnBack.classList.add('opacity-0', 'pointer-events-none');
+                
+                const isoLines = [
+                    { t: "> Authenticating to EDR API...", c: "text-gray-400" },
+                    { t: "> Locating Host: SRV-DB-01 (10.0.4.55)...", c: "text-gray-400" },
+                    { t: "[OK] Host verified. Status: ONLINE", c: "text-green-400" },
+                    { t: "> Dispatching Network Containment Command via CrowdStrike...", c: "text-orange-400" },
+                    { t: "...", c: "text-gray-500 animate-pulse" },
+                    { t: "[SUCCESS] Host 10.0.4.55 successfully isolated from lateral network.", c: "text-green-500 font-bold" },
+                    { t: "> Only OutcomeX console access remains. Playbook complete.", c: "text-cyber-cyan" }
+                ];
+
+                let i = 0;
+                function printIsoLine() {
+                    if (i < isoLines.length) {
+                        const line = document.createElement('div');
+                        line.className = isoLines[i].c;
+                        line.innerText = isoLines[i].t;
+                        isolateLog.appendChild(line);
+                        
+                        let delay = 600;
+                        if (isoLines[i].t === "...") delay = 1500;
+                        
+                        i++;
+                        setTimeout(printIsoLine, delay);
+                    } else {
+                        btnBack.classList.remove('opacity-0', 'pointer-events-none');
+                    }
+                }
+                setTimeout(printIsoLine, 500);
+            };
 
         });
     </script>
