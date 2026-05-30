@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSM Public School | Excellence in Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        secondary: '#f59e0b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Gradient background for hero */
+        .hero-bg {
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.8)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-gray-50">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center gap-3">
+                        <!-- Logo Placeholder -->
+                        <div class="w-10 h-10 bg-primary-700 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            KSM
+                        </div>
+                        <span class="font-serif font-bold text-xl md:text-2xl text-primary-900 leading-tight">
+                            KSM Public <br class="hidden sm:block md:hidden">School
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-primary-700 font-medium transition-colors">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-primary-700 font-medium transition-colors">About Us</a>
+                    <a href="#academics" class="text-gray-600 hover:text-primary-700 font-medium transition-colors">Academics</a>
+                    <a href="#facilities" class="text-gray-600 hover:text-primary-700 font-medium transition-colors">Facilities</a>
+                    <a href="#contact" class="bg-primary-700 text-white px-5 py-2 rounded-full font-medium hover:bg-primary-900 transition-colors shadow-sm">Contact Us</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-gray-600 hover:text-primary-700 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white border-t border-gray-100" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md" onclick="toggleMobileMenu()">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md" onclick="toggleMobileMenu()">About Us</a>
+                <a href="#academics" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md" onclick="toggleMobileMenu()">Academics</a>
+                <a href="#facilities" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-700 hover:bg-gray-50 rounded-md" onclick="toggleMobileMenu()">Facilities</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-primary-700 font-bold hover:bg-gray-50 rounded-md" onclick="toggleMobileMenu()">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg h-screen flex items-center justify-center mt-10 md:mt-0 relative">
+        <div class="absolute inset-0 bg-primary-900/40"></div> <!-- Overlay -->
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <span class="block text-secondary font-semibold tracking-wider uppercase mb-4 animate-fade-in-up" style="animation-delay: 0.2s;">Welcome to</span>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight animate-fade-in-up" style="animation-delay: 0.4s;">
+                KSM Public School
+            </h1>
+            <p class="mt-4 text-lg sm:text-xl text-gray-200 mb-10 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.6s;">
+                Nurturing young minds to become tomorrow's leaders through holistic education, character building, and academic excellence.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.8s;">
+                <a href="#about" class="bg-secondary text-white px-8 py-3 rounded-full font-semibold hover:bg-yellow-600 transition-colors shadow-lg">Discover More</a>
+                <a href="#contact" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary-900 transition-colors shadow-lg">Admissions Open</a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
+            <a href="#about" class="text-white opacity-70 hover:opacity-100 transition-opacity">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students studying" class="rounded-2xl shadow-xl z-10 relative">
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary rounded-full -z-0 opacity-20"></div>
+                        <div class="absolute -top-6 -left-6 w-24 h-24 bg-primary-500 rounded-full -z-0 opacity-20"></div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="inline-block px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold mb-4 uppercase tracking-wide">About Our Institution</div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-6">Empowering Students to Achieve Their Highest Potential</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        At KSM Public School, we believe that education is the key to unlocking a bright future. Established with a vision to provide quality education, we focus on the overall development of our students—academic, physical, moral, and social.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Our dedicated faculty members are committed to creating a nurturing and stimulating environment where every child feels valued and inspired to learn. We combine traditional values with modern teaching methodologies.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0 text-primary-700">
+                                <i class="fas fa-bullseye text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Our Mission</h4>
+                                <p class="text-sm text-gray-500">To inspire a passion for learning and lifelong achievement.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 text-secondary">
+                                <i class="fas fa-eye text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Our Vision</h4>
+                                <p class="text-sm text-gray-500">To be a premier institution fostering global citizens.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics Section -->
+    <section id="academics" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold mb-4 uppercase tracking-wide">Academic Excellence</div>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">Our Programs</h2>
+                <p class="text-gray-600">We offer a comprehensive curriculum designed to challenge and engage students at every stage of their educational journey.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Program 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pre-Primary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Pre-Primary</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4">A playful and caring environment focusing on early childhood development, foundational skills, and social interaction.</p>
+                        <ul class="text-sm text-gray-500 space-y-2 mb-6">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Play-way methodology</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Motor skills development</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Creative expression</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Program 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group relative -translate-y-4 md:-translate-y-8">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Primary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Primary School</h3>
+                    </div>
+                    <div class="p-6 border-b-4 border-primary-500">
+                        <p class="text-gray-600 mb-4">Building a strong academic foundation while encouraging curiosity, critical thinking, and character development.</p>
+                        <ul class="text-sm text-gray-500 space-y-2 mb-6">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Core subjects focus</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Extracurricular activities</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Value education</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Program 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Secondary" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-6 text-2xl font-bold text-white">Senior Secondary</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4">Preparing students for higher education and future careers with specialized streams and rigorous academic training.</p>
+                        <ul class="text-sm text-gray-500 space-y-2 mb-6">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Science, Commerce & Arts streams</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Career counseling</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary-500"></i> Competitive exam prep</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="facilities" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/3 lg:sticky lg:top-24 h-fit">
+                    <div class="inline-block px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold mb-4 uppercase tracking-wide">Campus Life</div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">World-Class Facilities</h2>
+                    <p class="text-gray-600 mb-6">We provide a state-of-the-art infrastructure designed to support comprehensive learning and extracurricular development.</p>
+                    <a href="#contact" class="inline-flex items-center text-primary-700 font-semibold hover:text-primary-900 transition-colors">
+                        Schedule a Campus Tour <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6">
+                    <!-- Facility Item -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-primary-100 transition-colors">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-primary-600 text-2xl mb-4">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Modern Laboratories</h3>
+                        <p class="text-gray-600 text-sm">Fully equipped Physics, Chemistry, Biology, and Computer labs to foster practical learning and scientific inquiry.</p>
+                    </div>
+                    
+                    <!-- Facility Item -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-primary-100 transition-colors">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-secondary text-2xl mb-4">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Extensive Library</h3>
+                        <p class="text-gray-600 text-sm">A vast collection of books, journals, and digital resources to cultivate a reading habit and support research.</p>
+                    </div>
+
+                    <!-- Facility Item -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-primary-100 transition-colors">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-green-500 text-2xl mb-4">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Sports Complex</h3>
+                        <p class="text-gray-600 text-sm">Spacious playgrounds, courts for various sports, and trained coaches to promote physical fitness and teamwork.</p>
+                    </div>
+
+                    <!-- Facility Item -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-primary-100 transition-colors">
+                        <div class="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center text-purple-500 text-2xl mb-4">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Transport Services</h3>
+                        <p class="text-gray-600 text-sm">Safe, secure, and well-maintained fleet of buses covering major routes with trained staff ensuring student safety.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-primary-900 relative overflow-hidden">
+        <!-- Abstract background shapes -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-primary-800 opacity-50"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-primary-800 opacity-50"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6">Ready to Give Your Child the Best Start?</h2>
+            <p class="text-primary-100 text-lg mb-8 max-w-2xl mx-auto">Admissions for the upcoming academic session are now open. Limited seats available. Apply today to secure a spot.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-white text-primary-900 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg">Apply Now</a>
+                <a href="#" class="bg-primary-800 border border-primary-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-primary-700 transition-colors">Download Prospectus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact Section -->
+    <footer id="contact" class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                
+                <!-- School Info -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-primary-900 font-bold text-xl">
+                            KSM
+                        </div>
+                        <span class="font-serif font-bold text-2xl">KSM Public School</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">
+                        Nurturing excellence and building character since establishment. We are committed to providing a holistic educational experience.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-gray-800 pb-2 inline-block">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> About Us</a></li>
+                        <li><a href="#academics" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Academics</a></li>
+                        <li><a href="#facilities" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Facilities</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors text-sm flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary-500"></i> Admission Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-gray-800 pb-2 inline-block">Contact Us</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-primary-500 mt-1"></i>
+                            <span class="text-gray-400 text-sm">123 Education Lane, Knowledge Park,<br>City Name, State - 123456</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-primary-500"></i>
+                            <span class="text-gray-400 text-sm">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-primary-500"></i>
+                            <span class="text-gray-400 text-sm">info@ksmpublicschool.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Map Placeholder -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 border-b border-gray-800 pb-2 inline-block">Location</h4>
+                    <div class="w-full h-40 bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center relative">
+                        <i class="fas fa-map text-4xl text-gray-700"></i>
+                        <div class="absolute inset-0 bg-black/20 hover:bg-transparent transition-colors cursor-pointer flex items-center justify-center opacity-0 hover:opacity-100">
+                             <span class="bg-primary-600 text-white text-xs px-2 py-1 rounded">View Map</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm text-center md:text-left">
+                    &copy; 2026 KSM Public School. All rights reserved.
+                </p>
+                <div class="flex gap-4 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+                nav.classList.remove('shadow-md');
+            } else {
+                nav.classList.remove('shadow-lg', 'bg-white/95', 'backdrop-blur-sm');
+                nav.classList.add('shadow-md');
+            }
+        });
+
+        // Simple intersection observer for scroll animations (if you want to expand on the CSS animations)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // You could add classes to elements further down to animate them on scroll
+            // Example: document.querySelectorAll('.animate-on-scroll').forEach(el => { el.style.animationPlayState = 'paused'; observer.observe(el); });
+        });
+    </script>
+</body>
+</html>
