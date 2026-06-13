@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReTeam Labs | The Next-Gen Tech Content Engine</title>
+    
+    <!-- Tailwind CSS for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan: '#00f0ff',
+                            purple: '#7000ff',
+                            dark: '#03050a', // Deep void background
+                            surface: 'rgba(255, 255, 255, 0.02)',
+                            surfaceHover: 'rgba(255, 255, 255, 0.04)'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons (Modern icon set) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Three.js for 3D graphics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        body {
+            background-color: #03050a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Modern Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.015);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .glass-nav {
+            background: rgba(3, 5, 10, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* 2026 Text Gradients */
+        .text-gradient {
+            background: linear-gradient(to right, #00f0ff, #7000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-alt {
+            background: linear-gradient(135deg, #e2e8f0 0%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Bento Box Interactions */
+        .bento-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .bento-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(0, 240, 255, 0.2);
+            box-shadow: 0 20px 40px -10px rgba(112, 0, 255, 0.15);
+        }
+
+        /* High-tech grid background overlay */
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #03050a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 5px;
+            border: 2px solid #03050a;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        
+        .btn-glow {
+            position: relative;
+        }
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #00f0ff, #7000ff, #00f0ff);
+            z-index: -1;
+            border-radius: inherit;
+            background-size: 200%;
+            animation: pulse-slow 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .btn-glow:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="selection:bg-brand-cyan selection:text-brand-dark">
+
+    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 py-4">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-cyan to-brand-purple flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.4)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] transition-all">
+                    <i class="ph-bold ph-brackets-angle text-white"></i>
+                </div>
+                <span class="font-display font-bold text-xl tracking-wide text-white">ReTeam<span class="font-light opacity-70">Labs</span></span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-300">
+                <a href="#solutions" class="hover:text-brand-cyan transition-colors">Solutions</a>
+                <a href="#impact" class="hover:text-brand-cyan transition-colors">Impact</a>
+                <a href="#testimonials" class="hover:text-brand-cyan transition-colors">Client Success</a>
+                <a href="#join" class="px-5 py-2.5 rounded-full border border-slate-700 hover:border-brand-cyan hover:bg-brand-cyan/10 transition-all text-white">
+                    Join as Author
+                </a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button class="md:hidden text-slate-300 hover:text-white">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- 3D Canvas Background -->
+        <div id="webgl-container" class="absolute inset-0 z-0"></div>
+        
+        <!-- Grid overlay -->
+        <div class="absolute inset-0 z-0 bg-grid"></div>
+
+        <!-- Ambient Glow Orbs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-cyan/10 rounded-full mix-blend-screen filter blur-[120px] animate-blob z-0"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-brand-purple/10 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-2000 z-0"></div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
+            
+            <div class="reveal inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full glass-panel border border-brand-cyan/20 text-brand-cyan font-medium text-xs uppercase tracking-widest shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+                <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+                The Standard for 2026 Tech Education
+            </div>
+            
+            <h1 class="reveal font-display text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight mb-6 leading-[1.1]" style="transition-delay: 100ms;">
+                Architecting the <br class="hidden md:block" />
+                <span class="text-gradient">Future of Tech Learning</span>
+            </h1>
+            
+            <p class="reveal text-lg md:text-2xl text-slate-400 max-w-3xl mx-auto mb-12 font-light leading-relaxed" style="transition-delay: 200ms;">
+                <comment-tag id="1">ReTeam Labs engineers world-class technical skill assessments, high-fidelity video training, and immersive interactive content for the modern workforce.</comment-tag id="1" text="To truly reflect 2026, we must acknowledge the role of AI in tech education. 
+
+Suggestion: 'ReTeam Labs engineers AI-adaptive skill assessments, high-fidelity spatial video, and immersive agentic workflows for the modern engineering workforce.'" type="suggestion">
+            </p>
+            
+            <div class="reveal flex flex-col sm:flex-row items-center gap-4 w-full justify-center" style="transition-delay: 300ms;">
+                <a href="#solutions" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-brand-dark font-bold hover:bg-slate-200 transition-all flex items-center justify-center gap-2 group shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                    Explore Solutions <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#join" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-white font-bold hover:bg-white/5 transition-all flex items-center justify-center gap-2 btn-glow">
+                    Become an Author <i class="ph-bold ph-code"></i>
+                </a>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="reveal absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 animate-float" style="transition-delay: 500ms;">
+                <span class="text-xs uppercase tracking-widest">Discover</span>
+                <i class="ph ph-caret-down"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="impact" class="py-24 relative z-10 border-y border-white/5 bg-brand-dark/50 backdrop-blur-md">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-x divide-white/5">
+                <div class="reveal text-center px-4">
+                    <h3 class="font-display text-4xl md:text-5xl font-bold text-white mb-2">20k<span class="text-brand-cyan">+</span></h3>
+                    <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">Learners Reached</p>
+                </div>
+                <div class="reveal text-center px-4" style="transition-delay: 100ms;">
+                    <comment-tag id="2"><h3 class="font-display text-4xl md:text-5xl font-bold text-white mb-2">10k<span class="text-brand-purple">+</span></h3>
+                    <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">Assessments Generated</p></comment-tag id="2" text="Let's make this metric sound more advanced. 
+
+Suggestion: Change 'Assessments Generated' to 'AI-Verified Assessments'." type="suggestion">
+                </div>
+                <div class="reveal text-center px-4" style="transition-delay: 200ms;">
+                    <h3 class="font-display text-4xl md:text-5xl font-bold text-white mb-2">100<span class="text-brand-cyan">%</span></h3>
+                    <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">Remote Elite Network</p>
+                </div>
+                <div class="reveal text-center px-4" style="transition-delay: 300ms;">
+                    <h3 class="font-display text-4xl md:text-5xl font-bold text-white mb-2">50<span class="text-brand-purple">+</span></h3>
+                    <p class="text-slate-400 text-sm font-medium tracking-wide uppercase">Tech Domains Covered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="py-32 relative z-10">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="mb-20">
+                <h2 class="reveal font-display text-4xl md:text-5xl font-bold mb-6 text-gradient-alt">Our Solutions Architecture</h2>
+                <p class="reveal text-slate-400 text-lg max-w-2xl" style="transition-delay: 100ms;">We don't just write content; we engineer comprehensive learning ecosystems. Explore our core capabilities designed for leading e-learning platforms and enterprises.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                
+                <!-- Box 1: Assessments (Wide) -->
+                <div class="reveal bento-card glass-panel rounded-3xl p-8 md:p-10 lg:col-span-2 relative overflow-hidden group flex flex-col lg:flex-row gap-8 justify-between items-center">
+                    <div class="absolute -right-20 -top-20 w-80 h-80 bg-brand-cyan/10 blur-[80px] rounded-full group-hover:bg-brand-cyan/20 transition-all duration-700 z-0"></div>
+                    
+                    <div class="relative z-10 flex-1">
+                        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(0,240,255,0.1)] group-hover:shadow-[0_0_25px_rgba(0,240,255,0.3)] transition-all">
+                            <i class="ph-duotone ph-terminal-window text-3xl text-brand-cyan"></i>
+                        </div>
+                        <h3 class="font-display text-3xl font-bold mb-4 text-white">Skills Assessments Creation</h3>
+                        <p class="text-slate-400 text-lg max-w-md">
+                            We create tailor-made tests for any technical area, ranging from programming languages and cloud service providers, to specific frameworks and libraries.
+                        </p>
+                    </div>
+
+                    <!-- Visual Code Mockup Graphic -->
+                    <div class="relative z-10 w-full lg:w-1/2 bg-[#0a0f1a] rounded-xl p-5 border border-white/5 font-mono text-sm shadow-2xl group-hover:border-brand-cyan/30 transition-colors">
+                        <div class="flex items-center justify-between mb-4 pb-2 border-b border-white/5">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            </div>
+                            <span class="text-slate-500 text-xs">assessment_engine.ts</span>
+                        </div>
+                        <div class="text-slate-300">
+                            <p><span class="text-brand-purple">import</span> { CodeEvaluator } <span class="text-brand-purple">from</span> <span class="text-green-400">'@reteam/core'</span>;</p>
+                            <p class="mt-3 text-slate-500">/* Initializing dynamic test suite */</p>
+                            <p class="mt-1"><span class="text-brand-purple">const</span> evaluation = <span class="text-brand-purple">await</span> CodeEvaluator.run({</p>
+                            <p class="mt-1 ml-4 text-slate-400">domain: <span class="text-green-400">'Cloud Architecture'</span>,</p>
+                            <p class="mt-1 ml-4 text-slate-400">complexity: <span class="text-brand-cyan">Level.EXPERT</span>,</p>
+                            <p class="mt-1 ml-4 text-slate-400">candidateId: <span class="text-green-400">'usr_992'</span></p>
+                            <p class="mt-1">});</p>
+                            <p class="mt-3">console.<span class="text-brand-cyan">log</span>(evaluation.status); <span class="text-brand-purple">►</span> <span class="text-brand-cyan animate-pulse">COMPETENCY_VERIFIED</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Box 2: Video Training (Square) -->
+                <div class="reveal bento-card glass-panel rounded-3xl p-8 lg:col-span-1 relative overflow-hidden group flex flex-col h-full" style="transition-delay: 150ms;">
+                    <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-brand-purple/20 blur-[60px] rounded-full group-hover:bg-brand-purple/40 transition-all duration-700 z-0"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 shadow-[0_0_15px_rgba(112,0,255,0.1)] group-hover:shadow-[0_0_25px_rgba(112,0,255,0.3)] transition-all">
+                            <i class="ph-duotone ph-video-camera text-2xl text-brand-purple"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-3 text-white">Video Training Material</h3>
+                        <p class="text-slate-400 text-sm">
+                            Our video content is easy to comprehend and includes hands-on, realistic demonstrations.
+                        </p>
+                    </div>
+                    
+                    <!-- Abstract Video Motion Graphic -->
+                    <div class="mt-6 flex-grow flex items-center justify-center relative rounded-xl bg-[#0a0f1a] border border-white/5 group-hover:border-brand-purple/30 transition-colors overflow-hidden min-h-[120px]">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-purple/5 to-transparent z-0"></div>
+                        <!-- Animated Waveform -->
+                        <div class="absolute bottom-0 w-full flex items-end justify-center gap-1.5 opacity-20 p-3 z-0">
+                            <div class="w-2 bg-brand-purple h-4 rounded-t-sm animate-pulse"></div>
+                            <div class="w-2 bg-brand-purple h-8 rounded-t-sm animate-pulse" style="animation-delay: 100ms"></div>
+                            <div class="w-2 bg-brand-purple h-6 rounded-t-sm animate-pulse" style="animation-delay: 200ms"></div>
+                            <div class="w-2 bg-brand-purple h-12 rounded-t-sm animate-pulse" style="animation-delay: 300ms"></div>
+                            <div class="w-2 bg-brand-purple h-5 rounded-t-sm animate-pulse" style="animation-delay: 400ms"></div>
+                            <div class="w-2 bg-brand-purple h-9 rounded-t-sm animate-pulse" style="animation-delay: 500ms"></div>
+                        </div>
+                        <!-- Play Button -->
+                        <div class="w-12 h-12 rounded-full bg-brand-purple/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-purple/40 transition-all z-10 shadow-[0_0_15px_rgba(112,0,255,0.4)] cursor-pointer">
+                            <i class="ph-fill ph-play text-brand-purple text-xl ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Box 3: Guides (Square) -->
+                <div class="reveal bento-card glass-panel rounded-3xl p-8 lg:col-span-1 relative overflow-hidden group flex flex-col h-full" style="transition-delay: 300ms;">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-500/10 blur-[60px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-700 z-0"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 shadow-[0_0_15px_rgba(16,185,129,0.1)] group-hover:shadow-[0_0_25px_rgba(16,185,129,0.3)] transition-all">
+                            <i class="ph-duotone ph-book-open-text text-2xl text-emerald-400"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-3 text-white">Guides and Tutorials</h3>
+                        <p class="text-slate-400 text-sm">
+                            Say goodbye to monotonous, static text – our guides and tutorials are rich and interactive.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Data Graphic -->
+                    <div class="mt-6 flex-grow rounded-xl bg-[#0a0f1a] p-5 border border-white/5 relative overflow-hidden group-hover:border-emerald-500/30 transition-colors flex flex-col justify-end min-h-[120px] z-10">
+                        <div class="flex gap-2 mb-4">
+                            <div class="h-2 w-1/3 bg-emerald-500/50 rounded-full"></div>
+                            <div class="h-2 w-1/4 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors"></div>
+                        </div>
+                        <div class="flex gap-2 items-end h-16 w-full">
+                            <div class="w-1/4 bg-white/5 hover:bg-emerald-400/30 transition-colors rounded-t-md h-full cursor-pointer relative group/bar"><div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] text-emerald-400 opacity-0 group-hover/bar:opacity-100 transition-opacity">70%</div></div>
+                            <div class="w-1/4 bg-emerald-500/40 hover:bg-emerald-400/80 transition-colors rounded-t-md h-3/4 cursor-pointer relative"><div class="absolute -top-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-emerald-300 rounded-full animate-ping"></div></div>
+                            <div class="w-1/4 bg-white/5 hover:bg-emerald-400/30 transition-colors rounded-t-md h-1/2 cursor-pointer"></div>
+                            <div class="w-1/4 bg-white/5 hover:bg-emerald-400/30 transition-colors rounded-t-md h-4/5 cursor-pointer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Box 4: Articles (Wide) -->
+                <div class="reveal bento-card glass-panel rounded-3xl p-8 md:p-10 lg:col-span-2 relative overflow-hidden group flex flex-col lg:flex-row gap-8 justify-between items-center" style="transition-delay: 450ms;">
+                    <div class="absolute -left-20 -top-20 w-80 h-80 bg-amber-500/10 blur-[80px] rounded-full group-hover:bg-amber-500/20 transition-all duration-700 z-0"></div>
+                    
+                    <div class="relative z-10 flex-1">
+                        <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(251,191,36,0.1)] group-hover:shadow-[0_0_25px_rgba(251,191,36,0.3)] transition-all">
+                            <i class="ph-duotone ph-pen-nib text-3xl text-amber-400"></i>
+                        </div>
+                        <h3 class="font-display text-3xl font-bold mb-4 text-white">Article Writing</h3>
+                        <p class="text-slate-400 text-lg max-w-md">
+                            Our dedicated team of authors can write articles that cross the boundary between technology and business, supplying your readers with multiple perspectives.
+                        </p>
+                    </div>
+
+                    <!-- Holographic Article Graphic -->
+                    <div class="relative z-10 w-full lg:w-1/2 bg-[#0a0f1a] rounded-xl p-6 border border-white/5 h-full flex flex-col justify-center gap-4 group-hover:border-amber-400/30 transition-colors shadow-2xl min-h-[160px]">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-gradient-to-bl from-amber-400/5 to-transparent rounded-tr-xl"></div>
+                        
+                        <!-- Author Meta -->
+                        <div class="flex items-center gap-3 mb-2 z-10">
+                            <div class="w-8 h-8 rounded-full bg-amber-400/20 flex items-center justify-center border border-amber-400/30"><i class="ph-fill ph-user text-amber-400 text-sm"></i></div>
+                            <div>
+                                <div class="h-2 w-24 bg-white/20 rounded-full mb-1.5"></div>
+                                <div class="h-1.5 w-12 bg-white/10 rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Article Content Simulation -->
+                        <div class="space-y-2.5 z-10">
+                            <div class="h-2.5 w-full bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-500"></div>
+                            <div class="h-2.5 w-11/12 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-500 delay-75"></div>
+                            <div class="h-2.5 w-4/5 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors duration-500 delay-100"></div>
+                            <div class="flex gap-2 pt-2">
+                                <div class="h-2.5 w-1/3 bg-amber-400/40 rounded-full animate-pulse"></div>
+                                <div class="h-2.5 w-1/4 bg-white/10 rounded-full"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute right-5 bottom-5 flex items-center gap-2 opacity-40 group-hover:opacity-100 transition-opacity z-10">
+                            <i class="ph-bold ph-share-network text-amber-400 hover:text-amber-300 cursor-pointer"></i>
+                            <i class="ph-bold ph-bookmarks text-amber-400 hover:text-amber-300 cursor-pointer"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 relative z-10 bg-white/[0.02] border-y border-white/5">
+        <div class="container mx-auto px-6 lg:px-12 text-center">
+            <h2 class="reveal font-display text-3xl md:text-4xl font-bold mb-16 text-white">Trusted by Industry Leaders</h2>
+            
+            <div class="reveal max-w-4xl mx-auto glass-panel rounded-3xl p-8 md:p-12 relative">
+                <i class="ph-fill ph-quotes text-6xl text-white/10 absolute top-6 left-6"></i>
+                <div class="relative z-10">
+                    <p class="text-xl md:text-2xl text-slate-300 font-light leading-relaxed mb-8 italic">
+                        <comment-tag id="4">"ReTeam Labs offers some of the most renown experts in their respective industries. Their flexibility and willingness to adapt to our process for creating quality content has been invaluable. No doubt we couldn't do our jobs effectively without this relationship!"</comment-tag id="4" text="This copy feels a bit long and traditional for a hyper-modern 2026 agency. 
+
+Suggestion: 'The elite quality of ReTeam Labs' authors is unmatched. Their adaptive assessments and dynamic content pipelines have completely transformed how we evaluate and upskill our engineering teams.'" type="suggestion">
+                    </p>
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center border border-white/10">
+                            <i class="ph-fill ph-user text-slate-400"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-white">Director of Assessments</h4>
+                            <p class="text-sm text-brand-cyan">US-based E-learning Firm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="join" class="py-32 relative z-10 overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-64 bg-gradient-to-r from-brand-cyan/20 to-brand-purple/20 blur-[100px] -z-10"></div>
+        
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="reveal glass-panel rounded-[2.5rem] p-8 md:p-16 text-center relative border-brand-purple/30 shadow-[0_0_50px_rgba(112,0,255,0.1)]">
+                
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm">
+                    <i class="ph-fill ph-globe-hemisphere-west text-brand-cyan"></i> 100% Remote Opportunity
+                </div>
+                
+                <h2 class="font-display text-4xl md:text-6xl font-extrabold mb-6 text-white">Monetize Your <span class="text-gradient">Mastery</span></h2>
+                
+                <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10">
+                    Join our global network of elite technical authors. Whether you're a Cloud Architect, Senior Dev, or AI Researcher, shape the future of tech education on your own terms. The perfect high-impact side gig.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#" class="px-8 py-4 rounded-xl bg-gradient-to-r from-brand-cyan to-brand-purple text-white font-bold hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all transform hover:-translate-y-1">
+                        <comment-tag id="5">Initiate Audition Protocol</comment-tag id="5" text="While 'Audition Protocol' sounds futuristic, it might confuse potential high-level leads and lower conversion rates. 
+
+Suggestion: 'Apply to the Elite Network' or 'Join as an Expert Author'. This maintains exclusivity while remaining perfectly clear." type="suggestion">
+                    </a>
+                    <a href="#" class="px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all">
+                        Learn More
+                    </a>
+                </div>
+
+                <!-- Features -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-white/5 text-left">
+                    <div>
+                        <i class="ph-duotone ph-clock text-2xl text-brand-cyan mb-2"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">Infinite Flexibility</h4>
+                        <p class="text-xs text-slate-500">Work whenever, wherever.</p>
+                    </div>
+                    <div>
+                        <i class="ph-duotone ph-currency-dollar text-2xl text-brand-purple mb-2"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">Turn Expertise to Income</h4>
+                        <p class="text-xs text-slate-500">Lucrative project-based pay.</p>
+                    </div>
+                    <div>
+                        <i class="ph-duotone ph-users-three text-2xl text-brand-cyan mb-2"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">Elite Slack Network</h4>
+                        <p class="text-xs text-slate-500">Connect with fellow experts.</p>
+                    </div>
+                    <div>
+                        <i class="ph-duotone ph-rocket text-2xl text-brand-purple mb-2"></i>
+                        <h4 class="font-bold text-slate-200 mb-1">Global Impact</h4>
+                        <p class="text-xs text-slate-500">Educate millions worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#020308] pt-20 pb-10 border-t border-white/5 relative z-10">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-2">
+                    <a href="#" class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-cyan to-brand-purple flex items-center justify-center">
+                            <i class="ph-bold ph-brackets-angle text-white"></i>
+                        </div>
+                        <span class="font-display font-bold text-xl tracking-wide text-white">ReTeam<span class="font-light opacity-70">Labs</span></span>
+                    </a>
+                    <p class="text-slate-500 text-sm max-w-sm">
+                        The custom-built skill assessments provider. We pioneer next-gen tech education content for leading platforms globally.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-white mb-6 uppercase tracking-wider text-xs">Company</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-brand-cyan transition-colors">About Us</a></li>
+                        <li><a href="#solutions" class="hover:text-brand-cyan transition-colors">Services</a></li>
+                        <li><a href="#join" class="hover:text-brand-cyan transition-colors">Join as Author</a></li>
+                        <li><a href="#" class="hover:text-brand-cyan transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-6 uppercase tracking-wider text-xs">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-brand-cyan transition-colors">Terms of Use</a></li>
+                        <li><a href="#" class="hover:text-brand-cyan transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-xs text-slate-600">
+                <p>&copy; 2026 ReTeam Labs. All rights reserved. Operating Globally.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brand-cyan transition-colors"><i class="ph-fill ph-linkedin-logo text-xl"></i></a>
+                    <a href="#" class="hover:text-brand-cyan transition-colors"><i class="ph-fill ph-twitter-logo text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav');
+                navbar.classList.remove('py-4');
+                navbar.classList.add('py-3');
+            } else {
+                navbar.classList.remove('glass-nav');
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-3');
+            }
+        });
+
+        // Intersection Observer for Reveal Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+
+    <script>
+        // 3D Data Cloud / Particle System using Three.js
+        window.addEventListener('load', () => {
+            const container = document.getElementById('webgl-container');
+            
+            // Scene Setup
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x03050a, 0.0015);
+
+            // Camera Setup
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 800;
+
+            // Renderer Setup
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Create Particle System
+            const particleCount = 2000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
+
+            for (let i = 0; i < particleCount; i++) {
+                // Spherical distribution for a "cloud" look
+                const r = 1000 * Math.cbrt(Math.random());
+                const theta = Math.random() * 2 * Math.PI;
+                const phi = Math.acos(2 * Math.random() - 1);
+
+                positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);     // x
+                positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta); // y
+                positions[i * 3 + 2] = r * Math.cos(phi);                   // z
+
+                // Randomize sizes slightly
+                sizes[i] = Math.random() * 2.5;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+            // Custom shader material for glowing circular points
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    color: { value: new THREE.Color(0x00f0ff) },
+                },
+                vertexShader: `
+                    attribute float size;
+                    varying vec3 vPosition;
+                    void main() {
+                        vPosition = position;
+                        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                        gl_PointSize = size * (1000.0 / -mvPosition.z);
+                        gl_Position = projectionMatrix * mvPosition;
+                    }
+                `,
+                fragmentShader: `
+                    uniform vec3 color;
+                    varying vec3 vPosition;
+                    void main() {
+                        // Circular point with soft edge
+                        vec2 xy = gl_PointCoord.xy - vec2(0.5);
+                        float ll = length(xy);
+                        if (ll > 0.5) discard;
+                        
+                        // Add some color variation based on position
+                        vec3 finalColor = mix(color, vec3(0.44, 0.0, 1.0), (vPosition.y + 1000.0) / 2000.0);
+                        
+                        gl_FragColor = vec4(finalColor, (0.5 - ll) * 2.0 * 0.8);
+                    }
+                `,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            const particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+
+            // Add a few larger floating geometric nodes to represent "Data Points"
+            const nodeGeometry = new THREE.IcosahedronGeometry(15, 0);
+            const nodeMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0x7000ff, 
+                wireframe: true, 
+                transparent: true, 
+                opacity: 0.3 
+            });
+            
+            const nodes = [];
+            for(let i=0; i<10; i++) {
+                const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+                node.position.x = (Math.random() - 0.5) * 1000;
+                node.position.y = (Math.random() - 0.5) * 1000;
+                node.position.z = (Math.random() - 0.5) * 1000;
+                node.rotation.x = Math.random() * Math.PI;
+                node.rotation.y = Math.random() * Math.PI;
+                scene.add(node);
+                nodes.push(node);
+            }
+
+            // Mouse Interaction Variables
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - windowHalfX) * 0.5;
+                mouseY = (event.clientY - windowHalfY) * 0.5;
+            });
+
+            // Resize Handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // Animation Loop
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                const time = clock.getElapsedTime();
+
+                // Smooth mouse follow
+                targetX = mouseX * 0.001;
+                targetY = mouseY * 0.001;
+                
+                particleSystem.rotation.y += 0.001;
+                particleSystem.rotation.x += (targetY - particleSystem.rotation.x) * 0.05;
+                particleSystem.rotation.y += (targetX - particleSystem.rotation.y) * 0.05;
+
+                // Animate floating nodes
+                nodes.forEach((node, i) => {
+                    node.rotation.x += 0.005;
+                    node.rotation.y += 0.005;
+                    node.position.y += Math.sin(time * 0.5 + i) * 0.5;
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            // Start animation
+            animate();
+        });
+    </script>
+</body>
+</html>
