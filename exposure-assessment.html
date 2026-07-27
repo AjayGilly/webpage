@@ -1,0 +1,2888 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free Cyber Security Exposure Assessment | Outcomex</title>
+<meta name="description" content="See what attackers see. Outcomex maps your internet-facing attack surface — exposed services, misconfigurations, weak SSL, forgotten subdomains — and returns a prioritised executive report within 72 hours. Free at Cisco Live.">
+<meta name="theme-color" content="#04060c">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://www.outcomex.com.au/exposure-assessment">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Cyber Security Exposure Assessment | Outcomex">
+<meta property="og:description" content="Find exposed services, attack paths and security risks before attackers do. Free assessment for Cisco Live attendees.">
+<meta property="og:locale" content="en_AU">
+<meta property="og:site_name" content="Outcomex">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050a14'/><path d='M16 5l9 3.5v7c0 5.6-3.8 10-9 11.5-5.2-1.5-9-5.9-9-11.5v-7z' fill='none' stroke='%2329ffe3' stroke-width='2'/></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "External Attack Surface Assessment",
+  "name": "Free Cyber Security Exposure Assessment",
+  "provider": {
+    "@type": "Organization",
+    "name": "Outcomex",
+    "url": "https://www.outcomex.com.au",
+    "areaServed": "AU",
+    "foundingDate": "2016"
+  },
+  "areaServed": { "@type": "Country", "name": "Australia" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "AUD" }
+}
+</script>
+
+<style>
+/* ============================================================
+   OUTCOMEX — EXPOSURE ASSESSMENT
+   Tokens
+   ============================================================ */
+:root{
+  --ink:        #04060c;
+  --ink-2:      #070c17;
+  --ink-3:      #0b1222;
+  --panel:      rgba(120,170,255,.045);
+  --panel-2:    rgba(120,170,255,.075);
+  --line:       rgba(120,170,255,.14);
+  --line-2:     rgba(120,170,255,.28);
+
+  --c-blue:     #4cc9ff;
+  --c-cyan:     #29ffe3;
+  --c-deep:     #2f6bff;
+  --c-violet:   #7c6bff;
+
+  --ok:         #35e08a;
+  --warn:       #ffb020;
+  --crit:       #ff4d6d;
+
+  --text:       #e9f1ff;
+  --muted:      #92a5c4;
+  --faint:      #62738f;
+
+  --display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --body:    'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --r-sm: 10px;
+  --r:    16px;
+  --r-lg: 24px;
+
+  --max: 1240px;
+  --pad: clamp(20px, 5vw, 48px);
+
+  --glow-blue: 0 0 40px rgba(76,201,255,.28);
+  --glow-cyan: 0 0 40px rgba(41,255,227,.22);
+  --ease: cubic-bezier(.22,.68,.28,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,canvas{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; cursor:pointer; }
+h1,h2,h3,h4{ font-family:var(--display); font-weight:600; line-height:1.08; letter-spacing:-.022em; margin:0; }
+p{ margin:0; }
+::selection{ background:rgba(41,255,227,.26); color:#fff; }
+
+:focus-visible{
+  outline:2px solid var(--c-cyan);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:999;
+  background:var(--c-cyan); color:#04060c; padding:12px 20px; border-radius:0 0 10px 0; font-weight:600;
+}
+.skip:focus{ left:0; }
+
+/* ---------- Ambient background layers ---------- */
+.bg-fixed{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+#net{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.55; }
+
+.grid-layer{
+  position:fixed; inset:-10%; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(120,170,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,170,255,.055) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 20%, #000 20%, transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 20%, #000 20%, transparent 78%);
+  animation:gridDrift 40s linear infinite;
+}
+@keyframes gridDrift{ to{ background-position:64px 64px, 64px 64px; } }
+
+.aurora{
+  position:fixed; inset:0; z-index:0; pointer-events:none; filter:blur(70px); opacity:.6;
+}
+.aurora i{ position:absolute; display:block; border-radius:50%; }
+.aurora i:nth-child(1){ width:52vw; height:52vw; left:-12vw; top:-16vw; background:radial-gradient(circle, rgba(47,107,255,.42), transparent 68%); animation:float1 26s var(--ease) infinite; }
+.aurora i:nth-child(2){ width:44vw; height:44vw; right:-10vw; top:8vh;  background:radial-gradient(circle, rgba(41,255,227,.22), transparent 68%); animation:float2 32s var(--ease) infinite; }
+.aurora i:nth-child(3){ width:60vw; height:60vw; left:22vw; bottom:-30vw; background:radial-gradient(circle, rgba(124,107,255,.26), transparent 70%); animation:float3 38s var(--ease) infinite; }
+@keyframes float1{ 50%{ transform:translate(10vw,8vh) scale(1.18); } }
+@keyframes float2{ 50%{ transform:translate(-9vw,12vh) scale(.86); } }
+@keyframes float3{ 50%{ transform:translate(6vw,-10vh) scale(1.1); } }
+
+.noise{
+  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.035; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* mouse-follow light */
+#mouseglow{
+  position:fixed; z-index:1; width:620px; height:620px; margin:-310px 0 0 -310px;
+  border-radius:50%; pointer-events:none; opacity:0;
+  background:radial-gradient(circle, rgba(76,201,255,.10), rgba(41,255,227,.045) 42%, transparent 68%);
+  transition:opacity .5s ease;
+}
+
+/* ---------- Layout ---------- */
+.wrap{ width:100%; max-width:var(--max); margin-inline:auto; padding-inline:var(--pad); }
+main{ position:relative; z-index:2; }
+section{ position:relative; padding-block:clamp(80px,10vw,140px); }
+.sec-head{ max-width:720px; margin-bottom:clamp(40px,5vw,64px); }
+
+.eyebrow{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.20em; text-transform:uppercase;
+  color:var(--c-cyan); margin-bottom:18px;
+}
+.eyebrow::before{
+  content:''; width:26px; height:1px; background:linear-gradient(90deg,transparent,var(--c-cyan));
+}
+h2{ font-size:clamp(30px,4.4vw,52px); }
+.sec-head p{ color:var(--muted); font-size:clamp(15.5px,1.5vw,18px); margin-top:18px; max-width:62ch; }
+
+/* ---------- Surfaces ---------- */
+.glass{
+  background:linear-gradient(160deg, rgba(120,170,255,.075), rgba(120,170,255,.02));
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  position:relative;
+}
+.glass::after{
+  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background:linear-gradient(160deg, rgba(255,255,255,.09), transparent 42%);
+  mix-blend-mode:overlay;
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:15px 28px; border-radius:100px; border:1px solid transparent;
+  font-family:var(--display); font-weight:600; font-size:15.5px; letter-spacing:-.005em;
+  overflow:hidden; will-change:transform;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .3s;
+}
+.btn svg{ width:17px; height:17px; flex:0 0 auto; }
+.btn-primary{
+  background:linear-gradient(102deg, var(--c-cyan), var(--c-blue) 52%, var(--c-deep));
+  color:#03121a;
+  box-shadow:0 10px 34px rgba(47,130,255,.34), inset 0 1px 0 rgba(255,255,255,.42);
+}
+.btn-primary:hover{ box-shadow:0 16px 48px rgba(47,150,255,.48), inset 0 1px 0 rgba(255,255,255,.55); }
+.btn-ghost{
+  background:rgba(120,170,255,.055); color:var(--text); border-color:var(--line-2);
+  backdrop-filter:blur(10px);
+}
+.btn-ghost:hover{ border-color:var(--c-cyan); background:rgba(41,255,227,.09); }
+.ripple{
+  position:absolute; border-radius:50%; transform:scale(0); pointer-events:none;
+  background:radial-gradient(circle, rgba(255,255,255,.55), transparent 68%);
+  animation:ripple .68s ease-out forwards;
+}
+@keyframes ripple{ to{ transform:scale(3.2); opacity:0; } }
+
+/* ---------- Scroll progress ---------- */
+#progress{
+  position:fixed; top:0; left:0; height:2px; width:0; z-index:80;
+  background:linear-gradient(90deg,var(--c-cyan),var(--c-blue),var(--c-violet));
+  box-shadow:0 0 14px rgba(41,255,227,.7);
+}
+
+/* ---------- Nav ---------- */
+header.nav{
+  position:fixed; inset:0 0 auto 0; z-index:70;
+  transition:background .45s var(--ease), border-color .45s, backdrop-filter .45s;
+  border-bottom:1px solid transparent;
+}
+header.nav.stuck{
+  background:rgba(5,9,18,.72); border-bottom-color:var(--line);
+  backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%);
+}
+.nav-in{ display:flex; align-items:center; justify-content:space-between; gap:24px; height:74px; }
+.brand{ display:flex; align-items:center; gap:12px; font-family:var(--display); font-weight:700; letter-spacing:-.02em; font-size:19px; }
+.brand .mark{
+  width:34px; height:34px; border-radius:10px; display:grid; place-items:center; flex:0 0 auto;
+  background:linear-gradient(140deg, rgba(41,255,227,.18), rgba(47,107,255,.22));
+  border:1px solid var(--line-2);
+}
+.brand .mark svg{ width:19px; height:19px; }
+.brand small{
+  display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.16em;
+  color:var(--faint); font-weight:400; text-transform:uppercase; margin-top:-2px;
+}
+.nav-links{ display:flex; gap:30px; font-size:14.5px; color:var(--muted); }
+.nav-links a{ position:relative; padding:4px 0; transition:color .25s; }
+.nav-links a::after{
+  content:''; position:absolute; left:0; bottom:0; height:1px; width:0;
+  background:var(--c-cyan); transition:width .35s var(--ease);
+}
+.nav-links a:hover{ color:var(--text); }
+.nav-links a:hover::after{ width:100%; }
+.nav .btn{ padding:11px 20px; font-size:14px; }
+.burger{ display:none; background:none; border:1px solid var(--line-2); border-radius:10px; padding:9px; }
+.burger span{ display:block; width:18px; height:1.6px; background:var(--text); border-radius:2px; }
+.burger span+span{ margin-top:4.5px; }
+
+.mobile-menu{
+  display:none; position:fixed; inset:74px 0 auto 0; z-index:69;
+  background:rgba(5,9,18,.96); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line); padding:18px var(--pad) 26px;
+}
+.mobile-menu.open{ display:block; animation:fadeDown .3s var(--ease); }
+.mobile-menu a{ display:block; padding:13px 0; border-bottom:1px solid rgba(120,170,255,.09); color:var(--muted); }
+@keyframes fadeDown{ from{ opacity:0; transform:translateY(-10px);} }
+
+/* ---------- Reveal ---------- */
+.rv{ opacity:0; transform:translateY(28px); transition:opacity .85s var(--ease), transform .85s var(--ease); }
+.rv.in{ opacity:1; transform:none; }
+.rv[data-d="1"]{ transition-delay:.08s } .rv[data-d="2"]{ transition-delay:.16s }
+.rv[data-d="3"]{ transition-delay:.24s } .rv[data-d="4"]{ transition-delay:.32s }
+.rv[data-d="5"]{ transition-delay:.40s } .rv[data-d="6"]{ transition-delay:.48s }
+.rv[data-d="7"]{ transition-delay:.56s } .rv[data-d="8"]{ transition-delay:.64s }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{ padding-top:clamp(120px,15vh,180px); padding-bottom:clamp(60px,8vw,110px); }
+.hero-grid{ display:grid; grid-template-columns:1.06fr .94fr; gap:clamp(32px,5vw,64px); align-items:center; }
+
+.pill{
+  display:inline-flex; align-items:center; gap:10px; padding:7px 16px 7px 10px;
+  border:1px solid var(--line-2); border-radius:100px; background:rgba(120,170,255,.06);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.10em; text-transform:uppercase; color:var(--muted);
+  backdrop-filter:blur(10px);
+}
+.dot-live{
+  width:7px; height:7px; border-radius:50%; background:var(--ok); flex:0 0 auto;
+  box-shadow:0 0 0 0 rgba(53,224,138,.6); animation:pulseDot 2.2s infinite;
+}
+@keyframes pulseDot{ 70%{ box-shadow:0 0 0 9px rgba(53,224,138,0);} 100%{ box-shadow:0 0 0 0 rgba(53,224,138,0);} }
+
+h1{
+  font-size:clamp(38px,5.6vw,70px); margin:26px 0 0; letter-spacing:-.035em; line-height:1.02;
+}
+h1 .grad{
+  background:linear-gradient(96deg,var(--c-cyan),var(--c-blue) 48%,var(--c-violet));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.line{ display:block; overflow:hidden; }
+.line > span{ display:block; transform:translateY(105%); transition:transform 1s var(--ease); }
+.loaded .line > span{ transform:none; }
+.line:nth-child(2) > span{ transition-delay:.11s }
+.line:nth-child(3) > span{ transition-delay:.22s }
+
+.hero-sub{ color:var(--muted); font-size:clamp(16px,1.7vw,19px); margin-top:26px; max-width:54ch; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:14px; margin-top:36px; }
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:12px 28px; margin-top:34px;
+  font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.04em;
+}
+.hero-meta span{ display:flex; align-items:center; gap:8px; }
+.hero-meta svg{ width:14px; height:14px; color:var(--c-cyan); }
+
+/* Hero visual */
+.hero-visual{ position:relative; aspect-ratio:1/1; max-width:560px; margin-inline:auto; width:100%; }
+.hero-visual svg{ width:100%; height:100%; overflow:visible; }
+.orbit-ring{ transform-origin:250px 250px; }
+.spin-slow{ animation:spin 34s linear infinite; transform-origin:250px 250px; }
+.spin-rev{ animation:spin 46s linear infinite reverse; transform-origin:250px 250px; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+.sweep{ transform-origin:250px 250px; animation:spin 4.5s linear infinite; }
+.blip{ animation:blip 4.5s ease-out infinite; transform-box:fill-box; transform-origin:center; }
+@keyframes blip{ 0%,72%{ opacity:0; r:2 } 76%{ opacity:1; r:5 } 100%{ opacity:0; r:9 } }
+.dash-arc{ stroke-dasharray:8 12; animation:dash 3s linear infinite; }
+@keyframes dash{ to{ stroke-dashoffset:-40; } }
+.pkt{ offset-rotate:0deg; }
+
+.hero-badge{
+  position:absolute; display:flex; align-items:center; gap:9px; padding:9px 14px;
+  border-radius:12px; border:1px solid var(--line-2); background:rgba(7,12,24,.82);
+  backdrop-filter:blur(12px); font-family:var(--mono); font-size:11px; letter-spacing:.05em; white-space:nowrap;
+  animation:bob 7s ease-in-out infinite;
+}
+.hero-badge i{ width:6px; height:6px; border-radius:50%; display:block; flex:0 0 auto; }
+.hb-1{ top:8%; right:-4%; } .hb-1 i{ background:var(--crit); box-shadow:0 0 10px var(--crit); }
+.hb-2{ bottom:20%; left:-6%; animation-delay:-2.4s } .hb-2 i{ background:var(--warn); box-shadow:0 0 10px var(--warn); }
+.hb-3{ bottom:2%; right:6%; animation-delay:-4.8s } .hb-3 i{ background:var(--ok); box-shadow:0 0 10px var(--ok); }
+@keyframes bob{ 50%{ transform:translateY(-12px); } }
+
+/* ---------- Logo strip ---------- */
+.strip{ padding-block:clamp(30px,4vw,48px); }
+.strip-in{
+  border-radius:var(--r); border:1px solid var(--line); overflow:hidden;
+  background:linear-gradient(180deg, rgba(120,170,255,.055), rgba(120,170,255,.015));
+}
+.strip-label{
+  display:block; text-align:center; font-family:var(--mono); font-size:10.5px;
+  letter-spacing:.20em; text-transform:uppercase; color:var(--faint);
+  padding:16px 20px 15px; border-bottom:1px solid var(--line);
+}
+.strip-row{ display:grid; grid-template-columns:repeat(4,1fr); }
+.si{ padding:20px 16px; text-align:center; position:relative; }
+.si + .si::before{
+  content:''; position:absolute; left:0; top:22%; bottom:22%; width:1px; background:var(--line);
+}
+.si b{
+  display:block; font-family:var(--display); font-size:clamp(15px,1.7vw,19px); font-weight:600;
+  letter-spacing:-.018em; line-height:1.2; color:var(--text);
+}
+.si em{
+  display:block; font-style:normal; font-family:var(--mono); font-size:10px;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--faint); margin-top:8px;
+}
+
+/* ============================================================
+   CARDS — Why get assessed
+   ============================================================ */
+.card-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.xcard{
+  position:relative; padding:26px 24px; border-radius:var(--r);
+  border:1px solid var(--line); background:linear-gradient(165deg, rgba(120,170,255,.055), rgba(120,170,255,.015));
+  overflow:hidden; cursor:default; will-change:transform;
+  transition:transform .4s var(--ease), border-color .4s, box-shadow .4s;
+}
+.xcard::before{
+  content:''; position:absolute; inset:0; opacity:0; transition:opacity .45s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%), rgba(41,255,227,.13), transparent 62%);
+}
+.xcard:hover{ border-color:var(--line-2); box-shadow:0 22px 54px rgba(0,0,0,.5); }
+.xcard:hover::before{ opacity:1; }
+.xcard .ico{
+  width:42px; height:42px; border-radius:12px; display:grid; place-items:center; margin-bottom:18px;
+  background:rgba(41,255,227,.09); border:1px solid rgba(41,255,227,.2); color:var(--c-cyan);
+  transition:transform .5s var(--ease), background .4s;
+}
+.xcard:hover .ico{ transform:translateY(-3px) rotate(-6deg); background:rgba(41,255,227,.16); }
+.xcard .ico svg{ width:20px; height:20px; }
+.xcard h3{ font-size:17.5px; margin-bottom:8px; }
+.xcard p{ font-size:14px; color:var(--muted); line-height:1.6; }
+.xcard .more{
+  display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease), opacity .4s; opacity:0;
+}
+.xcard:hover .more, .xcard:focus-within .more{ grid-template-rows:1fr; opacity:1; }
+.xcard .more > div{ overflow:hidden; }
+.xcard .more p{
+  font-family:var(--mono); font-size:11.5px; color:var(--c-cyan); letter-spacing:.03em;
+  padding-top:14px; margin-top:14px; border-top:1px solid var(--line); line-height:1.7;
+}
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.tl{ position:relative; display:grid; gap:2px; }
+.tl::before{
+  content:''; position:absolute; left:31px; top:34px; bottom:34px; width:1px;
+  background:linear-gradient(180deg, transparent, var(--line-2) 12%, var(--line-2) 88%, transparent);
+}
+.tl-line{
+  position:absolute; left:31px; top:34px; width:1px; height:0;
+  background:linear-gradient(180deg,var(--c-cyan),var(--c-blue));
+  box-shadow:0 0 12px rgba(41,255,227,.8);
+  transition:height 1.4s var(--ease);
+}
+.tl-item{ position:relative; display:grid; grid-template-columns:64px 1fr; gap:20px; padding:20px 0; align-items:start; }
+.tl-num{
+  width:64px; height:64px; border-radius:18px; display:grid; place-items:center; position:relative; z-index:2;
+  background:var(--ink-2); border:1px solid var(--line-2);
+  font-family:var(--mono); font-size:13px; color:var(--c-cyan); letter-spacing:.06em;
+  transition:box-shadow .5s, border-color .5s, background .5s;
+}
+.tl-item.in .tl-num{ border-color:var(--c-cyan); box-shadow:0 0 0 5px rgba(41,255,227,.07), 0 0 26px rgba(41,255,227,.28); }
+.tl-body{ padding-top:8px; }
+.tl-body h3{ font-size:20px; margin-bottom:8px; }
+.tl-body p{ color:var(--muted); font-size:15px; max-width:60ch; }
+.tl-tag{
+  display:inline-block; margin-top:12px; font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+  color:var(--faint); border:1px solid var(--line); border-radius:100px; padding:4px 12px;
+}
+
+/* ============================================================
+   REPORT PREVIEW
+   ============================================================ */
+.report{
+  border-radius:var(--r-lg); border:1px solid var(--line); overflow:hidden;
+  background:linear-gradient(170deg, rgba(11,18,34,.9), rgba(5,9,18,.92));
+  box-shadow:0 44px 110px rgba(0,0,0,.62);
+}
+.report-bar{
+  display:flex; align-items:center; gap:14px; padding:14px 20px;
+  border-bottom:1px solid var(--line); background:rgba(120,170,255,.035);
+}
+.tl-dots{ display:flex; gap:7px; }
+.tl-dots i{ width:10px; height:10px; border-radius:50%; background:rgba(120,170,255,.22); display:block; }
+.tl-dots i:first-child{ background:rgba(255,77,109,.55); }
+.tl-dots i:nth-child(2){ background:rgba(255,176,32,.55); }
+.tl-dots i:nth-child(3){ background:rgba(53,224,138,.55); }
+.report-bar .path{ font-family:var(--mono); font-size:12px; color:var(--faint); }
+.report-bar .stamp{
+  margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--ok);
+  border:1px solid rgba(53,224,138,.28); background:rgba(53,224,138,.07);
+  padding:4px 11px; border-radius:100px;
+}
+.report-body{ padding:clamp(20px,3vw,32px); display:grid; gap:16px; }
+.r-top{ display:grid; grid-template-columns:280px 1fr; gap:16px; }
+.r-panel{
+  border:1px solid var(--line); border-radius:var(--r); padding:22px;
+  background:linear-gradient(160deg, rgba(120,170,255,.05), transparent);
+}
+.r-label{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint);
+  margin-bottom:16px;
+}
+.donut-wrap{ display:flex; align-items:center; gap:22px; }
+.donut{ position:relative; width:132px; height:132px; flex:0 0 auto; }
+.donut svg{ transform:rotate(-90deg); overflow:visible; }
+.donut .track{ stroke:rgba(120,170,255,.11); }
+.donut .val{ stroke-linecap:round; stroke-dasharray:339.3; stroke-dashoffset:339.3; transition:stroke-dashoffset 1.9s var(--ease); filter:drop-shadow(0 0 8px rgba(255,176,32,.55)); }
+.donut .mid{
+  position:absolute; inset:0; display:grid; place-content:center; text-align:center;
+}
+.donut .mid b{ font-family:var(--display); font-size:34px; font-weight:700; letter-spacing:-.04em; display:block; line-height:1; }
+.donut .mid small{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--faint); text-transform:uppercase; }
+.grade{ display:grid; gap:9px; }
+.grade-row{ display:flex; align-items:center; gap:10px; font-size:13px; color:var(--muted); }
+.grade-row b{ font-family:var(--mono); color:var(--text); font-size:12.5px; margin-left:auto; }
+.gbar{ height:4px; border-radius:4px; background:rgba(120,170,255,.12); overflow:hidden; flex:1; min-width:60px; }
+.gbar i{ display:block; height:100%; width:0; border-radius:4px; transition:width 1.5s var(--ease); }
+
+.find-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.find{
+  border:1px solid var(--line); border-radius:14px; padding:16px 16px 15px;
+  background:rgba(120,170,255,.03); position:relative; overflow:hidden;
+}
+.find::after{ content:''; position:absolute; left:0; top:0; bottom:0; width:2px; }
+.find.crit::after{ background:var(--crit); box-shadow:0 0 12px var(--crit); }
+.find.high::after{ background:var(--warn); box-shadow:0 0 12px var(--warn); }
+.find.med::after{ background:var(--c-blue); box-shadow:0 0 12px var(--c-blue); }
+.find.low::after{ background:var(--ok); box-shadow:0 0 12px var(--ok); }
+.find b{ font-family:var(--display); font-size:30px; font-weight:700; letter-spacing:-.04em; display:block; line-height:1.1; }
+.find span{ font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); }
+
+.r-bottom{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.tbl{ width:100%; border-collapse:collapse; font-size:13px; }
+.tbl th{
+  text-align:left; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--faint); font-weight:400; padding:0 0 11px; border-bottom:1px solid var(--line);
+}
+.tbl td{ padding:11px 0; border-bottom:1px solid rgba(120,170,255,.07); color:var(--muted); }
+.tbl td:first-child{ color:var(--text); font-family:var(--mono); font-size:12px; }
+.tbl tr:last-child td{ border-bottom:0; }
+.badge{
+  display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  padding:3px 9px; border-radius:100px; border:1px solid;
+}
+.b-crit{ color:var(--crit); border-color:rgba(255,77,109,.35); background:rgba(255,77,109,.09); }
+.b-high{ color:var(--warn); border-color:rgba(255,176,32,.32); background:rgba(255,176,32,.08); }
+.b-med{ color:var(--c-blue); border-color:rgba(76,201,255,.3); background:rgba(76,201,255,.08); }
+.b-ok{ color:var(--ok); border-color:rgba(53,224,138,.3); background:rgba(53,224,138,.08); }
+
+.spark{ display:flex; align-items:flex-end; gap:6px; height:96px; margin-top:6px; }
+.spark i{
+  flex:1; border-radius:4px 4px 2px 2px; height:0; display:block;
+  background:linear-gradient(180deg,var(--c-cyan),rgba(47,107,255,.35));
+  transition:height 1.2s var(--ease);
+}
+.spark-x{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:9.5px; color:var(--faint); margin-top:9px; letter-spacing:.08em; }
+
+.disclaimer{
+  font-family:var(--mono); font-size:11px; color:var(--faint); text-align:center; margin-top:20px; letter-spacing:.03em;
+}
+
+/* ============================================================
+   CAPABILITY / WHY OUTCOMEX
+   ============================================================ */
+.split{ display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(32px,5vw,60px); align-items:center; }
+.stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:36px; }
+.stat{ padding:20px 18px; border:1px solid var(--line); border-radius:14px; background:rgba(120,170,255,.03); }
+.stat b{ font-family:var(--display); font-size:clamp(26px,3.4vw,36px); font-weight:700; letter-spacing:-.045em; display:block; line-height:1; }
+.stat span{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); display:block; margin-top:9px; }
+
+.cap-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.cap{
+  display:flex; align-items:center; gap:14px; padding:17px 18px; border-radius:14px;
+  border:1px solid var(--line); background:rgba(120,170,255,.03);
+  transition:border-color .35s, background .35s, transform .35s var(--ease);
+}
+.cap:hover{ border-color:var(--line-2); background:rgba(41,255,227,.05); transform:translateX(5px); }
+.cap i{
+  width:36px; height:36px; border-radius:10px; display:grid; place-items:center; flex:0 0 auto;
+  background:rgba(76,201,255,.09); border:1px solid rgba(76,201,255,.2); color:var(--c-blue);
+  transition:transform .55s var(--ease);
+}
+.cap:hover i{ transform:rotate(180deg); }
+.cap i svg{ width:17px; height:17px; }
+.cap span{ font-size:14.5px; font-weight:500; }
+
+/* ============================================================
+   LIVE DEMO / TERMINAL
+   ============================================================ */
+.demo-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(28px,4vw,48px); align-items:center; }
+.laptop{ position:relative; }
+.screen{
+  border-radius:14px 14px 4px 4px; border:1px solid var(--line-2); border-bottom:0;
+  background:#04070e; overflow:hidden; box-shadow:0 40px 90px rgba(0,0,0,.6), var(--glow-blue);
+}
+.screen-bar{ display:flex; gap:6px; padding:11px 14px; border-bottom:1px solid var(--line); background:rgba(120,170,255,.04); }
+.screen-bar i{ width:9px; height:9px; border-radius:50%; background:rgba(120,170,255,.2); display:block; }
+.term{
+  font-family:var(--mono); font-size:12.5px; line-height:1.85; padding:18px 20px;
+  height:326px; overflow:hidden; color:#b9cbe6;
+}
+.term .p{ color:var(--c-cyan); }
+.term .ok{ color:var(--ok); } .term .wn{ color:var(--warn); } .term .cr{ color:var(--crit); } .term .dim{ color:var(--faint); }
+.caret{ display:inline-block; width:8px; height:15px; background:var(--c-cyan); vertical-align:-3px; animation:caret 1.05s steps(1) infinite; }
+@keyframes caret{ 50%{ opacity:0 } }
+.base{
+  height:13px; border-radius:0 0 14px 14px; margin:0 -6%;
+  background:linear-gradient(180deg,#1b2437,#0a1020); border:1px solid var(--line);
+  border-top:0; box-shadow:0 22px 44px rgba(0,0,0,.6);
+}
+.radar-mini{
+  position:absolute; right:-18px; bottom:34px; width:132px; height:132px; border-radius:50%;
+  border:1px solid var(--line-2); background:rgba(5,9,18,.86); backdrop-filter:blur(10px);
+  overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,.55);
+}
+.radar-mini::before, .radar-mini::after{
+  content:''; position:absolute; border:1px solid rgba(41,255,227,.13); border-radius:50%;
+}
+.radar-mini::before{ inset:22px; } .radar-mini::after{ inset:44px; }
+.radar-mini .rsweep{
+  position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from 0deg, rgba(41,255,227,.4), transparent 26%);
+  animation:spin 3.4s linear infinite;
+}
+.radar-mini .rdot{ position:absolute; width:5px; height:5px; border-radius:50%; background:var(--c-cyan); box-shadow:0 0 8px var(--c-cyan); }
+
+.scanline{
+  position:absolute; left:0; right:0; height:88px; pointer-events:none;
+  background:linear-gradient(180deg, transparent, rgba(41,255,227,.09), transparent);
+  animation:scanMove 4.6s ease-in-out infinite;
+}
+@keyframes scanMove{ 0%,100%{ top:-88px } 50%{ top:100% } }
+
+/* ============================================================
+   BENEFITS
+   ============================================================ */
+.ben-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+.ben{
+  padding:28px 22px; border-radius:var(--r); border:1px solid var(--line); text-align:left;
+  background:linear-gradient(170deg, rgba(120,170,255,.05), transparent);
+  transition:transform .4s var(--ease), border-color .4s;
+}
+.ben:hover{ transform:translateY(-7px); border-color:var(--line-2); }
+.ben i{ display:grid; place-items:center; width:44px; height:44px; border-radius:13px; margin-bottom:16px;
+  background:rgba(124,107,255,.1); border:1px solid rgba(124,107,255,.24); color:#a99bff; }
+.ben i svg{ width:20px; height:20px; }
+.ben h3{ font-size:16px; margin-bottom:7px; }
+.ben p{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+
+/* ============================================================
+   QR SECTION
+   ============================================================ */
+.qr-sec{ padding-block:clamp(80px,10vw,130px); }
+.qr-card{
+  border-radius:var(--r-lg); border:1px solid var(--line-2); overflow:hidden; position:relative;
+  background:linear-gradient(150deg, rgba(41,255,227,.075), rgba(47,107,255,.07) 45%, rgba(124,107,255,.06));
+  box-shadow:0 50px 120px rgba(0,0,0,.6);
+}
+.qr-card::before{
+  content:''; position:absolute; inset:-2px; border-radius:inherit; padding:1px; pointer-events:none;
+  background:linear-gradient(115deg, var(--c-cyan), transparent 32%, transparent 68%, var(--c-blue));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  background-size:280% 280%; animation:borderFlow 7s linear infinite;
+}
+@keyframes borderFlow{ to{ background-position:280% 0 } }
+.wz-in{ display:grid; grid-template-columns:.82fr 1.18fr; gap:clamp(28px,3.6vw,52px); padding:clamp(26px,4vw,52px); align-items:start; }
+
+.urgency{
+  display:inline-flex; align-items:center; gap:11px; padding:8px 16px; border-radius:100px;
+  border:1px solid rgba(255,176,32,.35); background:rgba(255,176,32,.08); color:var(--warn);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.11em; text-transform:uppercase;
+}
+.wz-rail h2{ font-size:clamp(27px,3.2vw,40px); margin:20px 0 14px; }
+.wz-rail > p{ color:var(--muted); font-size:16px; max-width:40ch; }
+
+.scope{
+  margin-top:28px; padding:20px; border-radius:var(--r); border:1px solid var(--line);
+  background:rgba(5,9,18,.42); backdrop-filter:blur(8px);
+}
+.scope-row{
+  display:flex; align-items:baseline; gap:12px; padding:9px 0;
+  border-bottom:1px solid rgba(120,170,255,.08); font-size:13.5px; color:var(--muted);
+}
+.scope-row:last-child{ border-bottom:0; }
+.scope-row b{ margin-left:auto; font-family:var(--mono); font-size:12.5px; color:var(--text); text-align:right; }
+.scope-row.hi b{ color:var(--c-cyan); }
+
+.slots{ margin-top:26px; max-width:400px; }
+.slots-top{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.06em; margin-bottom:9px; }
+.slots-bar{ height:6px; border-radius:6px; background:rgba(120,170,255,.12); overflow:hidden; }
+.slots-bar i{ display:block; height:100%; width:0; border-radius:6px; background:linear-gradient(90deg,var(--warn),var(--crit)); transition:width 1.8s var(--ease); box-shadow:0 0 12px rgba(255,176,32,.5); }
+.countdown{ display:flex; gap:10px; margin-top:22px; }
+.cd{ min-width:70px; padding:11px 8px; border-radius:12px; border:1px solid var(--line); background:rgba(5,9,18,.5); text-align:center; }
+.cd b{ font-family:var(--display); font-size:24px; font-weight:700; letter-spacing:-.04em; display:block; line-height:1; font-variant-numeric:tabular-nums; }
+.cd span{ font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+.rail-note{ font-family:var(--mono); font-size:11px; color:var(--faint); margin-top:18px; letter-spacing:.03em; line-height:1.7; }
+
+/* ---- wizard shell ---- */
+.wizard{
+  border-radius:var(--r-lg); border:1px solid var(--line-2); padding:clamp(22px,3vw,34px);
+  background:linear-gradient(170deg, rgba(7,12,24,.78), rgba(4,7,14,.86));
+  backdrop-filter:blur(16px); box-shadow:0 30px 80px rgba(0,0,0,.5); position:relative;
+}
+.wz-head{ margin-bottom:26px; }
+.wz-track{ height:3px; border-radius:3px; background:rgba(120,170,255,.13); overflow:hidden; }
+.wz-track i{ display:block; height:100%; width:25%; border-radius:3px; background:linear-gradient(90deg,var(--c-cyan),var(--c-blue)); box-shadow:0 0 12px rgba(41,255,227,.6); transition:width .55s var(--ease); }
+.wz-steps{ display:flex; justify-content:space-between; gap:8px; margin-top:12px; }
+.wz-dot{ font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--faint); transition:color .35s; }
+.wz-dot.on{ color:var(--c-cyan); }
+.wz-dot.done{ color:var(--muted); }
+
+.wz-panel{ display:none; animation:wzIn .45s var(--ease); }
+.wz-panel.on{ display:block; }
+@keyframes wzIn{ from{ opacity:0; transform:translateX(16px) } }
+.wz-t{ font-size:clamp(20px,2.3vw,25px); margin-bottom:9px; }
+.wz-h{ color:var(--muted); font-size:14.5px; max-width:56ch; margin-bottom:22px; line-height:1.6; }
+
+/* ---- fields ---- */
+.field{ display:block; margin-bottom:16px; }
+.field > span{
+  display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--faint); margin-bottom:9px;
+}
+.field > span em{ font-style:normal; text-transform:none; letter-spacing:.02em; color:rgba(146,165,196,.6); margin-left:6px; }
+.field input, .field select{
+  width:100%; padding:14px 16px; border-radius:12px; font-size:15px; font-family:var(--body);
+  background:rgba(120,170,255,.05); border:1px solid var(--line); color:var(--text);
+  transition:border-color .3s, background .3s, box-shadow .3s; appearance:none;
+}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2392a5c4' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 16px center; padding-right:44px; cursor:pointer;
+}
+.field select option{ background:#0b1222; color:var(--text); }
+.field input::placeholder{ color:rgba(146,165,196,.42); }
+.field input:focus, .field select:focus{
+  outline:none; border-color:var(--c-cyan); background:rgba(41,255,227,.05);
+  box-shadow:0 0 0 3px rgba(41,255,227,.1);
+}
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.err{ color:var(--crit); font-size:13px; margin:-6px 0 16px; }
+.field.bad input, .field.bad select{ border-color:rgba(255,77,109,.6); }
+
+/* ---- radio option cards ---- */
+.opt-list{ display:grid; gap:12px; }
+.opt{
+  display:flex; gap:15px; align-items:flex-start; text-align:left; width:100%;
+  padding:18px 18px; border-radius:14px; border:1px solid var(--line);
+  background:rgba(120,170,255,.03); transition:border-color .3s, background .3s, transform .3s var(--ease);
+}
+.opt:hover{ border-color:var(--line-2); background:rgba(120,170,255,.06); }
+.opt.sel{ border-color:var(--c-cyan); background:rgba(41,255,227,.07); box-shadow:0 0 0 3px rgba(41,255,227,.07); }
+.opt-mark{
+  width:19px; height:19px; border-radius:50%; border:1.5px solid var(--line-2); flex:0 0 auto; margin-top:3px;
+  position:relative; transition:border-color .3s;
+}
+.opt.sel .opt-mark{ border-color:var(--c-cyan); }
+.opt-mark::after{
+  content:''; position:absolute; inset:4px; border-radius:50%; background:var(--c-cyan);
+  transform:scale(0); transition:transform .3s var(--ease); box-shadow:0 0 10px var(--c-cyan);
+}
+.opt.sel .opt-mark::after{ transform:scale(1); }
+.opt-body{ display:block; }
+.opt-body b{ font-family:var(--display); font-size:16px; font-weight:600; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.rec{
+  font-family:var(--mono); font-size:9.5px; font-style:normal; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--c-cyan); border:1px solid rgba(41,255,227,.32); background:rgba(41,255,227,.09);
+  padding:3px 9px; border-radius:100px; font-weight:400;
+}
+.opt-body em{ display:block; font-style:normal; font-size:13.5px; color:var(--muted); line-height:1.6; margin-top:7px; }
+.opt-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-top:12px; }
+.opt-tags i{
+  font-style:normal; font-family:var(--mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--faint); border:1px solid var(--line); border-radius:100px; padding:3px 10px;
+}
+
+/* ---- module toggles ---- */
+.all-btn{
+  background:none; border:1px solid var(--line); color:var(--muted); border-radius:100px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase;
+  padding:7px 15px; margin-bottom:16px; transition:border-color .3s, color .3s;
+}
+.all-btn:hover{ border-color:var(--c-cyan); color:var(--c-cyan); }
+.mod-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.mod{
+  position:relative; text-align:left; padding:15px 16px 15px 44px; border-radius:12px;
+  border:1px solid var(--line); background:rgba(120,170,255,.03);
+  transition:border-color .3s, background .3s;
+}
+.mod::before{
+  content:''; position:absolute; left:16px; top:17px; width:17px; height:17px; border-radius:5px;
+  border:1.5px solid var(--line-2); transition:border-color .3s, background .3s;
+}
+.mod::after{
+  content:''; position:absolute; left:21px; top:21px; width:7px; height:4px;
+  border-left:2px solid #03121a; border-bottom:2px solid #03121a; transform:rotate(-45deg) scale(0);
+  transition:transform .28s var(--ease);
+}
+.mod:hover{ border-color:var(--line-2); }
+.mod.sel{ border-color:rgba(41,255,227,.5); background:rgba(41,255,227,.06); }
+.mod.sel::before{ background:var(--c-cyan); border-color:var(--c-cyan); }
+.mod.sel::after{ transform:rotate(-45deg) scale(1); }
+.mod b{ display:block; font-family:var(--display); font-size:14.5px; font-weight:600; }
+.mod em{ display:block; font-style:normal; font-size:12px; color:var(--faint); margin-top:3px; }
+
+/* ---- checkbox ---- */
+.chk{ display:flex; gap:13px; align-items:flex-start; margin-top:6px; cursor:pointer; }
+.chk input{ appearance:none; width:20px; height:20px; border-radius:6px; border:1.5px solid var(--line-2); flex:0 0 auto; margin-top:2px; position:relative; cursor:pointer; transition:background .3s, border-color .3s; }
+.chk input:checked{ background:var(--c-cyan); border-color:var(--c-cyan); }
+.chk input:checked::after{ content:''; position:absolute; left:6px; top:4px; width:6px; height:11px; border-right:2px solid #03121a; border-bottom:2px solid #03121a; transform:rotate(42deg); }
+.chk span{ font-size:13.5px; color:var(--muted); line-height:1.6; }
+.chk.bad input{ border-color:rgba(255,77,109,.7); }
+
+/* ---- nav + legal ---- */
+.wz-nav{ display:flex; gap:12px; margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
+.wz-nav .btn{ flex:1; padding:14px 22px; }
+.wz-nav .btn[disabled]{ opacity:.32; pointer-events:none; }
+.wz-legal{ font-family:var(--mono); font-size:10.5px; color:var(--faint); margin-top:16px; line-height:1.7; letter-spacing:.02em; }
+
+/* ---- success ---- */
+.wz-done{ text-align:left; }
+.done-mark{ width:76px; height:76px; margin:6px auto 22px; }
+.done-mark .dc{ stroke:rgba(53,224,138,.35); stroke-width:2.4; stroke-dasharray:145; stroke-dashoffset:145; animation:drawC .8s var(--ease) forwards; }
+.done-mark .dp{ stroke:var(--ok); stroke-width:3.4; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:36; stroke-dashoffset:36; animation:drawP .5s var(--ease) .55s forwards; filter:drop-shadow(0 0 8px rgba(53,224,138,.7)); }
+@keyframes drawC{ to{ stroke-dashoffset:0 } }
+@keyframes drawP{ to{ stroke-dashoffset:0 } }
+.ref{
+  font-family:var(--mono); font-size:23px; letter-spacing:.16em; text-align:center; color:var(--c-cyan);
+  border:1px dashed rgba(41,255,227,.4); background:rgba(41,255,227,.06);
+  border-radius:14px; padding:16px; margin:22px 0 20px;
+}
+.done-sum{ display:grid; gap:9px; margin-bottom:24px; }
+.done-sum div{ display:flex; gap:12px; font-size:13.5px; color:var(--muted); padding:9px 0; border-bottom:1px solid rgba(120,170,255,.08); }
+.done-sum div b{ margin-left:auto; color:var(--text); font-family:var(--mono); font-size:12.5px; text-align:right; }
+.done-cta{ display:flex; gap:12px; }
+.done-cta .btn{ flex:1; }
+
+/* ============================================================
+   BOOKING
+   ============================================================ */
+.book-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,44px); align-items:center; }
+.slot-card{ padding:clamp(24px,3vw,34px); border-radius:var(--r-lg); }
+.slot-head{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:22px; }
+.slot-head h3{ font-size:20px; }
+.avail{ display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; color:var(--ok); letter-spacing:.08em; }
+.slot-list{ display:grid; gap:9px; }
+.slot{
+  display:flex; align-items:center; gap:14px; padding:14px 16px; border-radius:12px;
+  border:1px solid var(--line); background:rgba(120,170,255,.03); width:100%; text-align:left;
+  transition:border-color .3s, background .3s, transform .3s var(--ease);
+}
+.slot:hover:not([disabled]){ border-color:var(--c-cyan); background:rgba(41,255,227,.07); transform:translateX(5px); }
+.slot[disabled]{ opacity:.36; cursor:not-allowed; }
+.slot .time{ font-family:var(--mono); font-size:14px; min-width:74px; }
+.slot .who{ font-size:13.5px; color:var(--muted); }
+.slot .state{ margin-left:auto; font-family:var(--mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; }
+.slot .state.free{ color:var(--ok); } .slot .state.gone{ color:var(--faint); }
+.slot.sel{ border-color:var(--c-cyan); background:rgba(41,255,227,.1); }
+.book-note{ font-family:var(--mono); font-size:11px; color:var(--faint); margin-top:18px; letter-spacing:.03em; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  position:relative; z-index:2; border-top:1px solid var(--line); margin-top:40px;
+  background:linear-gradient(180deg, transparent, rgba(47,107,255,.05));
+}
+.foot-in{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:36px; padding-block:clamp(48px,6vw,72px); }
+.foot-in h4{ font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); font-weight:400; margin-bottom:16px; }
+.foot-in ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+.foot-in li a{ color:var(--muted); font-size:14px; transition:color .25s; }
+.foot-in li a:hover{ color:var(--c-cyan); }
+.foot-blurb{ color:var(--muted); font-size:14px; max-width:38ch; margin-top:16px; }
+.foot-bot{
+  display:flex; flex-wrap:wrap; gap:14px 28px; justify-content:space-between; align-items:center;
+  padding-block:24px; border-top:1px solid var(--line);
+  font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:.05em;
+}
+
+/* ---------- FAB / back to top ---------- */
+.fab{
+  position:fixed; right:22px; bottom:22px; z-index:60; display:flex; flex-direction:column; gap:10px; align-items:flex-end;
+}
+.fab-btn{
+  width:52px; height:52px; border-radius:50%; display:grid; place-items:center; border:1px solid var(--line-2);
+  background:rgba(7,12,24,.86); backdrop-filter:blur(14px); color:var(--text);
+  opacity:0; transform:translateY(16px) scale(.86); pointer-events:none;
+  transition:opacity .4s var(--ease), transform .4s var(--ease), border-color .3s, background .3s;
+}
+.fab-btn.show{ opacity:1; transform:none; pointer-events:auto; }
+.fab-btn:hover{ border-color:var(--c-cyan); background:rgba(41,255,227,.12); }
+.fab-btn svg{ width:19px; height:19px; }
+.fab-main{
+  width:auto; padding:0 22px; height:52px; border-radius:100px; gap:10px;
+  background:linear-gradient(102deg,var(--c-cyan),var(--c-blue)); color:#03121a; border:0;
+  font-family:var(--display); font-weight:600; font-size:14.5px;
+  box-shadow:0 12px 34px rgba(47,130,255,.4);
+}
+.fab-main:hover{ background:linear-gradient(102deg,var(--c-cyan),var(--c-blue)); }
+
+
+/* ============================================================
+   CISCO LIVE BAR
+   ============================================================ */
+.clbar{
+  background:linear-gradient(90deg, rgba(47,107,255,.22), rgba(41,255,227,.14) 50%, rgba(124,107,255,.2));
+  border-bottom:1px solid var(--line);
+}
+.clbar-in{
+  display:flex; align-items:center; justify-content:center; gap:10px 26px; flex-wrap:wrap;
+  height:40px; font-family:var(--mono); font-size:11.5px; letter-spacing:.11em; text-transform:uppercase;
+}
+.clbar b{ color:var(--text); font-weight:500; display:flex; align-items:center; gap:9px; }
+.clbar span{ color:var(--muted); }
+.clbar .booth{
+  color:var(--c-cyan); border:1px solid rgba(41,255,227,.4); background:rgba(41,255,227,.1);
+  padding:3px 11px; border-radius:100px;
+}
+.clbar .live{ color:var(--warn); }
+header.nav.stuck .clbar{ background:rgba(47,107,255,.14); }
+.nav-in{ height:74px; }
+
+/* ============================================================
+   HERO SCANNER
+   ============================================================ */
+.scan-launch{
+  margin-top:30px; padding:20px; border-radius:var(--r); border:1px solid var(--line-2);
+  background:linear-gradient(150deg, rgba(41,255,227,.07), rgba(47,107,255,.05));
+  backdrop-filter:blur(12px); max-width:520px; position:relative; overflow:hidden;
+}
+.scan-launch::before{
+  content:''; position:absolute; inset:-1px; border-radius:inherit; padding:1px; pointer-events:none;
+  background:linear-gradient(115deg,var(--c-cyan),transparent 40%,transparent 60%,var(--c-blue));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  background-size:260% 260%; animation:borderFlow 6s linear infinite;
+}
+.scan-launch .sl-label{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--c-cyan); margin-bottom:12px; display:flex; align-items:center; gap:9px;
+}
+.sl-row{ display:flex; gap:10px; }
+.sl-row input{
+  flex:1; min-width:0; padding:14px 16px; border-radius:12px; font-size:15px; font-family:var(--mono);
+  background:rgba(4,7,14,.6); border:1px solid var(--line); color:var(--text); transition:border-color .3s, box-shadow .3s;
+}
+.sl-row input::placeholder{ color:rgba(146,165,196,.4); }
+.sl-row input:focus{ outline:none; border-color:var(--c-cyan); box-shadow:0 0 0 3px rgba(41,255,227,.1); }
+.sl-row .btn{ padding:14px 22px; white-space:nowrap; }
+.sl-note{ font-family:var(--mono); font-size:10.5px; color:var(--faint); margin-top:12px; line-height:1.6; }
+
+/* ============================================================
+   LIVE SCAN SECTION
+   ============================================================ */
+#scan{ padding-block:0; }
+#scan.armed{ padding-block:clamp(60px,8vw,110px); }
+.scan-shell{ display:none; }
+#scan.armed .scan-shell{ display:block; }
+.scan-card{
+  border-radius:var(--r-lg); border:1px solid var(--line-2); overflow:hidden; position:relative;
+  background:linear-gradient(170deg, rgba(11,18,34,.92), rgba(4,7,14,.95));
+  box-shadow:0 44px 110px rgba(0,0,0,.62);
+}
+.scan-top{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  padding:16px 22px; border-bottom:1px solid var(--line); background:rgba(120,170,255,.04);
+}
+.scan-top .dom{ font-family:var(--mono); font-size:14px; color:var(--c-cyan); }
+.scan-top .st{
+  margin-left:auto; font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+  padding:4px 12px; border-radius:100px; border:1px solid;
+  color:var(--warn); border-color:rgba(255,176,32,.3); background:rgba(255,176,32,.08);
+}
+.scan-top .st.done{ color:var(--ok); border-color:rgba(53,224,138,.3); background:rgba(53,224,138,.08); }
+.scan-prog{ height:3px; background:rgba(120,170,255,.12); }
+.scan-prog i{ display:block; height:100%; width:0; background:linear-gradient(90deg,var(--c-cyan),var(--c-blue)); box-shadow:0 0 12px rgba(41,255,227,.7); transition:width .5s var(--ease); }
+
+.scan-body{ display:grid; grid-template-columns:1fr 340px; gap:0; }
+.scan-log{
+  font-family:var(--mono); font-size:12.5px; line-height:1.9; padding:22px;
+  min-height:320px; max-height:400px; overflow:hidden; color:#b9cbe6; border-right:1px solid var(--line);
+}
+.scan-log .p{ color:var(--c-cyan); } .scan-log .ok{ color:var(--ok); }
+.scan-log .wn{ color:var(--warn); } .scan-log .cr{ color:var(--crit); } .scan-log .dim{ color:var(--faint); }
+.scan-side{ padding:22px; display:grid; gap:18px; align-content:start; }
+.scan-radar{
+  position:relative; width:100%; aspect-ratio:1; max-width:220px; margin-inline:auto; border-radius:50%;
+  border:1px solid var(--line-2); background:radial-gradient(circle, rgba(41,255,227,.07), transparent 70%); overflow:hidden;
+}
+.scan-radar::before,.scan-radar::after{ content:''; position:absolute; border:1px solid rgba(41,255,227,.13); border-radius:50%; }
+.scan-radar::before{ inset:16%; } .scan-radar::after{ inset:34%; }
+.scan-radar .sw{ position:absolute; inset:0; border-radius:50%; background:conic-gradient(from 0deg, rgba(41,255,227,.42), transparent 25%); animation:spin 2.6s linear infinite; }
+.scan-radar .hit{ position:absolute; width:6px; height:6px; border-radius:50%; background:var(--c-cyan); box-shadow:0 0 10px var(--c-cyan); transform:scale(0); transition:transform .4s var(--ease); }
+.scan-radar .hit.on{ transform:scale(1); }
+.stage-list{ display:grid; gap:7px; }
+.stage{
+  display:flex; align-items:center; gap:11px; font-family:var(--mono); font-size:11.5px;
+  color:var(--faint); letter-spacing:.05em; transition:color .3s;
+}
+.stage i{ width:14px; height:14px; border-radius:4px; border:1px solid var(--line-2); flex:0 0 auto; position:relative; transition:all .3s; }
+.stage.run{ color:var(--c-cyan); } .stage.run i{ border-color:var(--c-cyan); animation:pulseDot 1s infinite; }
+.stage.ok{ color:var(--muted); } .stage.ok i{ background:var(--ok); border-color:var(--ok); }
+.stage.ok i::after{ content:''; position:absolute; left:4px; top:1.5px; width:4px; height:7px; border-right:2px solid #03121a; border-bottom:2px solid #03121a; transform:rotate(42deg); }
+
+/* results */
+.scan-res{ display:none; padding:clamp(20px,3vw,30px); border-top:1px solid var(--line); }
+.scan-res.on{ display:block; animation:wzIn .6s var(--ease); }
+.res-grid{ display:grid; grid-template-columns:240px 1fr; gap:18px; }
+.res-score{ text-align:center; padding:22px; border-radius:var(--r); border:1px solid var(--line); background:rgba(120,170,255,.04); }
+.res-score .donut{ margin-inline:auto; }
+.res-verdict{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; margin-top:14px; }
+.score-scope{
+  font-size:11.5px; color:var(--faint); line-height:1.65; margin-top:14px;
+  padding-top:14px; border-top:1px solid var(--line); text-align:left;
+}
+.find-list{ display:grid; gap:9px; align-content:start; }
+.fitem{
+  display:flex; align-items:flex-start; gap:13px; padding:14px 16px; border-radius:12px;
+  border:1px solid var(--line); background:rgba(120,170,255,.03);
+  opacity:0; transform:translateY(10px); animation:fIn .5s var(--ease) forwards;
+}
+@keyframes fIn{ to{ opacity:1; transform:none } }
+.fitem .sev{ width:8px; height:8px; border-radius:50%; margin-top:7px; flex:0 0 auto; }
+.fitem b{ display:block; font-family:var(--display); font-size:14.5px; font-weight:600; }
+.fitem em{ display:block; font-style:normal; font-size:12.5px; color:var(--muted); margin-top:3px; line-height:1.55; }
+.fitem .tag{ margin-left:auto; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px; border-radius:100px; border:1px solid; white-space:nowrap; }
+.scan-foot{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:22px; padding-top:20px; border-top:1px solid var(--line); }
+.scan-foot p{ font-family:var(--mono); font-size:11px; color:var(--faint); line-height:1.7; flex:1; min-width:240px; }
+
+/* ============================================================
+   SOC TICKER
+   ============================================================ */
+.ticker{
+  display:grid; grid-template-columns:repeat(6,1fr); gap:1px; border-radius:var(--r); overflow:hidden;
+  border:1px solid var(--line); background:var(--line);
+}
+.tk{ padding:20px 16px; background:rgba(7,12,24,.9); text-align:center; }
+.tk b{ font-family:var(--display); font-size:clamp(20px,2.4vw,28px); font-weight:700; letter-spacing:-.04em; display:block; line-height:1; font-variant-numeric:tabular-nums; color:var(--c-cyan); }
+.tk span{ font-family:var(--mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); display:block; margin-top:9px; }
+.tk.up b{ animation:tkFlash .5s var(--ease); }
+@keyframes tkFlash{ 0%{ color:#fff; transform:translateY(-3px) } }
+
+/* ============================================================
+   SOCIAL PROOF
+   ============================================================ */
+.proof-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.proof{
+  padding:26px 24px; border-radius:var(--r); border:1px solid var(--line);
+  background:linear-gradient(165deg, rgba(120,170,255,.05), transparent);
+}
+.proof b{ font-family:var(--display); font-size:17px; font-weight:600; display:block; margin-bottom:8px; }
+.proof p{ font-size:14px; color:var(--muted); line-height:1.6; }
+.proof .sect{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--c-cyan); margin-bottom:14px; display:block; }
+
+/* ============================================================
+   DELIVERABLES CHECKLIST
+   ============================================================ */
+.deliver{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px 26px; margin-top:8px; }
+.dl{ display:flex; align-items:flex-start; gap:11px; padding:11px 0; font-size:14.5px; }
+.dl i{
+  width:19px; height:19px; border-radius:50%; flex:0 0 auto; margin-top:2px; position:relative;
+  background:rgba(53,224,138,.12); border:1px solid rgba(53,224,138,.4);
+}
+.dl i::after{ content:''; position:absolute; left:6px; top:4px; width:5px; height:8px; border-right:2px solid var(--ok); border-bottom:2px solid var(--ok); transform:rotate(42deg); }
+.dl span b{ display:block; font-family:var(--display); font-weight:600; font-size:14.5px; }
+.dl span em{ display:block; font-style:normal; font-size:12.5px; color:var(--faint); margin-top:2px; }
+
+/* ============================================================
+   CLOSING CTA
+   ============================================================ */
+.finale{ padding-block:clamp(80px,11vw,150px); text-align:center; position:relative; overflow:hidden; }
+.finale::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(41,255,227,.13), transparent 70%);
+}
+.finale h2{ font-size:clamp(34px,6vw,72px); letter-spacing:-.04em; max-width:16ch; margin-inline:auto; }
+.finale p{ color:var(--muted); font-size:clamp(16px,1.8vw,19px); margin:22px auto 0; max-width:52ch; }
+.finale-cta{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:38px; }
+.finale-meta{
+  display:flex; gap:12px 30px; justify-content:center; flex-wrap:wrap; margin-top:34px;
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint);
+}
+.finale-meta b{ color:var(--c-cyan); font-weight:400; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+  .card-grid{ grid-template-columns:repeat(2,1fr); }
+  .find-grid{ grid-template-columns:repeat(2,1fr); }
+  .ben-grid{ grid-template-columns:repeat(3,1fr); }
+  .foot-in{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:900px){
+  .nav-links{ display:none; }
+  .nav .btn.desk{ display:none; }
+  .burger{ display:block; }
+  .hero-grid{ grid-template-columns:1fr; }
+  .hero-visual{ order:-1; max-width:400px; }
+  .hero-badge{ display:none; }
+  .split, .demo-grid, .wz-in, .book-grid, .r-top, .r-bottom, .scan-body, .res-grid{ grid-template-columns:1fr; }
+  .scan-log{ border-right:0; border-bottom:1px solid var(--line); min-height:250px; }
+  .ticker{ grid-template-columns:repeat(3,1fr); }
+  .proof-grid, .deliver{ grid-template-columns:repeat(2,1fr); }
+  .strip-row{ grid-template-columns:repeat(2,1fr); }
+  .si:nth-child(3)::before, .si:nth-child(4)::before{ top:0; }
+  .si:nth-child(3), .si:nth-child(4){ border-top:1px solid var(--line); }
+  .si:nth-child(3)::before{ display:none; }
+  .stat-row{ grid-template-columns:repeat(2,1fr); }
+  .radar-mini{ right:8px; bottom:-40px; width:104px; height:104px; }
+  .scope{ margin-top:22px; }
+}
+@media (max-width:640px){
+  .card-grid, .ben-grid, .cap-grid, .foot-in{ grid-template-columns:1fr; }
+  .find-grid{ grid-template-columns:repeat(2,1fr); }
+  .tl-item{ grid-template-columns:52px 1fr; gap:16px; }
+  .tl::before, .tl-line{ left:25px; }
+  .tl-num{ width:52px; height:52px; border-radius:15px; font-size:12px; }
+  .term{ height:280px; font-size:11.5px; }
+  .btn{ width:100%; }
+  .hero-cta{ flex-direction:column; }
+  .fab-main span{ display:none; }
+  .fab-main{ width:52px; padding:0; }
+  #mouseglow{ display:none; }
+  .field-row, .mod-grid, .proof-grid, .deliver{ grid-template-columns:1fr; }
+  .ticker{ grid-template-columns:repeat(2,1fr); }
+  .si{ padding:16px 12px; }
+  .si em{ font-size:9px; letter-spacing:.08em; }
+  .sl-row{ flex-direction:column; }
+  .clbar-in{ height:auto; padding:9px 0; font-size:10px; gap:6px 14px; }
+  .scan-log{ font-size:11px; }
+  .done-cta{ flex-direction:column; }
+  .wz-nav{ flex-direction:row; }
+  .wz-nav .btn{ width:auto; }
+  .wz-dot{ font-size:9px; letter-spacing:.06em; }
+  .field input, .field select{ font-size:16px; }
+  .countdown .cd{ min-width:0; flex:1; }
+  .ref{ font-size:19px; letter-spacing:.1em; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  .rv{ opacity:1; transform:none; }
+  .line > span{ transform:none; }
+  #net{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<div id="progress" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grid-layer" aria-hidden="true"></div>
+<canvas id="net" aria-hidden="true"></canvas>
+<div class="noise" aria-hidden="true"></div>
+<div id="mouseglow" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <!-- EDIT: booth number and stand location before printing -->
+  <div class="clbar">
+    <div class="wrap clbar-in">
+      <b><i class="dot-live" aria-hidden="true"></i> Cisco Live Melbourne 2026</b>
+      <span>9&ndash;12 November &middot; MCEC</span>
+      <span class="booth">Outcomex &middot; Booth B12</span>
+      <span class="live" id="clLive">Complimentary assessments this week only</span>
+    </div>
+  </div>
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="Outcomex home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="url(#bg1)" stroke-width="1.9" stroke-linejoin="round">
+          <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#29ffe3"/><stop offset="1" stop-color="#4cc9ff"/></linearGradient></defs>
+          <path d="M12 2.6l7.4 2.9v5.8c0 4.6-3.1 8.3-7.4 9.5-4.3-1.2-7.4-4.9-7.4-9.5V5.5z"/>
+          <path d="M9 12.2l2.1 2.1 4-4.3"/>
+        </svg>
+      </span>
+      <span>Outcomex<small>Cyber Security</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Section navigation">
+      <a href="#why">Why assess</a>
+      <a href="#how">How it works</a>
+      <a href="#report">The report</a>
+      <a href="#outcomex">Why us</a>
+      <a href="#book">Book a review</a>
+    </nav>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn btn-primary magnetic desk" href="#claim">Start my assessment</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobilemenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobilemenu">
+  <a href="#why">Why assess</a>
+  <a href="#how">How it works</a>
+  <a href="#report">The report</a>
+  <a href="#outcomex">Why us</a>
+  <a href="#book">Book a review</a>
+  <a class="btn btn-primary" href="#claim" style="margin-top:16px">Start my assessment</a>
+</div>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><i class="dot-live" aria-hidden="true"></i> Cisco Live &middot; You've reached us from the booth</span>
+
+      <h1>
+        <span class="line"><span>Discover your</span></span>
+        <span class="line"><span class="grad">external exposure</span></span>
+        <span class="line"><span>in minutes.</span></span>
+      </h1>
+
+      <p class="hero-sub rv">
+        Every organisation leaves more on the internet than it realises — a forgotten subdomain, an
+        expired certificate, a management port that was only ever meant to be temporary. We map what an
+        attacker can already see, and show you what to close first.
+      </p>
+
+      <div class="hero-cta rv" data-d="1">
+        <a class="btn btn-primary magnetic" href="#claim">
+          Start my assessment
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost magnetic" href="#book">
+          Book a 10-minute expert review
+        </a>
+      </div>
+
+      <div class="scan-launch rv" data-d="2">
+        <div class="sl-label"><i class="dot-live" aria-hidden="true"></i> See what's already public about you</div>
+        <div class="sl-row">
+          <input type="text" id="slDomain" inputmode="url" autocomplete="off" spellcheck="false"
+                 placeholder="yourcompany.com.au" aria-label="Domain to scan">
+          <button class="btn btn-primary magnetic" type="button" id="slGo">Check my domain</button>
+        </div>
+        <p class="sl-note">Reads your public DNS and mail-authentication records from this browser &mdash; about fifteen seconds. No ports are probed and nothing is sent to your web or application servers. These records are readable by anyone, which is precisely why attackers start here too.</p>
+      </div>
+
+      <div class="hero-meta rv" data-d="3">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Report in 72 hours</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3.2v5.4c0 4.4-3.4 8-8 9.4-4.6-1.4-8-5-8-9.4V6.2z"/></svg> Passive and non-intrusive</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg> Australian SOC, Australian data</span>
+      </div>
+    </div>
+
+    <!-- Hero visual: attack-surface radar -->
+    <div class="hero-visual" id="heroVisual">
+      <svg viewBox="0 0 500 500" role="img" aria-label="Illustration of an external attack surface being scanned by radar, with assets discovered around a central shield">
+        <defs>
+          <radialGradient id="core" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#29ffe3" stop-opacity=".38"/>
+            <stop offset="60%" stop-color="#2f6bff" stop-opacity=".14"/>
+            <stop offset="100%" stop-color="#2f6bff" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#29ffe3"/><stop offset="100%" stop-color="#2f6bff"/>
+          </linearGradient>
+          <linearGradient id="sweepg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#29ffe3" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#29ffe3" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+        </defs>
+
+        <circle cx="250" cy="250" r="230" fill="url(#core)"/>
+
+        <!-- radar rings -->
+        <g fill="none" stroke="rgba(120,170,255,.16)">
+          <circle cx="250" cy="250" r="70"/><circle cx="250" cy="250" r="122"/>
+          <circle cx="250" cy="250" r="174"/><circle cx="250" cy="250" r="226"/>
+        </g>
+        <g stroke="rgba(120,170,255,.10)">
+          <line x1="250" y1="24" x2="250" y2="476"/><line x1="24" y1="250" x2="476" y2="250"/>
+          <line x1="90" y1="90" x2="410" y2="410"/><line x1="410" y1="90" x2="90" y2="410"/>
+        </g>
+
+        <!-- sweep -->
+        <g class="sweep"><path d="M250 250 L250 24 A226 226 0 0 1 410 90 Z" fill="url(#sweepg)"/></g>
+
+        <!-- rotating dashed orbits -->
+        <circle class="spin-slow dash-arc" cx="250" cy="250" r="174" fill="none" stroke="url(#ring)" stroke-width="1.4" opacity=".55"/>
+        <circle class="spin-rev dash-arc" cx="250" cy="250" r="122" fill="none" stroke="#29ffe3" stroke-width="1.2" opacity=".4"/>
+
+        <!-- shield core -->
+        <g transform="translate(250 250)">
+          <circle r="62" fill="rgba(5,10,20,.86)" stroke="url(#ring)" stroke-width="1.6"/>
+          <circle r="62" fill="none" stroke="#29ffe3" stroke-width="6" opacity=".16" filter="url(#soft)"/>
+          <g transform="translate(-26 -30) scale(1.08)" fill="none" stroke="url(#ring)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M24 2.6l19 7.4v14.6c0 11.6-7.9 21-19 24-11.1-3-19-12.4-19-24V10z"/>
+            <path d="M16 26.4l6 6 11-12"/>
+          </g>
+        </g>
+
+        <!-- discovered assets -->
+        <g id="assets" fill="#29ffe3">
+          <circle class="blip" cx="368" cy="168" r="3"/>
+          <circle class="blip" cx="146" cy="322" r="3" style="animation-delay:-1.1s"/>
+          <circle class="blip" cx="404" cy="312" r="3" style="animation-delay:-2.2s"/>
+          <circle class="blip" cx="188" cy="128" r="3" style="animation-delay:-3.3s"/>
+          <circle class="blip" cx="298" cy="416" r="3" style="animation-delay:-0.6s"/>
+          <circle class="blip" cx="104" cy="212" r="3" style="animation-delay:-2.8s"/>
+        </g>
+
+        <!-- static asset nodes -->
+        <g stroke="rgba(41,255,227,.5)" stroke-width="1" fill="rgba(5,10,20,.9)">
+          <rect x="352" y="152" width="32" height="32" rx="9"/>
+          <rect x="130" y="306" width="32" height="32" rx="9"/>
+          <rect x="388" y="296" width="32" height="32" rx="9"/>
+          <rect x="172" y="112" width="32" height="32" rx="9"/>
+        </g>
+        <g fill="none" stroke="#4cc9ff" stroke-width="1.6" stroke-linecap="round" opacity=".85">
+          <path d="M361 162h14M361 168h9M361 174h14"/>
+          <path d="M139 316h14M139 322h9M139 328h14"/>
+          <path d="M397 306h14M397 312h9M397 318h14"/>
+          <path d="M181 122h14M181 128h9M181 134h14"/>
+        </g>
+
+        <!-- connection lines -->
+        <g stroke="rgba(76,201,255,.28)" stroke-width="1" fill="none">
+          <path id="p1" d="M250 250 Q320 190 368 168"/>
+          <path id="p2" d="M250 250 Q190 300 146 322"/>
+          <path id="p3" d="M250 250 Q350 290 404 312"/>
+          <path id="p4" d="M250 250 Q210 170 188 128"/>
+        </g>
+        <g fill="#29ffe3">
+          <circle r="3.2" class="pkt"><animateMotion dur="3.2s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
+          <circle r="3.2" class="pkt"><animateMotion dur="4.1s" begin="-1.2s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle>
+          <circle r="3.2" class="pkt"><animateMotion dur="3.7s" begin="-2.4s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
+          <circle r="3.2" class="pkt"><animateMotion dur="4.6s" begin="-0.7s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></circle>
+        </g>
+      </svg>
+
+      <div class="hero-badge hb-1"><i></i> RDP exposed · 3389/tcp</div>
+      <div class="hero-badge hb-2"><i></i> TLS 1.0 still accepted</div>
+      <div class="hero-badge hb-3"><i></i> 47 subdomains mapped</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST STRIP ================= -->
+<section class="strip">
+  <div class="wrap">
+    <div class="strip-in rv">
+      <span class="strip-label">Trusted by Australian enterprise since 2016</span>
+      <div class="strip-row">
+        <div class="si"><b>Cisco Preferred</b><em>Partner designation</em></div>
+        <div class="si"><b>24/7</b><em>Australian SOC</em></div>
+        <div class="si"><b>31</b><em>CCIEs on staff</em></div>
+        <div class="si"><b>Gov &middot; Edu &middot; Retail</b><em>Sectors served</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE SCAN ================= -->
+<section id="scan" aria-live="polite">
+  <div class="wrap scan-shell">
+    <div class="scan-card">
+      <div class="scan-top">
+        <div class="tl-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="dom" id="scanDom">&mdash;</span>
+        <span class="st" id="scanState">Reading public records</span>
+      </div>
+      <div class="scan-prog"><i id="scanBar"></i></div>
+
+      <div class="scan-body">
+        <div class="scan-log" id="scanLog" role="log"></div>
+        <div class="scan-side">
+          <div class="scan-radar" aria-hidden="true">
+            <div class="sw"></div>
+            <span class="hit" style="left:30%;top:28%"></span><span class="hit" style="left:66%;top:40%"></span>
+            <span class="hit" style="left:44%;top:62%"></span><span class="hit" style="left:74%;top:70%"></span>
+            <span class="hit" style="left:22%;top:56%"></span><span class="hit" style="left:56%;top:20%"></span>
+          </div>
+          <div class="stage-list" id="stages">
+            <div class="stage" data-k="dns"><i></i> Name servers</div>
+            <div class="stage" data-k="host"><i></i> Hosting &amp; addresses</div>
+            <div class="stage" data-k="mail"><i></i> Mail exchangers</div>
+            <div class="stage" data-k="spf"><i></i> SPF policy</div>
+            <div class="stage" data-k="dmarc"><i></i> DMARC policy</div>
+            <div class="stage" data-k="caa"><i></i> Certificate authority pinning</div>
+            <div class="stage" data-k="subs"><i></i> Common hostnames</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scan-res" id="scanRes">
+        <div class="res-grid">
+          <div class="res-score">
+            <div class="r-label">DNS &amp; mail score</div>
+            <div class="donut">
+              <svg viewBox="0 0 132 132" width="132" height="132" aria-hidden="true">
+                <circle class="track" cx="66" cy="66" r="54" fill="none" stroke-width="11"/>
+                <circle class="val" id="scanDonut" cx="66" cy="66" r="54" fill="none" stroke="#ffb020" stroke-width="11"/>
+              </svg>
+              <div class="mid"><b id="scanScore">0</b><small id="scanBand">&nbsp;</small></div>
+            </div>
+            <div class="res-verdict" id="scanVerdict">&nbsp;</div>
+            <p class="score-scope">Covers public DNS and mail authentication only &mdash; roughly a sixth of the full assessment. Not an overall security rating.</p>
+          </div>
+          <div class="find-list" id="scanFindings"></div>
+        </div>
+        <div class="scan-foot">
+          <p id="scanCaveat">Everything above came from public DNS records, which anyone can read without your permission &mdash; no ports were probed and no authorisation was needed. The full assessment adds port and service discovery, TLS configuration, cloud exposure, credential leaks and CVE matching, and typically surfaces three to four times as many findings.</p>
+          <a class="btn btn-primary magnetic" href="#claim">Request the full report</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY ASSESS ================= -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">What we look for</span>
+      <h2>Attackers start with reconnaissance.<br>So should you.</h2>
+      <p>An external exposure assessment looks at your organisation from the outside in — no agents, no credentials, no disruption. Here's what typically turns up.</p>
+    </div>
+
+    <div class="card-grid">
+      <article class="xcard tilt rv" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <h3>Attack surface</h3>
+        <p>The full inventory of internet-facing assets tied to your organisation, including the ones no one has owned for years.</p>
+        <div class="more"><div><p>IP ranges · ASNs · hosting providers · shadow IT</p></div></div>
+      </article>
+
+      <article class="xcard tilt rv" data-d="1" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></div>
+        <h3>Open ports and services</h3>
+        <p>Management interfaces, databases and remote access protocols that are reachable from the public internet.</p>
+        <div class="more"><div><p>RDP · SSH · SMB · RPC · exposed admin panels</p></div></div>
+      </article>
+
+      <article class="xcard tilt rv" data-d="2" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.6l-8 13.9A2 2 0 0 0 4 20.5h16a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+        <h3>Misconfigurations</h3>
+        <p>Default credentials, directory listings, verbose error pages and debug endpoints left switched on in production.</p>
+        <div class="more"><div><p>Open buckets · exposed .git · index-of · stack traces</p></div></div>
+      </article>
+
+      <article class="xcard tilt rv" data-d="3" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+        <h3>Certificate and TLS health</h3>
+        <p>Expired or expiring certificates, deprecated protocol versions and weak cipher suites still being negotiated.</p>
+        <div class="more"><div><p>TLS 1.0/1.1 · self-signed · expiry within 30 days</p></div></div>
+      </article>
+
+      <article class="xcard tilt rv" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg></div>
+        <h3>Subdomains and DNS</h3>
+        <p>Forgotten hosts, staging environments and dangling records pointing at infrastructure you no longer control.</p>
+        <div class="more"><div><p>Subdomain takeover · orphaned CNAMEs · zone hygiene</p></div></div>
+      </article>
+
+      <article class="xcard tilt rv" data-d="1" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 8l9 6 9-6"/></svg></div>
+        <h3>Email security posture</h3>
+        <p>SPF, DKIM and DMARC records that allow your domain to be spoofed in business email compromise attempts.</p>
+        <div class="more"><div><p>DMARC p=none · missing SPF · unaligned DKIM</p></div></div>
+      </article>
+
+      <article class="xcard tilt rv" data-d="2" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18a4.5 4.5 0 0 1 .5-9 6 6 0 0 1 11.4 1.6A3.9 3.9 0 0 1 18 18z"/></svg></div>
+        <h3>Cloud exposure</h3>
+        <p>Public storage, unauthenticated APIs and workloads spun up outside the change process across your cloud estate.</p>
+        <div class="more"><div><p>AWS · Azure · GCP · public endpoints and buckets</p></div></div>
+      </article>
+
+      <article class="xcard tilt rv" data-d="3" tabindex="0">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5v8l-7 5-7-5z"/></svg></div>
+        <h3>Known vulnerabilities</h3>
+        <p>Public-facing software matched against known CVEs, weighted by whether the flaw is actively being exploited.</p>
+        <div class="more"><div><p>CVE mapping · KEV catalogue · EPSS scoring</p></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">The process</span>
+      <h2>Five steps. Three days. No agents.</h2>
+      <p>The order matters here — each step depends on the one before it. Nothing is installed on your network, and nothing is tested that you haven't authorised.</p>
+    </div>
+
+    <div class="tl" id="timeline">
+      <div class="tl-line" id="tlLine" aria-hidden="true"></div>
+
+      <div class="tl-item rv">
+        <div class="tl-num">01</div>
+        <div class="tl-body">
+          <h3>Scan the QR code at our booth</h3>
+          <p>Which is how you got here. No account needed, and no sales call required to proceed.</p>
+          <span class="tl-tag" style="color:var(--ok);border-color:rgba(53,224,138,.3)">✓ Done</span>
+        </div>
+      </div>
+
+      <div class="tl-item rv" data-d="1">
+        <div class="tl-num">02</div>
+        <div class="tl-body">
+          <h3>Confirm your domain and authorisation</h3>
+          <p>You tell us which domains are yours and confirm you're authorised to request the assessment. We only look at what you list.</p>
+          <span class="tl-tag">You stay in control of scope</span>
+        </div>
+      </div>
+
+      <div class="tl-item rv" data-d="2">
+        <div class="tl-num">03</div>
+        <div class="tl-body">
+          <h3>We run the assessment</h3>
+          <p>Passive discovery and non-intrusive validation across DNS, certificates, exposed services, email authentication and known vulnerabilities. Nothing is exploited and nothing is taken offline.</p>
+          <span class="tl-tag">Non-intrusive · no production impact</span>
+        </div>
+      </div>
+
+      <div class="tl-item rv" data-d="3">
+        <div class="tl-num">04</div>
+        <div class="tl-body">
+          <h3>You receive the report</h3>
+          <p>An executive summary your board can read, and a technical appendix your engineers can action — each finding with evidence, impact and a specific remediation step.</p>
+          <span class="tl-tag">Within 72 hours</span>
+        </div>
+      </div>
+
+      <div class="tl-item rv" data-d="4">
+        <div class="tl-num">05</div>
+        <div class="tl-body">
+          <h3>Walk through it with an engineer</h3>
+          <p>A 30-minute session with the person who ran the assessment. We prioritise the fixes, and you keep the report whether or not you engage us further.</p>
+          <span class="tl-tag">No obligation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REPORT PREVIEW ================= -->
+<section id="report">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Sample output</span>
+      <h2>What lands in your inbox.</h2>
+      <p>A worked example using fictional data. Your report follows the same structure — scored, evidenced, and ordered by what to fix first.</p>
+    </div>
+
+    <div class="report rv" id="reportCard">
+      <div class="report-bar">
+        <div class="tl-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="path">exposure-report · example-corp.com.au · v2.4</span>
+        <span class="stamp">Assessment complete</span>
+      </div>
+
+      <div class="report-body">
+        <div class="r-top">
+          <div class="r-panel">
+            <div class="r-label">Overall risk score</div>
+            <div class="donut-wrap">
+              <div class="donut">
+                <svg viewBox="0 0 132 132" width="132" height="132" aria-hidden="true">
+                  <circle class="track" cx="66" cy="66" r="54" fill="none" stroke-width="11"/>
+                  <circle class="val" id="donutVal" cx="66" cy="66" r="54" fill="none" stroke="#ffb020" stroke-width="11"/>
+                </svg>
+                <div class="mid">
+                  <b class="count" data-to="72" style="color:#ffb020">0</b>
+                  <small>High risk</small>
+                </div>
+              </div>
+            </div>
+            <p style="font-size:13px;color:var(--muted);margin-top:16px;line-height:1.55">
+              Scored 0–100 across exposure, exploitability and hygiene. Anything above 60 warrants attention this quarter.
+            </p>
+          </div>
+
+          <div class="r-panel">
+            <div class="r-label">Attack surface breakdown</div>
+            <div class="grade">
+              <div class="grade-row">Exposed services <span class="gbar"><i data-w="82" style="background:linear-gradient(90deg,#ff4d6d,#ff8a5c)"></i></span> <b>82</b></div>
+              <div class="grade-row">Certificate hygiene <span class="gbar"><i data-w="64" style="background:linear-gradient(90deg,#ffb020,#ffd479)"></i></span> <b>64</b></div>
+              <div class="grade-row">Email authentication <span class="gbar"><i data-w="71" style="background:linear-gradient(90deg,#ffb020,#ff8a5c)"></i></span> <b>71</b></div>
+              <div class="grade-row">DNS and subdomains <span class="gbar"><i data-w="45" style="background:linear-gradient(90deg,#4cc9ff,#29ffe3)"></i></span> <b>45</b></div>
+              <div class="grade-row">Cloud exposure <span class="gbar"><i data-w="38" style="background:linear-gradient(90deg,#4cc9ff,#29ffe3)"></i></span> <b>38</b></div>
+              <div class="grade-row">Patch currency <span class="gbar"><i data-w="76" style="background:linear-gradient(90deg,#ff4d6d,#ffb020)"></i></span> <b>76</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="find-grid">
+          <div class="find crit"><b class="count" data-to="4" style="color:#ff4d6d">0</b><span>Critical</span></div>
+          <div class="find high"><b class="count" data-to="12" style="color:#ffb020">0</b><span>High</span></div>
+          <div class="find med"><b class="count" data-to="56" style="color:#4cc9ff">0</b><span>Medium</span></div>
+          <div class="find low"><b class="count" data-to="18" style="color:#35e08a">0</b><span>Internet-facing assets</span></div>
+        </div>
+
+        <div class="r-bottom">
+          <div class="r-panel">
+            <div class="r-label">Priority findings</div>
+            <table class="tbl">
+              <thead><tr><th>Asset</th><th>Finding</th><th style="text-align:right">Severity</th></tr></thead>
+              <tbody>
+                <tr><td>vpn-legacy</td><td>Unpatched CVE, actively exploited</td><td style="text-align:right"><span class="badge b-crit">Critical</span></td></tr>
+                <tr><td>mail</td><td>DMARC policy set to none</td><td style="text-align:right"><span class="badge b-high">High</span></td></tr>
+                <tr><td>staging-api</td><td>Debug endpoint publicly reachable</td><td style="text-align:right"><span class="badge b-high">High</span></td></tr>
+                <tr><td>portal</td><td>TLS 1.0 accepted</td><td style="text-align:right"><span class="badge b-med">Medium</span></td></tr>
+                <tr><td>www</td><td>Security headers present</td><td style="text-align:right"><span class="badge b-ok">Pass</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="r-panel">
+            <div class="r-label">Exposure over time (projected after remediation)</div>
+            <div class="spark" id="spark" aria-hidden="true">
+              <i data-h="72"></i><i data-h="84"></i><i data-h="66"></i><i data-h="91"></i>
+              <i data-h="58"></i><i data-h="44"></i><i data-h="36"></i><i data-h="22"></i>
+            </div>
+            <div class="spark-x"><span>Week 1</span><span>Week 4</span><span>Week 8</span></div>
+            <p style="font-size:13px;color:var(--muted);margin-top:18px;line-height:1.55">
+              Most organisations close their critical findings within two weeks. The remaining work is process, not firefighting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="disclaimer">Illustrative sample. All figures, domains and findings shown are fictional.</p>
+  </div>
+</section>
+
+<!-- ================= SOCIAL PROOF ================= -->
+<section id="proof">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Track record</span>
+      <h2>The organisations we do this for.</h2>
+      <p>We run assessments across regulated and high-exposure sectors, where a forgotten host isn't an inconvenience — it's a notifiable breach.</p>
+    </div>
+
+    <div class="ticker" id="ticker" style="margin-bottom:16px">
+      <div class="tk"><b data-tk="1420" data-step="3">1420</b><span>Assets mapped today</span></div>
+      <div class="tk"><b data-tk="318" data-step="2">318</b><span>Subdomains found</span></div>
+      <div class="tk"><b data-tk="47" data-step="1">47</b><span>Exposed services</span></div>
+      <div class="tk"><b data-tk="12" data-step="1">12</b><span>Critical findings</span></div>
+      <div class="tk"><b data-tk="94" data-step="1">94</b><span>Certificates checked</span></div>
+      <div class="tk"><b data-tk="26" data-step="1">26</b><span>Domains spoofable</span></div>
+    </div>
+    <p class="disclaimer" style="margin:0 0 34px">Running totals across assessments completed at this event.</p>
+
+    <div class="proof-grid">
+      <article class="proof rv">
+        <span class="sect">Retail &amp; supply chain</span>
+        <b>Thousands of sites, one attack surface</b>
+        <p>Store networks, supplier portals and seasonal microsites accumulate exposure faster than any asset register keeps up with.</p>
+      </article>
+      <article class="proof rv" data-d="1">
+        <span class="sect">Education &amp; research</span>
+        <b>Open by design, exposed by default</b>
+        <p>Campus environments run more internet-facing services than most enterprises, often across devolved faculty IT.</p>
+      </article>
+      <article class="proof rv" data-d="2">
+        <span class="sect">Government &amp; utilities</span>
+        <b>Essential Eight and the real world</b>
+        <p>Assessments mapped against the ACSC Essential Eight, so findings land in the language your auditors already use.</p>
+      </article>
+    </div>
+
+    <!-- EDIT: marketing to confirm these figures before printing -->
+    <div class="ticker rv" style="margin-top:16px">
+      <div class="tk"><b class="count" data-to="10" data-suffix=" yrs">0</b><span>Securing AU enterprise</span></div>
+      <div class="tk"><b class="count" data-to="148">0</b><span>People</span></div>
+      <div class="tk"><b class="count" data-to="31">0</b><span>CCIEs</span></div>
+      <div class="tk"><b>24/7</b><span>Australian SOC</span></div>
+      <div class="tk"><b>3</b><span>Countries</span></div>
+      <div class="tk"><b>2016</b><span>Founded, Sydney</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY OUTCOMEX ================= -->
+<section id="outcomex">
+  <div class="wrap split">
+    <div class="rv">
+      <span class="eyebrow">Why Outcomex</span>
+      <h2>Australian engineers, on Australian time.</h2>
+      <p style="color:var(--muted);font-size:17px;margin-top:20px;max-width:52ch">
+        We've been building and defending enterprise networks from Sydney since 2016. The person who runs
+        your assessment is the same person who walks you through it — not a reseller passing on someone
+        else's scan.
+      </p>
+      <div class="stat-row">
+        <div class="stat"><b class="count" data-to="90" data-suffix="+">0</b><span>Engineers</span></div>
+        <div class="stat"><b class="count" data-to="31">0</b><span>CCIEs</span></div>
+        <div class="stat"><b class="count" data-to="71">0</b><span>CCNA / CCNP</span></div>
+        <div class="stat"><b>24/7</b><span>Australian SOC</span></div>
+      </div>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 3l8 3.2v5.4c0 4.4-3.4 8-8 9.4-4.6-1.4-8-5-8-9.4V6.2z"/></svg></i><span>Cisco Preferred Partner</span></div>
+      <div class="cap rv" data-d="1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M8.5 13.5L7 21l5-2.5L17 21l-1.5-7.5"/></svg></i><span>Certified security specialists</span></div>
+      <div class="cap rv" data-d="2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></i><span>Penetration testing</span></div>
+      <div class="cap rv" data-d="3"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-7 5 14L17 12h4"/></svg></i><span>Managed detection &amp; response</span></div>
+      <div class="cap rv" data-d="4"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></i><span>Incident response</span></div>
+      <div class="cap rv" data-d="5"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18a4.5 4.5 0 0 1 .5-9 6 6 0 0 1 11.4 1.6A3.9 3.9 0 0 1 18 18z"/></svg></i><span>Cloud security</span></div>
+      <div class="cap rv" data-d="6"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg></i><span>Zero trust architecture</span></div>
+      <div class="cap rv" data-d="7"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></i><span>Threat hunting</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LIVE DEMO ================= -->
+<section id="demo">
+  <div class="wrap demo-grid">
+    <div class="laptop rv">
+      <div class="screen" style="position:relative;overflow:hidden">
+        <div class="scanline" aria-hidden="true"></div>
+        <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="term" id="term" role="log" aria-live="off" aria-label="Simulated assessment output"></div>
+      </div>
+      <div class="base" aria-hidden="true"></div>
+      <div class="radar-mini" aria-hidden="true">
+        <div class="rsweep"></div>
+        <span class="rdot" style="left:28%;top:34%"></span>
+        <span class="rdot" style="left:66%;top:58%"></span>
+        <span class="rdot" style="left:48%;top:74%"></span>
+      </div>
+    </div>
+
+    <div class="rv" data-d="1">
+      <span class="eyebrow">Live at the booth</span>
+      <h2>Watch a scan run.</h2>
+      <p style="color:var(--muted);font-size:17px;margin-top:20px;max-width:46ch">
+        Drop by and we'll run discovery against a domain you own, on the spot. You'll see the asset count
+        climb in real time — most people are surprised by the number before we've even reached the findings.
+      </p>
+      <div style="margin-top:30px"><a class="btn btn-ghost magnetic" href="#book">Book a slot at the booth</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BENEFITS ================= -->
+<section id="benefits">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">What you get</span>
+      <h2>Built to be acted on, not filed away.</h2>
+    </div>
+    <div class="ben-grid">
+      <div class="ben rv"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></i><h3>72-hour turnaround</h3><p>Submit at the booth, report before the end of the week.</p></div>
+      <div class="ben rv" data-d="1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></i><h3>Board-ready summary</h3><p>One page your executive team can read without a translator.</p></div>
+      <div class="ben rv" data-d="2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></i><h3>Specific remediation</h3><p>Every finding names the asset, the fix and who typically owns it.</p></div>
+      <div class="ben rv" data-d="3"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg></i><h3>No obligation</h3><p>Keep the report. Engage us or don't — the findings are yours.</p></div>
+      <div class="ben rv" data-d="4"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 5.5a3 3 0 0 1 0 5M19 3.5a5.6 5.6 0 0 1 0 9"/></svg></i><h3>Engineer walkthrough</h3><p>Thirty minutes with the person who actually ran it.</p></div>
+    </div>
+
+    <div class="r-panel rv" style="margin-top:26px;padding:clamp(24px,3vw,34px)">
+      <div class="r-label">Everything in the deliverable</div>
+      <div class="deliver">
+        <div class="dl"><i aria-hidden="true"></i><span><b>Executive summary</b><em>One page, no jargon</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Overall risk score</b><em>Scored 0&ndash;100, benchmarked</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Attack surface map</b><em>Every asset we could find</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Prioritised fix list</b><em>Ordered by real-world risk</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Open ports &amp; services</b><em>With evidence per host</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Certificate &amp; TLS report</b><em>Expiry, protocols, ciphers</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>DNS &amp; subdomain inventory</b><em>Including takeover risk</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Email authentication</b><em>SPF, DKIM, DMARC verdicts</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>CVE exposure</b><em>Weighted by KEV and EPSS</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Cloud exposure</b><em>Public endpoints and storage</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>Essential Eight mapping</b><em>Where findings sit against ACSC</em></span></div>
+        <div class="dl"><i aria-hidden="true"></i><span><b>PDF and raw data</b><em>Report plus CSV of findings</em></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REQUEST WIZARD ================= -->
+<section class="qr-sec" id="claim">
+  <div class="wrap">
+    <div class="qr-card rv">
+      <div class="wz-in">
+
+        <!-- Left: context rail -->
+        <aside class="wz-rail">
+          <span class="urgency"><i class="dot-live" style="background:var(--warn);box-shadow:0 0 0 0 rgba(255,176,32,.6)"></i> Cisco Live exclusive</span>
+          <h2>Set up your assessment.</h2>
+          <p>Four short steps, about two minutes. Nothing runs until you've confirmed the scope yourself.</p>
+
+          <div class="scope" id="scope" aria-live="polite">
+            <div class="r-label" style="margin-bottom:14px">Your scope so far</div>
+            <div class="scope-row"><span>Domain</span><b id="sc-domain">—</b></div>
+            <div class="scope-row"><span>Scan type</span><b id="sc-type">Not selected</b></div>
+            <div class="scope-row"><span>Modules</span><b id="sc-mods">0 selected</b></div>
+            <div class="scope-row"><span>Checks</span><b id="sc-checks">0</b></div>
+            <div class="scope-row hi"><span>Report due</span><b id="sc-eta">—</b></div>
+          </div>
+
+          <div class="slots">
+            <div class="slots-top"><span>Assessments remaining today</span><span><b id="slotsLeft" style="color:var(--warn);font-family:var(--mono)">9</b> of 25</span></div>
+            <div class="slots-bar"><i data-w="64" id="slotsBar"></i></div>
+          </div>
+
+          <div class="countdown" id="countdown" aria-label="Booth closes in">
+            <div class="cd"><b id="cd-h">00</b><span>Hours</span></div>
+            <div class="cd"><b id="cd-m">00</b><span>Mins</span></div>
+            <div class="cd"><b id="cd-s">00</b><span>Secs</span></div>
+          </div>
+          <p class="rail-note">Booth closes at 5:00pm. Requests submitted after that are picked up the next morning.</p>
+        </aside>
+
+        <!-- Right: the wizard -->
+        <div class="wizard" id="wizard">
+          <div class="wz-head">
+            <div class="wz-track" aria-hidden="true"><i id="wzFill"></i></div>
+            <div class="wz-steps" role="tablist" aria-label="Assessment request steps">
+              <span class="wz-dot on" data-s="1">Domain</span>
+              <span class="wz-dot" data-s="2">Scan type</span>
+              <span class="wz-dot" data-s="3">Modules</span>
+              <span class="wz-dot" data-s="4">Details</span>
+            </div>
+          </div>
+
+          <!-- STEP 1 -->
+          <div class="wz-panel on" data-step="1">
+            <h3 class="wz-t">Which domain should we look at?</h3>
+            <p class="wz-h">Enter the domain you're authorised to have assessed. Add more than one, separated by commas, if they belong to the same organisation.</p>
+            <label class="field">
+              <span>Primary domain</span>
+              <input type="text" id="fDomain" inputmode="url" autocomplete="url" placeholder="yourcompany.com.au">
+            </label>
+            <p class="err" id="eDomain" hidden>Enter a valid domain, for example yourcompany.com.au</p>
+            <label class="field">
+              <span>Additional domains <em>optional</em></span>
+              <input type="text" id="fExtra" placeholder="brand.com.au, yourcompany.co.nz">
+            </label>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="wz-panel" data-step="2">
+            <h3 class="wz-t">How deep should we go?</h3>
+            <p class="wz-h">All three are non-intrusive. The difference is how much we validate rather than infer.</p>
+            <div class="opt-list" role="radiogroup" aria-label="Scan type">
+              <button class="opt" type="button" role="radio" aria-checked="false" data-val="passive" data-checks="64" data-eta="24 hours">
+                <span class="opt-mark" aria-hidden="true"></span>
+                <span class="opt-body">
+                  <b>Passive reconnaissance</b>
+                  <em>Zero packets sent to your infrastructure. Built entirely from public records, certificate transparency logs and passive DNS.</em>
+                  <span class="opt-tags"><i>64 checks</i><i>24 hours</i><i>No authorisation needed</i></span>
+                </span>
+              </button>
+              <button class="opt sel" type="button" role="radio" aria-checked="true" data-val="standard" data-checks="129" data-eta="72 hours">
+                <span class="opt-mark" aria-hidden="true"></span>
+                <span class="opt-body">
+                  <b>Standard external scan <i class="rec">Most chosen</i></b>
+                  <em>Passive discovery plus light service fingerprinting and TLS negotiation against the hosts you've listed. No exploitation, no load.</em>
+                  <span class="opt-tags"><i>129 checks</i><i>72 hours</i><i>Authorisation required</i></span>
+                </span>
+              </button>
+              <button class="opt" type="button" role="radio" aria-checked="false" data-val="deep" data-checks="240" data-eta="5 business days">
+                <span class="opt-mark" aria-hidden="true"></span>
+                <span class="opt-body">
+                  <b>Deep assessment</b>
+                  <em>Everything above plus manual validation of findings by an engineer, and a scoping call before we begin. Rules of engagement agreed in writing.</em>
+                  <span class="opt-tags"><i>240+ checks</i><i>5 business days</i><i>Scoping call first</i></span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="wz-panel" data-step="3">
+            <h3 class="wz-t">What should we include?</h3>
+            <p class="wz-h">Pick what's relevant. Most people take everything — it costs you nothing extra and the report is more useful whole.</p>
+            <button class="all-btn" type="button" id="selAll">Select all modules</button>
+            <div class="mod-grid" id="modGrid">
+              <button class="mod sel" type="button" aria-pressed="true" data-val="attack-surface"><b>Attack surface</b><em>Asset and IP discovery</em></button>
+              <button class="mod sel" type="button" aria-pressed="true" data-val="ports"><b>Open ports &amp; services</b><em>Exposed management access</em></button>
+              <button class="mod sel" type="button" aria-pressed="true" data-val="misconfig"><b>Misconfigurations</b><em>Debug, defaults, listings</em></button>
+              <button class="mod sel" type="button" aria-pressed="true" data-val="tls"><b>Certificates &amp; TLS</b><em>Expiry, protocols, ciphers</em></button>
+              <button class="mod sel" type="button" aria-pressed="true" data-val="dns"><b>Subdomains &amp; DNS</b><em>Takeover and zone hygiene</em></button>
+              <button class="mod sel" type="button" aria-pressed="true" data-val="email"><b>Email security</b><em>SPF, DKIM, DMARC</em></button>
+              <button class="mod sel" type="button" aria-pressed="true" data-val="cloud"><b>Cloud exposure</b><em>Public buckets and APIs</em></button>
+              <button class="mod sel" type="button" aria-pressed="true" data-val="cve"><b>Known vulnerabilities</b><em>CVE, KEV and EPSS</em></button>
+              <button class="mod" type="button" aria-pressed="false" data-val="darkweb"><b>Credential exposure</b><em>Breach and dark web data</em></button>
+              <button class="mod" type="button" aria-pressed="false" data-val="brand"><b>Brand &amp; typosquats</b><em>Lookalike domain monitoring</em></button>
+            </div>
+            <p class="err" id="eMods" hidden>Select at least one module.</p>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="wz-panel" data-step="4">
+            <h3 class="wz-t">Where should the report go?</h3>
+            <p class="wz-h">We send it to one person. If you'd like it shared more widely, tell us on the walkthrough call.</p>
+            <div class="field-row">
+              <label class="field"><span>Full name</span><input type="text" id="fName" autocomplete="name" placeholder="Jordan Smith"></label>
+              <label class="field"><span>Work email</span><input type="email" id="fEmail" autocomplete="email" inputmode="email" placeholder="jordan@yourcompany.com.au"></label>
+            </div>
+            <div class="field-row">
+              <label class="field"><span>Organisation</span><input type="text" id="fOrg" autocomplete="organization" placeholder="Your Company Pty Ltd"></label>
+              <label class="field"><span>Mobile <em>optional</em></span><input type="tel" id="fPhone" autocomplete="tel" inputmode="tel" placeholder="04XX XXX XXX"></label>
+            </div>
+            <label class="field"><span>Role</span>
+              <select id="fRole">
+                <option value="">Select your role</option>
+                <option>CISO / Head of Security</option>
+                <option>IT Manager / IT Director</option>
+                <option>Security Architect</option>
+                <option>Network Engineer</option>
+                <option>Security Analyst</option>
+                <option>CIO / CTO</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="chk" id="authWrap">
+              <input type="checkbox" id="fAuth">
+              <span>I'm authorised to request an assessment of the domains listed above, and I understand Outcomex will only test what I've listed.</span>
+            </label>
+            <p class="err" id="eDetails" hidden>Fill in your name, a valid work email, your organisation, and confirm authorisation.</p>
+          </div>
+
+          <!-- SUCCESS -->
+          <div class="wz-panel wz-done" data-step="5">
+            <div class="done-mark" aria-hidden="true">
+              <svg viewBox="0 0 52 52"><circle class="dc" cx="26" cy="26" r="23" fill="none"/><path class="dp" fill="none" d="M15 27l8 8 15-16"/></svg>
+            </div>
+            <h3 class="wz-t" style="text-align:center">You're booked in.</h3>
+            <p class="wz-h" style="text-align:center;margin-inline:auto">We've got everything we need. Your reference is below — screenshot it, or quote it to any Outcomex engineer at the booth.</p>
+            <div class="ref" id="refBox">OX-<span id="refNum">000000</span></div>
+            <div class="done-sum" id="doneSum"></div>
+            <div class="done-cta">
+              <a class="btn btn-primary magnetic" href="#book">Book the 10-minute review</a>
+              <button class="btn btn-ghost" type="button" id="restart">Submit another domain</button>
+            </div>
+          </div>
+
+          <!-- NAV -->
+          <div class="wz-nav" id="wzNav">
+            <button class="btn btn-ghost" type="button" id="wzBack" disabled>Back</button>
+            <button class="btn btn-primary magnetic" type="button" id="wzNext">Continue</button>
+          </div>
+          <p class="wz-legal">Non-intrusive by default. We never test a domain you haven't listed, and your details aren't shared outside Outcomex.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOK ================= -->
+<section id="book">
+  <div class="wrap book-grid">
+    <div class="rv">
+      <span class="eyebrow">Talk to an engineer</span>
+      <h2>Ten minutes, at the booth.</h2>
+      <p style="color:var(--muted);font-size:17px;margin-top:20px;max-width:46ch">
+        Bring a problem you're actually working on — a segmentation project, an audit finding, an XDR
+        rollout that's stalled. We'll give you a straight answer, and there's no pitch attached.
+      </p>
+      <div class="hero-meta" style="margin-top:28px">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 10 minutes</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.2-7-10a7 7 0 1 1 14 0c0 4.8-7 10-7 10z"/><circle cx="12" cy="11" r="2.4"/></svg> Outcomex booth</span>
+      </div>
+    </div>
+
+    <div class="slot-card glass rv" data-d="1">
+      <div class="slot-head">
+        <h3>Today's availability</h3>
+        <span class="avail"><i class="dot-live" aria-hidden="true"></i> 3 slots open</span>
+      </div>
+      <div class="slot-list" id="slotList">
+        <button class="slot" type="button"><span class="time">10:30</span><span class="who">Attack surface &amp; exposure</span><span class="state free">Open</span></button>
+        <button class="slot" type="button" disabled><span class="time">11:15</span><span class="who">Zero trust &amp; segmentation</span><span class="state gone">Booked</span></button>
+        <button class="slot" type="button"><span class="time">13:00</span><span class="who">MDR &amp; detection engineering</span><span class="state free">Open</span></button>
+        <button class="slot" type="button" disabled><span class="time">14:30</span><span class="who">Incident response readiness</span><span class="state gone">Booked</span></button>
+        <button class="slot" type="button"><span class="time">15:45</span><span class="who">Cloud security review</span><span class="state free">Open</span></button>
+      </div>
+      <p class="book-note" id="bookNote">Select a time, then confirm with any Outcomex engineer at the booth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINALE ================= -->
+<section class="finale">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow" style="justify-content:center">Before you leave the floor</span>
+      <h2>Ready to see what<br>attackers already see?</h2>
+      <p>Four questions, two minutes, and the report is with you by the end of the week. Free for every Cisco Live attendee.</p>
+      <div class="finale-cta">
+        <a class="btn btn-primary magnetic" href="#claim">Start my assessment</a>
+        <a class="btn btn-ghost magnetic" href="#book">Talk to an engineer instead</a>
+      </div>
+      <div class="finale-meta">
+        <span>Booth <b>B12</b></span>
+        <span>Cisco Live Melbourne <b>9&ndash;12 Nov</b></span>
+        <span>Report in <b>72 hours</b></span>
+        <span><b>No obligation</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div>
+        <a class="brand" href="#top">
+          <span class="mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#29ffe3" stroke-width="1.9" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M12 2.6l7.4 2.9v5.8c0 4.6-3.1 8.3-7.4 9.5-4.3-1.2-7.4-4.9-7.4-9.5V5.5z"/><path d="M9 12.2l2.1 2.1 4-4.3"/>
+            </svg>
+          </span>
+          <span>Outcomex<small>Cyber Security</small></span>
+        </a>
+        <p class="foot-blurb">Australian systems integrator and Cisco Preferred Partner. Networking, security and cloud, delivered by engineers who stay on after go-live.</p>
+      </div>
+      <div>
+        <h4>Assessment</h4>
+        <ul>
+          <li><a href="#why">What we check</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#report">Sample report</a></li>
+          <li><a href="#claim">Start a request</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Security services</h4>
+        <ul>
+          <li><a href="#outcomex">Managed detection &amp; response</a></li>
+          <li><a href="#outcomex">Penetration testing</a></li>
+          <li><a href="#outcomex">Incident response</a></li>
+          <li><a href="#outcomex">Zero trust architecture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <ul>
+          <li><a href="#book">Cisco Live booth</a></li>
+          <li><a href="https://www.outcomex.com.au">outcomex.com.au</a></li>
+          <li><a href="mailto:security@outcomex.com.au">security@outcomex.com.au</a></li>
+          <li><a href="#book">Book an expert review</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="yr">2026</span> Outcomex Pty Ltd · Sydney · Melbourne · Adelaide</span>
+      <span>Assessments are non-intrusive and run only against domains you authorise.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="fab">
+  <button class="fab-btn" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </button>
+  <a class="fab-btn fab-main show magnetic" href="#claim">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM19 19h2v2h-2z"/></svg>
+    <span>Get assessed</span>
+  </a>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $  = function(s,c){ return (c||document).querySelector(s); };
+  var $$ = function(s,c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+
+  /* ---------- page load sequence ---------- */
+  window.addEventListener('load', function(){ document.body.classList.add('loaded'); });
+  setTimeout(function(){ document.body.classList.add('loaded'); }, 400);
+  $('#yr').textContent = new Date().getFullYear();
+
+  /* ---------- nav ---------- */
+  var nav = $('#nav'), burger = $('#burger'), menu = $('#mobilemenu');
+  burger.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  $$('#mobilemenu a').forEach(function(a){
+    a.addEventListener('click', function(){ menu.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+  });
+
+  /* ---------- scroll progress + nav state + FAB ---------- */
+  var progress = $('#progress'), toTop = $('#toTop'), ticking = false;
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+    nav.classList.toggle('stuck', y > 30);
+    toTop.classList.toggle('show', y > 700);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; requestAnimationFrame(onScroll); }
+  }, {passive:true});
+  onScroll();
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'}); });
+
+  /* ---------- mouse glow ---------- */
+  var glow = $('#mouseglow');
+  if(!reduce && window.matchMedia('(pointer:fine)').matches){
+    var gx = window.innerWidth/2, gy = window.innerHeight/2, cx = gx, cy = gy;
+    window.addEventListener('pointermove', function(e){
+      gx = e.clientX; gy = e.clientY; glow.style.opacity = '1';
+    }, {passive:true});
+    (function loop(){
+      cx += (gx-cx) * 0.09; cy += (gy-cy) * 0.09;
+      glow.style.transform = 'translate(' + cx + 'px,' + cy + 'px)';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* ---------- magnetic buttons + ripple ---------- */
+  if(!reduce && window.matchMedia('(pointer:fine)').matches){
+    $$('.magnetic').forEach(function(el){
+      el.addEventListener('pointermove', function(e){
+        var r = el.getBoundingClientRect();
+        var mx = e.clientX - r.left - r.width/2;
+        var my = e.clientY - r.top - r.height/2;
+        el.style.transform = 'translate(' + (mx*0.16) + 'px,' + (my*0.28) + 'px)';
+      });
+      el.addEventListener('pointerleave', function(){ el.style.transform = ''; });
+    });
+  }
+  $$('.btn').forEach(function(btn){
+    btn.addEventListener('pointerdown', function(e){
+      if(reduce) return;
+      var r = btn.getBoundingClientRect(), s = Math.max(r.width, r.height);
+      var d = document.createElement('span');
+      d.className = 'ripple';
+      d.style.width = d.style.height = s + 'px';
+      d.style.left = (e.clientX - r.left - s/2) + 'px';
+      d.style.top  = (e.clientY - r.top  - s/2) + 'px';
+      btn.appendChild(d);
+      setTimeout(function(){ d.remove(); }, 700);
+    });
+  });
+
+  /* ---------- 3D tilt + spotlight cards ---------- */
+  if(!reduce && window.matchMedia('(pointer:fine)').matches){
+    $$('.tilt').forEach(function(card){
+      card.addEventListener('pointermove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--mx', (px*100) + '%');
+        card.style.setProperty('--my', (py*100) + '%');
+        card.style.transform = 'perspective(900px) rotateX(' + ((0.5-py)*7) + 'deg) rotateY(' + ((px-0.5)*9) + 'deg) translateY(-5px)';
+      });
+      card.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+    });
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var revealed = new WeakSet();
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting || revealed.has(en.target)) return;
+      revealed.add(en.target);
+      en.target.classList.add('in');
+      if(en.target.dataset.onview) fire(en.target.dataset.onview, en.target);
+    });
+  }, {threshold:0.16, rootMargin:'0px 0px -8% 0px'});
+  $$('.rv, .tl-item').forEach(function(el){ io.observe(el); });
+
+  /* ---------- animated counters ---------- */
+  function countUp(el){
+    var to = parseFloat(el.dataset.to), suffix = el.dataset.suffix || '';
+    if(reduce){ el.textContent = to + suffix; return; }
+    var start = performance.now(), dur = 1500;
+    (function step(now){
+      var p = Math.min((now-start)/dur, 1);
+      var e = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(to*e) + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    })(start);
+  }
+  var counterIO = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){ countUp(en.target); counterIO.unobserve(en.target); }
+    });
+  }, {threshold:0.5});
+  $$('.count').forEach(function(el){ counterIO.observe(el); });
+
+  /* ---------- report chart animations ---------- */
+  var reportIO = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting) return;
+      reportIO.unobserve(en.target);
+      var dv = $('#donutVal');
+      if(dv){ dv.style.strokeDashoffset = String(339.3 * (1 - 0.72)); }
+      $$('.gbar i').forEach(function(b,i){
+        setTimeout(function(){ b.style.width = b.dataset.w + '%'; }, 120*i);
+      });
+      $$('#spark i').forEach(function(b,i){
+        setTimeout(function(){ b.style.height = b.dataset.h + '%'; }, 70*i);
+      });
+    });
+  }, {threshold:0.25});
+  var reportCard = $('#reportCard');
+  if(reportCard) reportIO.observe(reportCard);
+
+  /* ---------- timeline progress line ---------- */
+  var tl = $('#timeline'), tlLine = $('#tlLine');
+  if(tl && tlLine){
+    var tlIO = new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(en.isIntersecting){
+          tlLine.style.height = (tl.offsetHeight - 68) + 'px';
+          tlIO.disconnect();
+        }
+      });
+    }, {threshold:0.15});
+    tlIO.observe(tl);
+  }
+
+  /* ---------- slot booking ---------- */
+  var note = $('#bookNote');
+  $$('#slotList .slot').forEach(function(s){
+    s.addEventListener('click', function(){
+      if(s.hasAttribute('disabled')) return;
+      $$('#slotList .slot').forEach(function(o){ o.classList.remove('sel'); });
+      s.classList.add('sel');
+      note.textContent = 'Holding ' + $('.time', s).textContent + ' — ' + $('.who', s).textContent + '. Confirm with an Outcomex engineer at the booth.';
+      note.style.color = 'var(--c-cyan)';
+    });
+  });
+
+  /* ---------- countdown to end of day ---------- */
+  var ch = $('#cd-h'), cm = $('#cd-m'), cs = $('#cd-s');
+  function pad(n){ return n < 10 ? '0'+n : ''+n; }
+  function tick(){
+    var now = new Date();
+    var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 0, 0);
+    if(end < now) end.setDate(end.getDate()+1);
+    var d = Math.max(0, Math.floor((end-now)/1000));
+    ch.textContent = pad(Math.floor(d/3600));
+    cm.textContent = pad(Math.floor(d%3600/60));
+    cs.textContent = pad(d%60);
+  }
+  tick(); setInterval(tick, 1000);
+
+  var slotsBar = $('#slotsBar');
+  var slotsIO = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){ slotsBar.style.width = slotsBar.dataset.w + '%'; slotsIO.disconnect(); }
+    });
+  }, {threshold:0.4});
+  if(slotsBar) slotsIO.observe(slotsBar);
+
+  /* ==========================================================
+     ASSESSMENT REQUEST WIZARD
+     ----------------------------------------------------------
+     TO GO LIVE: replace the body of submit() with a POST to
+     your endpoint. The full payload is already assembled in
+     buildPayload() and is also emitted as a DOM event:
+       document.addEventListener('outcomex:submit', e => e.detail)
+     ========================================================== */
+  (function wizard(){
+    var wz = $('#wizard'); if(!wz) return;
+
+    var TOTAL = 4, step = 1;
+    var panels = $$('.wz-panel', wz);
+    var dots   = $$('.wz-dot', wz);
+    var fill   = $('#wzFill');
+    var back   = $('#wzBack'), next = $('#wzNext'), navBar = $('#wzNav');
+
+    var LABELS = { passive:'Passive recon', standard:'Standard external', deep:'Deep assessment' };
+
+    /* ----- shared state ----- */
+    var state = {
+      domain:'', extra:'', scan:'standard', checks:129, eta:'72 hours',
+      modules:[], name:'', email:'', org:'', phone:'', role:''
+    };
+
+    /* ----- scope rail ----- */
+    function refreshScope(){
+      $('#sc-domain').textContent = state.domain || '—';
+      $('#sc-type').textContent   = LABELS[state.scan] || 'Not selected';
+      var mods = $$('.mod.sel', wz);
+      state.modules = mods.map(function(m){ return m.dataset.val; });
+      $('#sc-mods').textContent = mods.length + (mods.length === 1 ? ' selected' : ' selected');
+      /* checks scale with how much you've asked for */
+      var ratio = mods.length / 10;
+      $('#sc-checks').textContent = Math.max(12, Math.round(state.checks * (0.35 + ratio * 0.65)));
+      $('#sc-eta').textContent = state.eta;
+    }
+
+    /* ----- step navigation ----- */
+    function show(n){
+      step = n;
+      panels.forEach(function(p){ p.classList.toggle('on', +p.dataset.step === n); });
+      dots.forEach(function(d){
+        var s = +d.dataset.s;
+        d.classList.toggle('on', s === n);
+        d.classList.toggle('done', s < n);
+      });
+      fill.style.width = Math.min(100, (n / TOTAL) * 100) + '%';
+      back.disabled = (n === 1);
+      next.textContent = (n === TOTAL) ? 'Submit request' : 'Continue';
+      navBar.style.display = (n > TOTAL) ? 'none' : 'flex';
+      $('.wz-legal', wz).style.display = (n > TOTAL) ? 'none' : 'block';
+      if(!reduce){
+        var top = wz.getBoundingClientRect().top + window.scrollY - 100;
+        if(window.scrollY > top + 200 || window.scrollY < top - 400) window.scrollTo({top:top, behavior:'smooth'});
+      }
+      var focusable = $('.wz-panel.on input, .wz-panel.on .opt, .wz-panel.on .mod', wz);
+      if(focusable && n > 1) focusable.focus({preventScroll:true});
+    }
+
+    /* ----- validation ----- */
+    var DOMAIN_RE = /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i;
+    var EMAIL_RE  = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+    var FREE_MAIL  = /@(gmail|hotmail|outlook|yahoo|icloud|live|proton(mail)?)\./i;
+
+    function clean(v){
+      return String(v || '').trim().toLowerCase()
+        .replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/.*$/,'');
+    }
+
+    function validate(n){
+      if(n === 1){
+        var d = clean($('#fDomain').value);
+        var ok = DOMAIN_RE.test(d);
+        $('#eDomain').hidden = ok;
+        $('#fDomain').closest('.field').classList.toggle('bad', !ok);
+        if(ok){ state.domain = d; $('#fDomain').value = d; state.extra = $('#fExtra').value.trim(); }
+        return ok;
+      }
+      if(n === 3){
+        var count = $$('.mod.sel', wz).length;
+        $('#eMods').hidden = count > 0;
+        return count > 0;
+      }
+      if(n === 4){
+        var name = $('#fName').value.trim();
+        var mail = $('#fEmail').value.trim();
+        var org  = $('#fOrg').value.trim();
+        var auth = $('#fAuth').checked;
+        var okName = name.length > 1, okMail = EMAIL_RE.test(mail), okOrg = org.length > 1;
+        $('#fName').closest('.field').classList.toggle('bad', !okName);
+        $('#fEmail').closest('.field').classList.toggle('bad', !okMail);
+        $('#fOrg').closest('.field').classList.toggle('bad', !okOrg);
+        $('#authWrap').classList.toggle('bad', !auth);
+        var all = okName && okMail && okOrg && auth;
+        var e = $('#eDetails');
+        e.hidden = all;
+        if(okMail && FREE_MAIL.test(mail)){
+          e.hidden = false;
+          e.textContent = 'Please use your work email — we send the report to a verified organisational address.';
+          return false;
+        }
+        e.textContent = 'Fill in your name, a valid work email, your organisation, and confirm authorisation.';
+        if(all){
+          state.name = name; state.email = mail; state.org = org;
+          state.phone = $('#fPhone').value.trim(); state.role = $('#fRole').value;
+        }
+        return all;
+      }
+      return true;
+    }
+
+    /* ----- payload + submit ----- */
+    function buildPayload(){
+      refreshScope();
+      return {
+        submittedAt: new Date().toISOString(),
+        source: 'cisco-live-booth-qr',
+        domains: [state.domain].concat(
+          state.extra ? state.extra.split(',').map(clean).filter(Boolean) : []
+        ),
+        scanType: state.scan,
+        modules: state.modules,
+        estimatedChecks: $('#sc-checks').textContent,
+        turnaround: state.eta,
+        contact: { name:state.name, email:state.email, organisation:state.org, phone:state.phone, role:state.role },
+        authorised: true
+      };
+    }
+
+    function submit(){
+      var payload = buildPayload();
+      var ref = String(Math.floor(100000 + Math.random() * 900000));
+      payload.reference = 'OX-' + ref;
+      $('#refNum').textContent = ref;
+
+      $('#doneSum').innerHTML =
+        '<div>Domain <b>' + payload.domains.join(', ') + '</b></div>' +
+        '<div>Scan type <b>' + (LABELS[state.scan] || state.scan) + '</b></div>' +
+        '<div>Modules <b>' + state.modules.length + ' selected</b></div>' +
+        '<div>Report due <b>' + state.eta + '</b></div>' +
+        '<div>Sent to <b>' + state.email + '</b></div>';
+
+      /* hand the payload off — wire this to your CRM / form endpoint */
+      document.dispatchEvent(new CustomEvent('outcomex:submit', { detail: payload }));
+      if(window.console) console.log('[outcomex] assessment request', payload);
+
+      show(5);
+      var left = $('#slotsLeft');
+      if(left){ left.textContent = Math.max(0, parseInt(left.textContent, 10) - 1); }
+    }
+
+    /* ----- events ----- */
+    next.addEventListener('click', function(){
+      if(!validate(step)) return;
+      if(step === TOTAL){ submit(); return; }
+      show(step + 1);
+    });
+    back.addEventListener('click', function(){ if(step > 1) show(step - 1); });
+
+    $('#fDomain').addEventListener('input', function(){
+      state.domain = clean(this.value);
+      refreshScope();
+      if(DOMAIN_RE.test(state.domain)){ $('#eDomain').hidden = true; this.closest('.field').classList.remove('bad'); }
+    });
+    $('#fDomain').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); next.click(); } });
+
+    $$('.opt', wz).forEach(function(o){
+      o.addEventListener('click', function(){
+        $$('.opt', wz).forEach(function(x){ x.classList.remove('sel'); x.setAttribute('aria-checked','false'); });
+        o.classList.add('sel'); o.setAttribute('aria-checked','true');
+        state.scan = o.dataset.val;
+        state.checks = +o.dataset.checks;
+        state.eta = o.dataset.eta;
+        refreshScope();
+      });
+    });
+
+    $$('.mod', wz).forEach(function(m){
+      m.addEventListener('click', function(){
+        var on = m.classList.toggle('sel');
+        m.setAttribute('aria-pressed', on ? 'true' : 'false');
+        $('#eMods').hidden = true;
+        refreshScope();
+      });
+    });
+
+    $('#selAll').addEventListener('click', function(){
+      var mods = $$('.mod', wz);
+      var allOn = mods.every(function(m){ return m.classList.contains('sel'); });
+      mods.forEach(function(m){
+        m.classList.toggle('sel', !allOn);
+        m.setAttribute('aria-pressed', !allOn ? 'true' : 'false');
+      });
+      this.textContent = allOn ? 'Select all modules' : 'Clear all modules';
+      refreshScope();
+    });
+
+    $('#restart').addEventListener('click', function(){
+      $$('input', wz).forEach(function(i){ if(i.type === 'checkbox'){ i.checked = false; } else { i.value = ''; } });
+      $('#fRole').value = '';
+      $$('.field', wz).forEach(function(f){ f.classList.remove('bad'); });
+      $('#authWrap').classList.remove('bad');
+      state.domain = ''; state.extra = '';
+      refreshScope();
+      show(1);
+    });
+
+    refreshScope();
+    show(1);
+  })();
+
+  /* ---------- terminal simulation ---------- */
+  (function terminal(){
+    var t = $('#term'); if(!t) return;
+    var script = [
+      {txt:'$ outcomex-scan --domain example-corp.com.au --passive', cls:'p'},
+      {txt:'[*] Resolving organisation footprint...', cls:'dim', pause:260},
+      {txt:'[+] 3 registered domains, 2 ASNs, 47 hosts discovered', cls:'ok'},
+      {txt:'[*] Enumerating subdomains...', cls:'dim', pause:220},
+      {txt:'[+] 47 subdomains resolved · 6 previously unknown to asset register', cls:'ok'},
+      {txt:'[*] Fingerprinting exposed services...', cls:'dim', pause:260},
+      {txt:'[!] 3389/tcp open — RDP reachable from the internet', cls:'cr'},
+      {txt:'[!] 8080/tcp open — management console, no auth challenge', cls:'cr'},
+      {txt:'[*] Checking TLS configuration...', cls:'dim', pause:200},
+      {txt:'[!] portal.example-corp.com.au accepts TLS 1.0', cls:'wn'},
+      {txt:'[!] 2 certificates expire within 21 days', cls:'wn'},
+      {txt:'[*] Validating email authentication...', cls:'dim', pause:200},
+      {txt:'[!] DMARC policy p=none — domain can be spoofed', cls:'wn'},
+      {txt:'[*] Matching software versions against CVE data...', cls:'dim', pause:280},
+      {txt:'[!] 1 critical CVE with confirmed exploitation in the wild', cls:'cr'},
+      {txt:'[+] Assessment complete — 129 checks, 4 critical, 12 high', cls:'ok'},
+      {txt:'[+] Report generated: example-corp-exposure-report.pdf', cls:'p'},
+      {txt:'', cls:'dim', pause:1600}
+    ];
+
+    var line = 0, ch = 0, out = [];
+    function render(cur){
+      var html = out.join('');
+      if(cur !== null) html += '<div class="' + script[line].cls + '">' + cur + '<span class="caret"></span></div>';
+      t.innerHTML = html;
+      t.scrollTop = t.scrollHeight;
+    }
+    if(reduce){
+      out = script.map(function(l){ return '<div class="'+l.cls+'">'+l.txt+'</div>'; });
+      render(null); return;
+    }
+    function type(){
+      if(line >= script.length){
+        setTimeout(function(){ out = []; line = 0; ch = 0; type(); }, 2400);
+        return;
+      }
+      var l = script[line];
+      if(ch <= l.txt.length){
+        render(l.txt.slice(0, ch));
+        ch++;
+        setTimeout(type, 12 + Math.random()*16);
+      } else {
+        out.push('<div class="' + l.cls + '">' + l.txt + '</div>');
+        if(out.length > 14) out.shift();
+        line++; ch = 0;
+        setTimeout(type, l.pause || 90);
+      }
+    }
+    setTimeout(type, 900);
+  })();
+
+
+  /* ==========================================================
+     LIVE DOMAIN SCANNER
+     ----------------------------------------------------------
+     These are REAL lookups. Everything below is resolved over
+     DNS-over-HTTPS from the visitor's own browser — public
+     records only, nothing is sent to the target's servers, and
+     no port scanning happens here. If DoH is blocked (venue
+     wifi, corporate proxy) it degrades to a clearly-labelled
+     sample so the booth demo still runs.
+     ========================================================== */
+  (function scanner(){
+    var input = $('#slDomain'), go = $('#slGo'), sec = $('#scan');
+    if(!input || !go || !sec) return;
+
+    var DOH = 'https://dns.google/resolve';
+    var RE  = /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i;
+    var SUBS = ['www','mail','remote','vpn','portal','api','dev','staging','test',
+                'admin','git','owa','autodiscover','sso','ftp','citrix','intranet',
+                'cpanel','webmail','smtp','jenkins','vpn2','legacy','files'];
+    var busy = false, demo = false;
+
+    function clean(v){
+      return String(v||'').trim().toLowerCase()
+        .replace(/^https?:\/\//,'').replace(/^www\./,'').replace(/\/.*$/,'').replace(/\s/g,'');
+    }
+    function q(name, type){
+      var ctrl = new AbortController();
+      var t = setTimeout(function(){ ctrl.abort(); }, 4000);
+      return fetch(DOH + '?name=' + encodeURIComponent(name) + '&type=' + type, {signal:ctrl.signal})
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .catch(function(){ return null; })
+        .then(function(j){ clearTimeout(t); return j; });
+    }
+    function answers(j, type){
+      if(!j || !j.Answer) return [];
+      return j.Answer.filter(function(a){ return !type || a.type === type; })
+                     .map(function(a){ return String(a.data||'').replace(/^"|"$/g,''); });
+    }
+
+    var log = $('#scanLog'), bar = $('#scanBar'), stages = $$('#stages .stage');
+    var lines = [];
+    function say(txt, cls){
+      lines.push('<div class="' + (cls||'dim') + '">' + txt + '</div>');
+      if(lines.length > 16) lines.shift();
+      log.innerHTML = lines.join('') + '<div class="p"><span class="caret"></span></div>';
+      log.scrollTop = log.scrollHeight;
+    }
+    function stage(k, state){
+      stages.forEach(function(s){
+        if(s.dataset.k !== k) return;
+        s.classList.remove('run','ok');
+        if(state) s.classList.add(state);
+      });
+    }
+    function progress(pct){ bar.style.width = pct + '%'; }
+    function hits(n){
+      var el = $$('.scan-radar .hit');
+      el.forEach(function(d,i){ setTimeout(function(){ d.classList.toggle('on', i < n); }, i*120); });
+    }
+    function wait(ms){ return new Promise(function(r){ setTimeout(r, reduce ? 60 : ms); }); }
+
+    /* ---------- findings model ---------- */
+    var COLOUR = { critical:'#ff4d6d', high:'#ffb020', medium:'#4cc9ff', pass:'#35e08a' };
+    function render(findings, score){
+      var box = $('#scanFindings');
+      box.innerHTML = findings.map(function(f,i){
+        var c = COLOUR[f.sev];
+        return '<div class="fitem" style="animation-delay:' + (i*0.08) + 's">' +
+               '<span class="sev" style="background:'+c+';box-shadow:0 0 10px '+c+'"></span>' +
+               '<span><b>' + f.title + '</b><em>' + f.detail + '</em></span>' +
+               '<span class="tag" style="color:'+c+';border-color:'+c+'55;background:'+c+'14">' + f.sev + '</span></div>';
+      }).join('');
+
+      var band = score >= 70 ? 'High risk' : score >= 45 ? 'Moderate' : 'Low risk';
+      var col  = score >= 70 ? '#ff4d6d' : score >= 45 ? '#ffb020' : '#35e08a';
+      $('#scanDonut').setAttribute('stroke', col);
+      $('#scanDonut').style.strokeDashoffset = String(339.3 * (1 - score/100));
+      $('#scanBand').textContent = band;
+      var el = $('#scanScore'); el.style.color = col;
+      var n = 0, iv = setInterval(function(){ n += Math.ceil(score/24); if(n >= score){ n = score; clearInterval(iv); } el.textContent = n; }, 30);
+      $('#scanVerdict').style.color = col;
+      $('#scanVerdict').textContent = findings.filter(function(f){ return f.sev !== 'pass'; }).length + ' issues in public records alone';
+      $('#scanBand').textContent = band;
+      $('#scanRes').classList.add('on');
+    }
+
+    /* ---------- the run ---------- */
+    function run(domain){
+      if(busy) return;
+      busy = true; demo = false;
+      sec.classList.add('armed');
+      $('#scanDom').textContent = domain;
+      $('#scanState').textContent = 'Reading public records'; $('#scanState').classList.remove('done');
+      $('#scanRes').classList.remove('on');
+      lines = []; log.innerHTML = ''; progress(0); hits(0);
+      stages.forEach(function(s){ s.classList.remove('run','ok'); });
+      setTimeout(function(){
+        var top = sec.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({top:top, behavior: reduce ? 'auto' : 'smooth'});
+      }, 120);
+
+      var findings = [], score = 12, assets = 0;
+
+      function add(sev, title, detail, weight){
+        findings.push({sev:sev, title:title, detail:detail});
+        score += (weight || 0);
+      }
+
+      say('$ outcomex-preview --domain ' + domain + ' --public-records-only', 'p');
+
+      Promise.resolve()
+        /* --- name servers --- */
+        .then(function(){
+          stage('dns','run'); progress(8);
+          return q(domain, 'NS');
+        })
+        .then(function(j){
+          if(j === null){ demo = true; return; }
+          var ns = answers(j, 2);
+          stage('dns','ok'); progress(16);
+          if(ns.length){
+            say('[+] ' + ns.length + ' authoritative name servers · ' + ns[0].replace(/\.$/,''), 'ok');
+            if(ns.length < 2) add('medium','Single authoritative name server','No secondary NS record found — DNS is a single point of failure.', 6);
+          } else {
+            say('[!] No NS records returned', 'wn');
+          }
+          return wait(400);
+        })
+        /* --- hosting --- */
+        .then(function(){ if(demo) return; stage('host','run'); progress(24); return q(domain,'A'); })
+        .then(function(j){
+          if(demo || j === null) return;
+          var a = answers(j, 1);
+          assets += a.length;
+          stage('host','ok'); progress(32); hits(Math.min(3, a.length));
+          say('[+] ' + (a.length || 0) + ' A record' + (a.length===1?'':'s') + ' resolved' + (a[0] ? ' · ' + a[0] : ''), a.length ? 'ok' : 'wn');
+          return wait(400);
+        })
+        /* --- mail --- */
+        .then(function(){ if(demo) return; stage('mail','run'); progress(40); return q(domain,'MX'); })
+        .then(function(j){
+          if(demo || j === null) return;
+          var mx = answers(j, 15);
+          stage('mail','ok'); progress(48);
+          if(mx.length){ say('[+] ' + mx.length + ' mail exchanger' + (mx.length===1?'':'s') + ' published', 'ok'); }
+          else { say('[i] No MX records — domain does not receive mail', 'dim'); }
+          return wait(350);
+        })
+        /* --- SPF --- */
+        .then(function(){ if(demo) return; stage('spf','run'); progress(56); return q(domain,'TXT'); })
+        .then(function(j){
+          if(demo || j === null) return;
+          var txt = answers(j, 16);
+          var spf = txt.filter(function(t){ return /^v=spf1/i.test(t); })[0];
+          stage('spf','ok'); progress(64);
+          if(!spf){
+            say('[!] No SPF record — anyone can send mail as this domain', 'cr');
+            add('critical','No SPF record','Nothing tells receiving mail servers which hosts may send on your behalf.', 22);
+          } else if(/\?all|\+all/i.test(spf)){
+            say('[!] SPF ends in ?all or +all — policy is permissive', 'cr');
+            add('critical','SPF policy is permissive','The record exists but effectively allows any sender to pass.', 20);
+          } else if(/~all/i.test(spf)){
+            say('[!] SPF ends in ~all (softfail) rather than -all', 'wn');
+            add('high','SPF set to softfail','Unauthorised mail is marked, not rejected. Move to -all once senders are confirmed.', 11);
+          } else {
+            say('[+] SPF record present and set to hard fail', 'ok');
+            add('pass','SPF configured correctly','Record ends in -all, so unauthorised senders are rejected.', 0);
+          }
+          return wait(350);
+        })
+        /* --- DMARC --- */
+        .then(function(){ if(demo) return; stage('dmarc','run'); progress(72); return q('_dmarc.' + domain, 'TXT'); })
+        .then(function(j){
+          if(demo || j === null) return;
+          var txt = answers(j, 16);
+          var d = txt.filter(function(t){ return /^v=DMARC1/i.test(t); })[0];
+          stage('dmarc','ok'); progress(78);
+          if(!d){
+            say('[!] No DMARC record — domain can be spoofed in BEC attacks', 'cr');
+            add('critical','No DMARC record','Your domain can be impersonated in invoice fraud and phishing with nothing to stop it.', 24);
+          } else if(/p\s*=\s*none/i.test(d)){
+            say('[!] DMARC policy is p=none — reporting only, nothing blocked', 'wn');
+            add('high','DMARC set to p=none','You get visibility but spoofed mail is still delivered. Progress to quarantine, then reject.', 14);
+          } else if(/p\s*=\s*quarantine/i.test(d)){
+            say('[+] DMARC at p=quarantine', 'ok');
+            add('medium','DMARC at quarantine','Good progress. Reject is the end state once reports are clean.', 4);
+          } else {
+            say('[+] DMARC at p=reject — strongest setting', 'ok');
+            add('pass','DMARC enforced','Policy set to reject. Spoofed mail is refused outright.', 0);
+          }
+          return wait(350);
+        })
+        /* --- CAA --- */
+        .then(function(){ if(demo) return; stage('caa','run'); progress(84); return q(domain,'CAA'); })
+        .then(function(j){
+          if(demo || j === null) return;
+          var caa = (j.Answer||[]).filter(function(a){ return a.type === 257; });
+          stage('caa','ok'); progress(88);
+          if(!caa.length){
+            say('[!] No CAA record — any CA may issue for this domain', 'wn');
+            add('medium','No CAA record','Nothing restricts which certificate authorities can issue certificates for you.', 7);
+          } else {
+            say('[+] CAA record present — issuance restricted', 'ok');
+            add('pass','CAA record present','Certificate issuance is limited to authorities you nominate.', 0);
+          }
+          return wait(300);
+        })
+        /* --- subdomains --- */
+        .then(function(){
+          if(demo) return;
+          stage('subs','run');
+          say('[*] Resolving ' + SUBS.length + ' common hostnames...', 'dim');
+          return Promise.all(SUBS.map(function(s){
+            return q(s + '.' + domain, 'A').then(function(j){
+              return (j && j.Answer && j.Answer.length) ? s : null;
+            });
+          }));
+        })
+        .then(function(found){
+          if(demo || !found) return;
+          var live = found.filter(Boolean);
+          assets += live.length;
+          stage('subs','ok'); progress(96); hits(6);
+          say('[+] ' + live.length + ' of ' + SUBS.length + ' common hostnames resolve', live.length > 8 ? 'wn' : 'ok');
+
+          var risky = live.filter(function(s){ return /^(dev|staging|test|admin|git|jenkins|legacy|ftp|cpanel)$/.test(s); });
+          if(risky.length){
+            say('[!] Non-production hostnames publicly resolvable: ' + risky.join(', '), 'cr');
+            add('high','Non-production hosts are publicly resolvable',
+                risky.map(function(r){ return r + '.' + domain; }).join(', ') + ' — these are usually less patched and less monitored.', 13);
+          }
+          var remote = live.filter(function(s){ return /^(vpn|remote|citrix|owa|portal|sso)$/.test(s); });
+          if(remote.length){
+            add('medium','Remote access endpoints exposed',
+                remote.length + ' remote-access hostname' + (remote.length===1?'':'s') + ' visible from the internet. Worth confirming MFA coverage on each.', 8);
+          }
+          if(live.length > 12){
+            add('medium','Large discoverable footprint', live.length + ' hostnames resolved from a single wordlist. A full assessment typically finds several times this number.', 6);
+          }
+          return wait(400);
+        })
+        /* --- finish --- */
+        .then(function(){
+          if(demo) return fallback();
+          progress(100);
+          $('#scanState').textContent = 'Public records read';
+          $('#scanState').classList.add('done');
+          score = Math.max(8, Math.min(96, score));
+          say('[+] Done — ' + findings.filter(function(f){ return f.sev !== 'pass'; }).length +
+              ' issues from public records, ' + assets + ' hosts seen', 'ok');
+          say('[i] No ports probed. Full assessment adds ports, TLS, cloud, credentials and CVEs', 'p');
+          render(findings, score);
+          busy = false;
+        })
+        .catch(function(){ fallback(); });
+    }
+
+    /* ---------- offline / blocked fallback ---------- */
+    function fallback(){
+      progress(100);
+      stages.forEach(function(s){ s.classList.add('ok'); s.classList.remove('run'); });
+      hits(6);
+      $('#scanState').textContent = 'Sample data';
+      $('#scanState').classList.add('done');
+      say('[i] DNS lookups are blocked on this network', 'wn');
+      say('[i] Showing a worked sample instead — ask an engineer at the booth for a live run', 'dim');
+      $('#scanCaveat').innerHTML = '<b style="color:var(--warn)">This is sample data, not your domain.</b> ' +
+        'The lookups could not complete from this network. Request the assessment and we will run it properly from our side.';
+      render([
+        {sev:'critical', title:'No DMARC record', detail:'Domain can be impersonated in invoice fraud and phishing.'},
+        {sev:'high',     title:'SPF set to softfail', detail:'Unauthorised mail is marked rather than rejected.'},
+        {sev:'high',     title:'Non-production hosts resolvable', detail:'staging, dev and git hostnames answer publicly.'},
+        {sev:'medium',   title:'No CAA record', detail:'Any certificate authority may issue for this domain.'},
+        {sev:'medium',   title:'Remote access endpoints exposed', detail:'vpn and portal hostnames visible from the internet.'},
+        {sev:'pass',     title:'DNSSEC enabled', detail:'Responses are signed and validated.'}
+      ], 68);
+      busy = false;
+    }
+
+    /* ---------- triggers ---------- */
+    function start(){
+      var d = clean(input.value);
+      if(!RE.test(d)){
+        input.style.borderColor = 'rgba(255,77,109,.7)';
+        input.focus();
+        setTimeout(function(){ input.style.borderColor = ''; }, 1600);
+        return;
+      }
+      input.value = d;
+      var pre = $('#fDomain'); if(pre && !pre.value) pre.value = d;
+      run(d);
+    }
+    go.addEventListener('click', start);
+    input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); start(); } });
+  })();
+
+  /* ---------- SOC ticker ---------- */
+  (function ticker(){
+    var tk = $$('#ticker b[data-tk]');
+    if(!tk.length || reduce) return;
+    var live = false;
+    var tio = new IntersectionObserver(function(es){ es.forEach(function(e){ live = e.isIntersecting; }); }, {threshold:0.2});
+    tio.observe($('#ticker'));
+    setInterval(function(){
+      if(!live || document.hidden) return;
+      var el = tk[(Math.random()*tk.length)|0];
+      var step = +el.dataset.step || 1;
+      el.textContent = (+el.textContent + Math.ceil(Math.random()*step));
+      el.parentElement.classList.add('up');
+      setTimeout(function(){ el.parentElement.classList.remove('up'); }, 500);
+    }, 1800);
+  })();
+
+  /* ---------- ambient network canvas ---------- */
+  (function network(){
+    if(reduce) return;
+    var c = $('#net'); if(!c) return;
+    var ctx = c.getContext('2d'), w, h, dpr, nodes = [], packets = [], raf, visible = true;
+
+    function size(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = c.clientWidth = window.innerWidth;
+      h = c.clientHeight = window.innerHeight;
+      c.width = w*dpr; c.height = h*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      build();
+    }
+    function build(){
+      var count = Math.min(64, Math.round(w*h/26000));
+      nodes = [];
+      for(var i=0;i<count;i++){
+        nodes.push({
+          x: Math.random()*w, y: Math.random()*h,
+          vx: (Math.random()-0.5)*0.22, vy: (Math.random()-0.5)*0.22,
+          r: Math.random()*1.4 + 0.7
+        });
+      }
+      packets = [];
+    }
+    function spawn(){
+      if(nodes.length < 2 || packets.length > 5) return;
+      var a = nodes[(Math.random()*nodes.length)|0], b = nodes[(Math.random()*nodes.length)|0];
+      if(a === b) return;
+      packets.push({a:a, b:b, t:0, sp: 0.006 + Math.random()*0.008});
+    }
+    function draw(){
+      raf = requestAnimationFrame(draw);
+      if(!visible) return;
+      ctx.clearRect(0,0,w,h);
+
+      for(var i=0;i<nodes.length;i++){
+        var n = nodes[i];
+        n.x += n.vx; n.y += n.vy;
+        if(n.x < 0 || n.x > w) n.vx *= -1;
+        if(n.y < 0 || n.y > h) n.vy *= -1;
+      }
+      ctx.lineWidth = 1;
+      for(var a=0;a<nodes.length;a++){
+        for(var b=a+1;b<nodes.length;b++){
+          var dx = nodes[a].x-nodes[b].x, dy = nodes[a].y-nodes[b].y;
+          var d2 = dx*dx + dy*dy;
+          if(d2 < 22000){
+            var o = (1 - d2/22000) * 0.20;
+            ctx.strokeStyle = 'rgba(76,201,255,' + o.toFixed(3) + ')';
+            ctx.beginPath(); ctx.moveTo(nodes[a].x, nodes[a].y); ctx.lineTo(nodes[b].x, nodes[b].y); ctx.stroke();
+          }
+        }
+      }
+      for(var j=0;j<nodes.length;j++){
+        var p = nodes[j];
+        ctx.fillStyle = 'rgba(120,190,255,.42)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+      }
+      for(var k=packets.length-1;k>=0;k--){
+        var pk = packets[k];
+        pk.t += pk.sp;
+        if(pk.t >= 1){ packets.splice(k,1); continue; }
+        var px = pk.a.x + (pk.b.x - pk.a.x)*pk.t;
+        var py = pk.a.y + (pk.b.y - pk.a.y)*pk.t;
+        var fade = Math.sin(pk.t*Math.PI);
+        ctx.fillStyle = 'rgba(41,255,227,' + (0.85*fade).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(px, py, 1.9, 0, 6.2832); ctx.fill();
+      }
+      if(Math.random() < 0.02) spawn();
+    }
+    document.addEventListener('visibilitychange', function(){ visible = !document.hidden; });
+    window.addEventListener('resize', function(){ clearTimeout(window.__rz); window.__rz = setTimeout(size, 180); }, {passive:true});
+    size(); draw();
+  })();
+
+})();
+</script>
+</body>
+</html>
